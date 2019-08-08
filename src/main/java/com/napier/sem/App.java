@@ -15,7 +15,7 @@ public class App
         MongoDatabase database = mongoClient.getDatabase("mydb");
         // Get a collection from the database
         MongoCollection<Document> collection = database.getCollection("test");
-        // Create a document to store
+        // Creating a document to store
         Document doc = new Document("name", "Group3")
                 .append("class", "BSc Hons")
                 .append("year", "2019")
