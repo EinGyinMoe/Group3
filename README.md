@@ -1,13 +1,10 @@
-Group-3 Project
-
 <!DOCTYPE html>
 <html>
-<head>
-</head>
+<head></head>
 <body>
 <table>
   <tr>
-    <th>Name</th>
+    <th>Group-3 Members</th>
     <th>ID</th>
   </tr>
   <tr>
@@ -29,7 +26,6 @@ Group-3 Project
  
 </body>
 </html>
-
 
 
 # Software Engineering Methods
