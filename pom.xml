@@ -8,6 +8,7 @@
     <artifactId>seMethods</artifactId>
     <version>0.1.0.2</version>
 
+<!--    Getting started and MongoDB.-->
     <dependencies>
         <dependency>
             <groupId>org.mongodb</groupId>
@@ -16,6 +17,8 @@
         </dependency>
     </dependencies>
 
+<!--    apache maven complier plugin-->
+<!--    Specifying java version in maven - differences between properties and compiler plugin-->
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>

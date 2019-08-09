@@ -9,13 +9,13 @@ public class App
 {
     public static void main(String[] args)
     {
-        // Connecting to MongoDB on local system - we're using port 27000
+        // Connecting to MongoDB on local system by using port 27000
         MongoClient mongoClient = new MongoClient("mongo-dbserver");
         // Get a database - will create when we use it
         MongoDatabase database = mongoClient.getDatabase("mydb");
         // Get a collection from the database
         MongoCollection<Document> collection = database.getCollection("test");
-        // Creating a document to store
+        // Creating a document to store our info
         Document doc = new Document("name", "Group3")
                 .append("class", "BSc Hons")
                 .append("year", "2019")
