@@ -14,8 +14,8 @@ public class App
         a.connect();
 
         // Get City
-        //ArrayList<City> cty = a.getCity();
-        //a.displayCity(cty);
+        ArrayList<City> cty = a.getCity();
+        a.displayCity(cty);
         a.getContient();
         // Disconnect from database
         a.disconnect();
@@ -168,5 +168,6 @@ public class App
         {
             System.out.println(c.Name + "\t" + c.Population + "\t" + c.District + "\n");
         }
+        System.out.print("\n");
     }
 }
