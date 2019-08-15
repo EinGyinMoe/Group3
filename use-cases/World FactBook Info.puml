@@ -5,13 +5,18 @@ actor user as "Organization User"
 rectangle Database
 
 rectangle "World factbook Information System " {
-   usecase UC4 as "get all countries by population in descending order"
+   usecase UC1 as "get all city district from the database sorted from largest to smallest"
+   usecase UC2 as "get all city world from the database sorted from largest to smallest"
 
-    usecase UCa as "Print all countries"
+    usecase UCa as "Print all cities"
 
-    user - UC4
-    UC4 ..> UCa : include
-    UC4 - Database
+    user - UC1
+    UC1 ..> UCa : include
+    UC1 - Database
+    user - UC2
+    UC2 ..> UCa : include
+    UC2 - Database
+
 }
 
 @enduml
