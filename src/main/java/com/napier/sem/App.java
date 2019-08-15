@@ -80,5 +80,35 @@ public class App
             }
         }
     }
-
+    public City getCity(int ID)
+    {
+        try
+        {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT Name "
+                            + "FROM city "
+                            + "ORDER BY Population";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            // Return new city if valid.
+            // Check one is returned
+            if (rset.next())
+            {
+                City cty = new City();
+                cty.Name = rset.getString("Name");
+                return cty;
+            }
+            else
+                return null;
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city name");
+            return null;
+        }
+    }
 }
