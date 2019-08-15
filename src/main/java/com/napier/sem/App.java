@@ -1,6 +1,7 @@
 package com.napier.sem;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class App
 {
@@ -11,6 +12,10 @@ public class App
 
         // Connect to database
         a.connect();
+
+        // Get City
+        ArrayList<City> cty = a.getCity();
+        a.displayCity(cty);
 
         // Disconnect from database
         a.disconnect();
@@ -80,35 +85,45 @@ public class App
             }
         }
     }
-    public City getCity(int ID)
+    public ArrayList<City> getCity()
     {
-        try
-        {
+        ArrayList<City> cty = new ArrayList<>();
+        try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name "
+                    "SELECT Name, Population "
                             + "FROM city "
-                            + "ORDER BY Population";
+                            + "ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            // Return new city if valid.
-            // Check one is returned
-            if (rset.next())
-            {
-                City cty = new City();
-                cty.Name = rset.getString("Name");
-                return cty;
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                // Return new city if valid.
+                // Check one is returned
+                while (rset.next()) {
+                    City cities = new City();
+                    cities.Name = rset.getString("Name");
+                    cities.Population = rset.getInt("Population");
+                    cty.add(cities);
+                }
             }
-            else
-                return null;
         }
         catch (Exception e)
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city name");
-            return null;
+        }
+        return cty;
+    }
+
+    public void displayCity(ArrayList<City> cty)
+    {
+        for(City c:cty)
+        {
+            System.out.println(c.Name + "\t" + c.Population + "\n");
         }
     }
 }
