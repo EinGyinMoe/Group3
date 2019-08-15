@@ -93,8 +93,8 @@ public class App
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name, Population "
-                            + "FROM city "
+                    "SELECT Name,Population,District  "
+                            + "FROM city WHERE District='Gelderland'"
                             + "ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -107,6 +107,7 @@ public class App
                     City cities = new City();
                     cities.Name = rset.getString("Name");
                     cities.Population = rset.getInt("Population");
+                    cities.District = rset.getString("District");
                     cty.add(cities);
                 }
             }
@@ -123,7 +124,7 @@ public class App
     {
         for(City c:cty)
         {
-            System.out.println(c.Name + "\t" + c.Population + "\n");
+            System.out.println(c.Name + "\t" + c.Population + "\t" + c.District + "\n");
         }
     }
 }
