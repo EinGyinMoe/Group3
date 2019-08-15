@@ -1,0 +1,17 @@
+@startuml
+
+actor user as "Organization User"
+
+rectangle Database
+
+rectangle "World factbook Information System " {
+   usecase UC4 as "get all countries by population in descending order"
+
+    usecase UCa as "Print all countries"
+
+    user - UC4
+    UC4 ..> UCa : include
+    UC4 - Database
+}
+
+@enduml
