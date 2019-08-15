@@ -3,16 +3,15 @@ package com.napier.sem;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class App
-{
-    public static void main(String[] args)
-    {
+public class App {
+    public static void main(String[] args) {
         // Create new Application
         App a = new App();
 
         // Connect to database
         a.connect();
 
+        a.getCity_world();
         // Get City
         ArrayList<City> cty = a.getCity();
         a.displayCity(cty);
@@ -29,39 +28,29 @@ public class App
     /**
      * Connect to the MySQL database.
      */
-    public void connect()
-    {
-        try
-        {
+    public void connect() {
+        try {
             // Load Database driver
             Class.forName("com.mysql.jdbc.Driver");
-        }
-        catch (ClassNotFoundException e)
-        {
+        } catch (ClassNotFoundException e) {
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
 
         int retries = 10;
-        for (int i = 0; i < retries; ++i)
-        {
+        for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
-            try
-            {
+            try {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
                 con = DriverManager.getConnection("jdbc:mysql://db:3306/world", "root", "example");
                 System.out.println("Successfully connected");
                 break;
-            }
-            catch (SQLException sqle)
-            {
+            } catch (SQLException sqle) {
                 System.out.println("Failed to connect to database attempt " + Integer.toString(i));
                 System.out.println(sqle.getMessage());
-            }
-            catch (InterruptedException ie)
-            {
+            } catch (InterruptedException ie) {
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
@@ -70,21 +59,51 @@ public class App
     /**
      * Disconnect from the MySQL database.
      */
-    public void disconnect()
-    {
-        if (con != null)
-        {
-            try
-            {
+    public void disconnect() {
+        if (con != null) {
+            try {
                 // Close connection
                 con.close();
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 System.out.println("Error closing connection to database");
             }
         }
     }
+
+    //
+    //cities in the world by population
+    //
+    public void getCity_world()
+    {
+        ArrayList<City> ctyworld = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name,city.Population "
+                            + "FROM city "
+                            + "ORDER BY city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                // Return new city if valid.
+                // Check one is returned
+                while (rset.next()) {
+                    System.out.printf(rset.getString(1) + "\t" + rset.getInt(2) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city name in the world.");
+        }
+        //return ctyworld;
+    }
+
+
     //
     // All the cities in a continent by Population
     //
