@@ -16,7 +16,7 @@ public class App
         // Get City
         ArrayList<City> cty = a.getCity();
         a.displayCity(cty);
-
+        a.getContient();
         // Disconnect from database
         a.disconnect();
     }
@@ -85,6 +85,48 @@ public class App
             }
         }
     }
+    //
+    // All the cities in a continent by Population
+    //
+    public void getContient()
+    {
+        ArrayList<Country> continent = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, city.Population, country.Continent  "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code AND country.Continent = 'Europe' "
+                            + "ORDER BY city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                // Return new city if valid.
+                // Check one is returned
+                while (rset.next()) {
+                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+                    //System.out.println("\n");
+                    System.out.printf(rset.getString(1)+"\t"+rset.getInt(2)+"\t"+rset.getString(3)+"\n");
+
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city name by continent");
+        }
+        //return continent;
+    }
+
+
+    //
+    // All the cities in a district by population
+    //
     public ArrayList<City> getCity()
     {
         ArrayList<City> cty = new ArrayList<>();
@@ -126,5 +168,6 @@ public class App
         {
             System.out.println(c.Name + "\t" + c.Population + "\n");
         }
+        System.out.print("\n");
     }
 }
