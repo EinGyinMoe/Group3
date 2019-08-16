@@ -4,7 +4,7 @@
 
 ### Goal in Context
 
-As an Organization user, I want to product top populated country report so that I can support the report of population information of top country to the organization.
+As an Organization user, I want to product top populated country in a region report so that I can support the report of population information of top country in a region to the organization.
 
 ### Scope
 
@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-We know the role.  Database contains the data of current population information that does not live in top populated country.
+We know the role.  Database contains the data of current population information that does not live in top populated country in a region.
 
 ### Success End Condition
 
@@ -36,9 +36,9 @@ A request for Population information is sent to an Organization user.
 
 ## MAIN SUCCESS SCENARIO
 
-1. Organization requests population information of top populated countries.
-2. An organization user captures all population information of top populated country.
-3. An organization user extracts current population information of top populated country.
+1. Organization requests population information of top populated countries in a region.
+2. An organization user captures all population information of top populated country in a region.
+3. An organization user extracts current population information of top populated country in a region.
 4. An organization user provides report to an organization.
 
 ## EXTENSIONS
