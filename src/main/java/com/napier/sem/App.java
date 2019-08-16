@@ -11,12 +11,11 @@ public class App {
         // Connect to database
         a.connect();
 
-//        a.getCity_world();
+        a.getCity_world();
         // Get City
-
-//        a.displayCity(cty);
-//        a.getCityContinent();
-        a.getCityRegion();
+        ArrayList<City> cty = a.getCity();
+        a.displayCity(cty);
+        a.getContient();
         // Disconnect from database
         a.disconnect();
     }
@@ -71,12 +70,46 @@ public class App {
         }
     }
 
-
-    // All the country in a continent by Population
     //
-    public void getCityContinent()
+    //cities in the world by population
+    //
+    public void getCity_world()
     {
-       // ArrayList<City> continent = new ArrayList<>();
+        ArrayList<City> ctyworld = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name,city.Population "
+                            + "FROM city "
+                            + "ORDER BY city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                // Return new city if valid.
+                // Check one is returned
+                while (rset.next()) {
+                    System.out.printf(rset.getString(1) + "\t" + rset.getInt(2) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city name in the world.");
+        }
+        //return ctyworld;
+    }
+
+
+    //
+    // All the cities in a continent by Population
+    //
+    public void getContient()
+    {
+        ArrayList<Country> continent = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -104,33 +137,25 @@ public class App {
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country name by continent");
+            System.out.println("Failed to get city name by continent");
         }
         //return continent;
-
     }
 
 
-//    public void displayCountryContinent(ArrayList<Country> country)
-//    {
-//        for(Country ct:country)
-//        {
-//            System.out.println(ct.Name + "\t" + ct.Population + "\n");
-//        }
-//        System.out.print("\n");
-//    }
-
-    public void getCityRegion()
+    //
+    // All the cities in a district by population
+    //
+    public ArrayList<City> getCity()
     {
-//        ArrayList<City> region = new ArrayList<>();
+        ArrayList<City> cty = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT city.Name, city.Population, country.Region  "
-                            + "FROM city, country "
-                            + "WHERE city.CountryCode = country.Code AND country.Region = 'Caribbean' "
+                    "SELECT Name,Population "
+                            + "FROM city"
                             + "ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -140,20 +165,28 @@ public class App {
                 // Return new city if valid.
                 // Check one is returned
                 while (rset.next()) {
-                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-                    //System.out.println("\n");
-                    System.out.printf(rset.getString(1)+"\t"+rset.getInt(2)+"\t"+rset.getString(3)+"\n");
+                    City cities = new City();
+                    cities.Name = rset.getString("Name");
+                    cities.Population = rset.getInt("Population");
 
+                    cty.add(cities);
                 }
             }
         }
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country name by region");
+            System.out.println("Failed to get city name");
         }
-        //return continent;
-
+        return cty;
     }
 
+    public void displayCity(ArrayList<City> cty)
+    {
+        for(City c:cty)
+        {
+            System.out.println(c.Name + "\t" + c.Population + "\n");
+        }
+        System.out.print("\n");
+    }
 }
