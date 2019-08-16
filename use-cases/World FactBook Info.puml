@@ -1,0 +1,28 @@
+@startuml
+'Start PlantUML
+'Use Cases using in DevOps help to solve the problems and improve performance of the system.
+
+actor user as "Organization User"
+
+'Defined the system using rectangles
+
+rectangle Database
+
+rectangle "World factbook Information System " {
+   usecase UC1 as "get all city district from the database sorted from largest to smallest"
+   usecase UC2 as "get all city world from the database sorted from largest to smallest"
+
+    usecase UCa as "Print all cities"
+
+'To provide a name for usecases (use case UC1 as use case 1)
+
+    user - UC1
+    UC1 ..> UCa : include
+    UC1 - Database
+    user - UC2
+    UC2 ..> UCa : include
+    UC2 - Database
+
+}
+'End PlantUML
+@enduml
