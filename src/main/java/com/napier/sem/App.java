@@ -15,8 +15,9 @@ public class App {
         // Get City
 
 //        a.displayCity(cty);
-        a.getCountryContinent();
+//        a.getCountryContinent();
 //        a.getCountryRegion();
+        a.getCountryWorld();
         // Disconnect from database
         a.disconnect();
     }
@@ -147,4 +148,39 @@ public class App {
 
     }
 
+//    all the countries in the world by the population
+//
+public void getCountryWorld()
+{
+    try {
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
+        // Create string for SQL statement
+        String strSelect =
+                "SELECT country.Name, country.Population  "
+                        + "FROM country "
+                        + "ORDER BY country.Population DESC";
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery(strSelect);
+        if (rset == null) {
+            System.out.print("Not found.");
+        } else {
+            // Return new city if valid.
+            // Check one is returned
+            while (rset.next()) {
+                //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+                //System.out.println("\n");
+                System.out.printf(rset.getString(1)+"\t"+rset.getInt(2)+"\n");
+
+            }
+        }
+    }
+    catch (Exception e)
+    {
+        System.out.println(e.getMessage());
+        System.out.println("Failed to get country name by region");
+    }
+    //return continent;
+
+}
 }
