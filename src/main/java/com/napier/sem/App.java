@@ -123,7 +123,7 @@ public class App {
             // Create string for SQL statement
             String strSelect =
                     "SELECT city.Name,city.Population "
-                            + "FROM city"
+                            + "FROM city "
                             + "ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
