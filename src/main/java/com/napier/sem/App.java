@@ -11,11 +11,12 @@ public class App {
         // Connect to database
         a.connect();
 
-        a.getCity_world();
+//        a.getCity_world();
         // Get City
-        ArrayList<City> cty = a.getCity();
-        a.displayCity(cty);
-        a.getContient();
+
+//        a.displayCity(cty);
+//        a.getCountryContinent();
+        a.getCityRegion();
         // Disconnect from database
         a.disconnect();
     }
@@ -70,44 +71,10 @@ public class App {
         }
     }
 
-    //
-    //cities in the world by population
-    //
-    public void getCity_world()
-    {
-        ArrayList<City> ctyworld = new ArrayList<>();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT city.Name,city.Population "
-                            + "FROM city "
-                            + "ORDER BY city.Population DESC";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            if (rset == null) {
-                System.out.print("Not found.");
-            } else {
-                // Return new city if valid.
-                // Check one is returned
-                while (rset.next()) {
-                    System.out.printf(rset.getString(1) + "\t" + rset.getInt(2) + "\n");
-                }
-            }
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city name in the world.");
-        }
-        //return ctyworld;
-    }
 
-
+    // All the country in a continent by Population
     //
-    // All the cities in a continent by Population
-    //
-    public void getContient()
+    public void getCountryContinent()
     {
         ArrayList<Country> continent = new ArrayList<>();
         try {
@@ -115,10 +82,10 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT city.Name, city.Population, country.Continent  "
-                            + "FROM city, country "
-                            + "WHERE city.CountryCode = country.Code AND country.Continent = 'Europe' "
-                            + "ORDER BY city.Population DESC";
+                    "SELECT country.Name, country.Population, country.Continent  "
+                            + "FROM country "
+                            + "WHERE country.Continent = 'Europe' "
+                            + "ORDER BY country.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
@@ -137,26 +104,34 @@ public class App {
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city name by continent");
+            System.out.println("Failed to get country name by continent");
         }
         //return continent;
+
     }
 
 
-    //
-    // All the cities in a district by population
-    //
-    public ArrayList<City> getCity()
+    public void displayCountryContinent(ArrayList<Country> country)
     {
-        ArrayList<City> cty = new ArrayList<>();
+        for(Country ct:country)
+        {
+            System.out.println(ct.Name + "\t" + ct.Population + "\n");
+        }
+        System.out.print("\n");
+    }
+
+    public void getCityRegion()
+    {
+        ArrayList<Country> region = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT Name,Population "
-                            + "FROM city"
-                            + "ORDER BY city.Population DESC";
+                    "SELECT country.Name, country.Population, country.Region  "
+                            + "FROM country "
+                            + "WHERE country.Region = 'Caribbean' "
+                            + "ORDER BY country.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
@@ -165,28 +140,30 @@ public class App {
                 // Return new city if valid.
                 // Check one is returned
                 while (rset.next()) {
-                    City cities = new City();
-                    cities.Name = rset.getString("Name");
-                    cities.Population = rset.getInt("Population");
+                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+                    //System.out.println("\n");
+                    System.out.printf(rset.getString(1)+"\t"+rset.getInt(2)+"\t"+rset.getString(3)+"\n");
 
-                    cty.add(cities);
                 }
             }
         }
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city name");
+            System.out.println("Failed to get country name by region");
         }
-        return cty;
+        //return continent;
+
     }
 
-    public void displayCity(ArrayList<City> cty)
+
+    public void displayCityRegion(ArrayList<Country> country)
     {
-        for(City c:cty)
+        for(Country ct:country)
         {
-            System.out.println(c.Name + "\t" + c.Population + "\n");
+            System.out.println(ct.Name + "\t" + ct.Population + "\n");
         }
         System.out.print("\n");
     }
+
 }
