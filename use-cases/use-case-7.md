@@ -1,4 +1,4 @@
-# USE CASE: 1 Produce a capital city report requires name, country and population.
+# USE CASE: 7 Produce a capital city report requires name, country and population.
 
 ## CHARACTERISTIC INFORMATION
 

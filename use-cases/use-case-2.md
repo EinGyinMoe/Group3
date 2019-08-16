@@ -1,4 +1,4 @@
-# USE CASE: 1 Produce a Report on getting all city in a district from database sorted in descending order.
+# USE CASE: 2 Produce a Report on getting all city in a district from database sorted in descending order.
 
 ## CHARACTERISTIC INFORMATION
 

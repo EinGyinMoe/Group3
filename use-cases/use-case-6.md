@@ -1,4 +1,4 @@
-# USE CASE: 1 Produce a city report requires name, country, district and population.
+# USE CASE: 6 Produce a city report requires name, country, district and population.
 
 ## CHARACTERISTIC INFORMATION
 

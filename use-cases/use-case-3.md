@@ -1,4 +1,4 @@
-# USE CASE: 1 Produce a Report on getting all city in a continent from database sorted in descending order.
+# USE CASE: 3 Produce a Report on getting all city in a continent from database sorted in descending order.
 
 ## CHARACTERISTIC INFORMATION
 

@@ -1,4 +1,4 @@
-# USE CASE: 1 Produce a Report on getting all city in a region from database sorted in descending order.
+# USE CASE: 4 Produce a Report on getting all city in a region from database sorted in descending order.
 
 ## CHARACTERISTIC INFORMATION
 
