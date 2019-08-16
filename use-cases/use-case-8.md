@@ -32,7 +32,7 @@ Organization User.
 
 ### Trigger
 
-A request for Population information is sent to an Organization user.
+A request for the information is sent to an Organization user.
 
 ## MAIN SUCCESS SCENARIO
 
