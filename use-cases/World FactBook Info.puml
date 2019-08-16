@@ -9,19 +9,16 @@ actor user as "Organization User"
 rectangle Database
 
 rectangle "World factbook Information System " {
-   usecase UC1 as "get all city district from the database sorted from largest to smallest"
-   usecase UC2 as "get all city world from the database sorted from largest to smallest"
+   usecase UC1 as "get all population data of human being according to the usecase to the 1 to 16"
 
-    usecase UCa as "Print all cities"
+
+    usecase UCa as "Print all information"
 
 'To provide a name for usecases (use case UC1 as use case 1)
 
     user - UC1
     UC1 ..> UCa : include
     UC1 - Database
-    user - UC2
-    UC2 ..> UCa : include
-    UC2 - Database
 
 }
 'End PlantUML
