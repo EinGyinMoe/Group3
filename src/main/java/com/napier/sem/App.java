@@ -15,7 +15,7 @@ public class App {
         // Get City
 
 //        a.displayCity(cty);
-//        a.getCountryContinent();
+//        a.getCityContinent();
         a.getCityRegion();
         // Disconnect from database
         a.disconnect();
@@ -74,18 +74,18 @@ public class App {
 
     // All the country in a continent by Population
     //
-    public void getCountryContinent()
+    public void getCityContinent()
     {
-        ArrayList<Country> continent = new ArrayList<>();
+       // ArrayList<City> continent = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT country.Name, country.Population, country.Continent  "
-                            + "FROM country "
-                            + "WHERE country.Continent = 'Europe' "
-                            + "ORDER BY country.Population DESC";
+                    "SELECT city.Name, city.Population, country.Continent  "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code AND country.Continent = 'Europe' "
+                            + "ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
@@ -111,27 +111,27 @@ public class App {
     }
 
 
-    public void displayCountryContinent(ArrayList<Country> country)
-    {
-        for(Country ct:country)
-        {
-            System.out.println(ct.Name + "\t" + ct.Population + "\n");
-        }
-        System.out.print("\n");
-    }
+//    public void displayCountryContinent(ArrayList<Country> country)
+//    {
+//        for(Country ct:country)
+//        {
+//            System.out.println(ct.Name + "\t" + ct.Population + "\n");
+//        }
+//        System.out.print("\n");
+//    }
 
     public void getCityRegion()
     {
-        ArrayList<Country> region = new ArrayList<>();
+//        ArrayList<City> region = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT country.Name, country.Population, country.Region  "
-                            + "FROM country "
-                            + "WHERE country.Region = 'Caribbean' "
-                            + "ORDER BY country.Population DESC";
+                    "SELECT city.Name, city.Population, country.Region  "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code AND country.Region = 'Caribbean' "
+                            + "ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
@@ -154,16 +154,6 @@ public class App {
         }
         //return continent;
 
-    }
-
-
-    public void displayCityRegion(ArrayList<Country> country)
-    {
-        for(Country ct:country)
-        {
-            System.out.println(ct.Name + "\t" + ct.Population + "\n");
-        }
-        System.out.print("\n");
     }
 
 }
