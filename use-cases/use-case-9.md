@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-We know the role.  Database contains the data of current population information of all of the country.
+We know the role.  Database contains the data of current population information of the world, continent, region, country, district, and city.
 
 ### Success End Condition
 
