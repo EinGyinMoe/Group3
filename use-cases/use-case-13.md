@@ -1,4 +1,4 @@
-# USE CASE: 11 Produce a population report that requires total population of the continent/region/country not living in cities (including a %).
+# USE CASE: 13 Produce a population report that requires total population of the continent/region/country not living in cities (including a %).
 
 ## CHARACTERISTIC INFORMATION
 
