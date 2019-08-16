@@ -111,7 +111,9 @@ public class App {
 
     }
 
-
+//
+//    all the countries in a region by the population
+//
     public void getCountryRegion()
     {
 //        ArrayList<Country> region = new ArrayList<>();
