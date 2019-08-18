@@ -9,7 +9,24 @@ actor user as "Organization User"
 rectangle Database
 
 rectangle "World factbook Information System " {
-   usecase UC1 as "get all population data of human being according to the usecase to the 1 to 16"
+   usecase UC1 as "get all population data of human being 1"
+   usecase UC2 as "get all population data of human being 2"
+   usecase UC3 as "get all population data of human being 3"
+   usecase UC4 as "get all population data of human being 4"
+   usecase UC5 as "get all population data of human being 5"
+   usecase UC6 as "get all population data of human being 6"
+   usecase UC7 as "get all population data of human being 7"
+   usecase UC8 as "get all population data of human being 8"
+   usecase UC9 as "get all population data of human being 9"
+   usecase UC10 as "get all population data of human being 10"
+   usecase UC11 as "get all population data of human being 11"
+   usecase UC12 as "get all population data of human being 12"
+   usecase UC13 as "get all population data of human being 13"
+   usecase UC14 as "get all population data of human being 14"
+   usecase UC15 as "get all population data of human being 15"
+   usecase UC16 as "get all population data of human being 16"
+   usecase UC17 as "get all population data of human being 17"
+
 
 
     usecase UCa as "Print all information"
@@ -19,6 +36,54 @@ rectangle "World factbook Information System " {
     user - UC1
     UC1 ..> UCa : include
     UC1 - Database
+    user - UC2
+    UC2 ..> UCa : include
+    UC2 - Database
+    user - UC3
+    UC3 ..> UCa : include
+    UC3 - Database
+    user - UC4
+    UC4 ..> UCa : include
+    UC4 - Database
+    user - UC5
+    UC5 ..> UCa : include
+    UC5 - Database
+    user - UC6
+    UC6 ..> UCa : include
+    UC6 - Database
+    user - UC7
+    UC7 ..> UCa : include
+    UC7 - Database
+    user - UC8
+    UC8 ..> UCa : include
+    UC8 - Database
+    user - UC9
+    UC9 ..> UCa : include
+    UC9 - Database
+    user - UC10
+    UC10 ..> UCa : include
+    UC10 - Database
+    user - UC11
+    UC11 ..> UCa : include
+    UC11 - Database
+    user - UC12
+    UC12 ..> UCa : include
+    UC12 - Database
+    user - UC13
+    UC13 ..> UCa : include
+    UC13 - Database
+    user - UC14
+    UC14 ..> UCa : include
+    UC14 - Database
+    user - UC15
+    UC15 ..> UCa : include
+    UC15 - Database
+    user - UC16
+    UC16 ..> UCa : include
+    UC16 - Database
+    user - UC17
+    UC17 ..> UCa : include
+    UC17 - Database
 
 }
 'End PlantUML
