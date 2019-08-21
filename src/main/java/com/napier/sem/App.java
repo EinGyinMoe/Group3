@@ -3,6 +3,8 @@ package com.napier.sem;
 import java.sql.*;
 import java.util.ArrayList;
 
+//This is the class to be accessed from other functions
+
 public class App {
     public static void main(String[] args) {
         // Create new Application
@@ -74,9 +76,11 @@ public class App {
         }
     }
 
-    //
-    //cities in the world by population
-    //
+//
+//All the functions related to the city table
+//
+//cities in the world by population
+//
     public void getCity_world()
     {
         ArrayList<City> ctyworld = new ArrayList<>();
@@ -94,7 +98,6 @@ public class App {
                 System.out.print("Not found.");
             } else {
                 // Return new city if valid.
-                // Check one is returned
                 while (rset.next()) {
                     System.out.printf(rset.getString(1) + "\t" + rset.getInt(2) + "\n");
                 }
@@ -120,7 +123,7 @@ public class App {
             // Create string for SQL statement
             String strSelect =
                     "SELECT city.Name,city.Population "
-                            + "FROM city"
+                            + "FROM city "
                             + "ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -128,7 +131,6 @@ public class App {
                 System.out.print("Not found.");
             } else {
                 // Return new city if valid.
-                // Check one is returned
                 while (rset.next()) {
                     City cities = new City();
                     cities.Name = rset.getString("Name");
@@ -155,8 +157,11 @@ public class App {
         System.out.print("\n");
     }
 
-    // All the country in a continent by Population
-    //
+
+//All the functions related to the Countries Table
+//
+//All the country in a continent by Population
+//
     public void getCityContinent()
     {
         // ArrayList<City> continent = new ArrayList<>();
@@ -175,7 +180,6 @@ public class App {
                 System.out.print("Not found.");
             } else {
                 // Return new city if valid.
-                // Check one is returned
                 while (rset.next()) {
                     //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
                     //System.out.println("\n");
@@ -197,7 +201,6 @@ public class App {
     //  All the cities in a region by the population
     public void getCityRegion()
     {
-//        ArrayList<City> region = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -237,7 +240,6 @@ public class App {
     //
     public void getCountryContinent()
     {
-//        ArrayList<Country> continent = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -271,7 +273,7 @@ public class App {
 
     }
 
-    //
+
 //    all the countries in a region by the population
 //
     public void getCountryRegion()
