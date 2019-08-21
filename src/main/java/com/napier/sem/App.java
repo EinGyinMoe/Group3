@@ -3,6 +3,9 @@ package com.napier.sem;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * This is the class to be accessed from other functions
+ */
 public class App {
     public static void main(String[] args) {
         // Create new Application
@@ -11,13 +14,8 @@ public class App {
         // Connect to database
         a.connect();
 
-//        a.getCity_world();
-        // Get City
+        a.getCapitalCity_Report();
 
-//        a.displayCity(cty);
-//        a.getCountryContinent();
-//        a.getCountryRegion();
-        a.getCountryWorld();
         // Disconnect from database
         a.disconnect();
     }
@@ -72,117 +70,38 @@ public class App {
         }
     }
 
-
-    // All the country in a continent by Population
     //
-    public void getCountryContinent()
+//All the functions related to the city table
+//
+//capital city report
+//
+    public void getCapitalCity_Report()
     {
-//        ArrayList<Country> continent = new ArrayList<>();
+        ArrayList<Country> cpcty_report = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
+
             // Create string for SQL statement
             String strSelect =
-                    "SELECT country.Name, country.Population, country.Continent  "
+                    "SELECT country.Capital,country.Name, country.Population "
                             + "FROM country "
-                            + "WHERE country.Continent = 'Asia' "
-                            + "ORDER BY country.Population DESC";
+                            + "ORDER BY country.Capital ASC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
                 System.out.print("Not found.");
             } else {
                 // Return new city if valid.
-                // Check one is returned
                 while (rset.next()) {
-                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-                    //System.out.println("\n");
-                    System.out.printf(rset.getString(1)+"\t"+rset.getInt(2)+"\t"+rset.getString(3)+"\n");
-
+                    System.out.printf("\nCapital City: " + rset.getInt(1) + "\n" + "Country: " + rset.getString(2) + "\n" + "Population: " + rset.getInt(3) + "\n");
                 }
             }
         }
-        catch (Exception e)
-        {
+        catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country name by continent");
-        }
-        //return continent;
-
-    }
-
-//
-//    all the countries in a region by the population
-//
-    public void getCountryRegion()
-    {
-//        ArrayList<Country> region = new ArrayList<>();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT country.Name, country.Population, country.Region  "
-                            + "FROM country "
-                            + "WHERE country.Region = 'Caribbean' "
-                            + "ORDER BY country.Population DESC";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            if (rset == null) {
-                System.out.print("Not found.");
-            } else {
-                // Return new city if valid.
-                // Check one is returned
-                while (rset.next()) {
-                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-                    //System.out.println("\n");
-                    System.out.printf(rset.getString(1)+"\t"+rset.getInt(2)+"\t"+rset.getString(3)+"\n");
-
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get country name by region");
-        }
-        //return continent;
-
-    }
-
-//    all the countries in the world by the population
-//
-public void getCountryWorld()
-{
-    try {
-        // Create an SQL statement
-        Statement stmt = con.createStatement();
-        // Create string for SQL statement
-        String strSelect =
-                "SELECT country.Name, country.Population  "
-                        + "FROM country "
-                        + "ORDER BY country.Population DESC";
-        // Execute SQL statement
-        ResultSet rset = stmt.executeQuery(strSelect);
-        if (rset == null) {
-            System.out.print("Not found.");
-        } else {
-            // Return new city if valid.
-            // Check one is returned
-            while (rset.next()) {
-                //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-                //System.out.println("\n");
-                System.out.printf(rset.getString(1)+"\t"+rset.getInt(2)+"\n");
-
-            }
+            System.out.println("Failed to get capital city report.");
         }
     }
-    catch (Exception e)
-    {
-        System.out.println(e.getMessage());
-        System.out.println("Failed to get country name by region");
-    }
-    //return continent;
 
-}
-}
+} /*This is the end of the public App class */
