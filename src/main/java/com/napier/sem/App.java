@@ -94,12 +94,12 @@ public class App {
             } else {
                 // Return new country if valid.
                 while (rset.next()) {
-                    System.out.printf("Code " + rset.getString(1) + "\n" +
-                                      "Name " + rset.getString(2) + "\n" +
-                                      "Continent " + rset.getString(3) + "\n" +
-                                      "Region " + rset.getString(4) + "\n" +
-                                      "Population " + rset.getInt(5) + "\n" +
-                                      "Capital " + rset.getInt(6) + "\n");
+                    System.out.printf("\nCode: " + rset.getString(1) + "\n" +
+                                      "Name: " + rset.getString(2) + "\n" +
+                                      "Continent: " + rset.getString(3) + "\n" +
+                                      "Region: " + rset.getString(4) + "\n" +
+                                      "Population: " + rset.getInt(5) + "\n" +
+                                      "Capital: " + rset.getInt(6) + "\n");
                 }
             }
         }
