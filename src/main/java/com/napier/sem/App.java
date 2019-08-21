@@ -14,7 +14,8 @@ public class App {
         // Connect to database
         a.connect();
 
-        a.getCountry_report();
+        //a.getCountry_report();
+        a.getCity_report();
 
 
         // Disconnect from database
@@ -70,8 +71,6 @@ public class App {
             }
         }
     }
-
-    //
 //All the functions related to the city table
 //
 //cities in the world by population
@@ -108,6 +107,43 @@ public class App {
             System.out.println("Failed to get country report!.");
         }
         //return countryrept;
+    }
+
+//All the functions related to the city table
+//
+//cities in the world by population
+//
+    public void getCity_report()
+    {
+        ArrayList<City> cityrept = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, city.District, city.Population "
+                            + "FROM city, country  "
+                            + "WHERE city.CountryCode = country.Code "
+                            + "ORDER BY city.Name ASC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("City Report Not found!");
+            } else {
+                // Return new city if valid.
+                while (rset.next()) {
+                    System.out.printf("\nName: " + rset.getString(1) + "\n" +
+                            "Country: " + rset.getString(2) + "\n" +
+                            "District: " + rset.getString(3) + "\n" +
+                            "Population: " + rset.getInt(4) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city report!.");
+        }
+        //return cityrept;
     }
 
 
