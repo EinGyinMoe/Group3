@@ -14,8 +14,9 @@ public class App {
         // Connect to database
         a.connect();
 
-        //a.getCapitalCityReport();
-         a.getCapitalCityWorld();
+        // a.getCapitalCityReport();
+        // a.getCapitalCityWorld();
+        a.getCapitalCityContinent();
 
         // Disconnect from database
         a.disconnect();
@@ -104,7 +105,7 @@ public class App {
             System.out.println("Failed to get capital city report.");
         }
     }
-
+// capital city world
     public void getCapitalCityWorld()
     {
         ArrayList<Country> cpcty_world = new ArrayList<>();
@@ -134,4 +135,34 @@ public class App {
         }
     }
 
+// capital city in a continent
+    public void getCapitalCityContinent()
+    {
+        ArrayList<Country> cpcty_world = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Capital,country.Name, country.Continent, country.Population "
+                            + "FROM country "
+                            + "WHERE country.Continent='Asia' "
+                            + "ORDER BY country.Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                // Return new city if valid.
+                while (rset.next()) {
+                    System.out.printf("\nCapital City: " + rset.getInt(1) + "\n" + "Country: " + rset.getString(2) + "\n" + "Continent: " + rset.getString(3) + "\n" + "Population: " + rset.getInt(4) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city in a continent.");
+        }
+    }
 } /*This is the end of the public App class */
