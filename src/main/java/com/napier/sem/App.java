@@ -16,7 +16,8 @@ public class App {
 
         // a.getCapitalCityReport();
         // a.getCapitalCityWorld();
-        a.getCapitalCityContinent();
+        // a.getCapitalCityContinent();
+        a.getCapitalCityRegion();
 
         // Disconnect from database
         a.disconnect();
@@ -163,6 +164,36 @@ public class App {
         catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get capital city in a continent.");
+        }
+    }
+    // capital city in a region
+    public void getCapitalCityRegion()
+    {
+        ArrayList<Country> cpcty_world = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Capital,country.Name, country.Region, country.Population "
+                            + "FROM country "
+                            + "WHERE country.Region='Caribbean' "
+                            + "ORDER BY country.Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                // Return new city if valid.
+                while (rset.next()) {
+                    System.out.printf("\nCapital City: " + rset.getInt(1) + "\n" + "Country: " + rset.getString(2) + "\n" + "Region: " + rset.getString(3) + "\n" + "Population: " + rset.getInt(4) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city in a region.");
         }
     }
 } /*This is the end of the public App class */
