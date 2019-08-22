@@ -14,8 +14,8 @@ public class App {
         // Connect to database
         a.connect();
 
-        //a.getCountry_report();
-        a.getCity_report();
+
+        a.getCityCountry();
 
 
         // Disconnect from database
@@ -73,79 +73,39 @@ public class App {
     }
 //All the functions related to the city table
 //
-//cities in the world by population
+//cities in a country by population
 //
-    public void getCountry_report()
+    public void getCityCountry()
     {
-        ArrayList<Country> countryrept = new ArrayList<>();
+        //ArrayList<City> cityCountry = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT country.code,country.Name,country.Continent,country.Region,country.Population,country.Capital "
-                            + "FROM country "
-                            + "ORDER BY country.Name ASC";
+                    "SELECT city.Name, country.Name, city.Population "
+                            + "FROM country, city "
+                            + "WHERE city.CountryCode = country.Code AND country.Name = 'Belgium' "
+                            + "ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
                 System.out.print("Country Report Not found!");
             } else {
-                // Return new country if valid.
+                // Return city if valid.
                 while (rset.next()) {
-                    System.out.printf("\nCode: " + rset.getString(1) + "\n" +
-                                      "Name: " + rset.getString(2) + "\n" +
-                                      "Continent: " + rset.getString(3) + "\n" +
-                                      "Region: " + rset.getString(4) + "\n" +
-                                      "Population: " + rset.getInt(5) + "\n" +
-                                      "Capital: " + rset.getInt(6) + "\n");
+                    System.out.printf("\nCity Name: " + rset.getString(1) + "\n" +
+                                    "Country Name: " + rset.getString(2) + "\n" +
+                                      "Continent: " + rset.getString(3) + "\n" );
                 }
             }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get country report!.");
+            System.out.println("Failed to get city in a country!.");
         }
-        //return countryrept;
-    }
 
-//All the functions related to the city table
-//
-//cities in the world by population
-//
-    public void getCity_report()
-    {
-        ArrayList<City> cityrept = new ArrayList<>();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT city.Name, country.Name, city.District, city.Population "
-                            + "FROM city, country  "
-                            + "WHERE city.CountryCode = country.Code "
-                            + "ORDER BY city.Name ASC";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            if (rset == null) {
-                System.out.print("City Report Not found!");
-            } else {
-                // Return new city if valid.
-                while (rset.next()) {
-                    System.out.printf("\nName: " + rset.getString(1) + "\n" +
-                            "Country: " + rset.getString(2) + "\n" +
-                            "District: " + rset.getString(3) + "\n" +
-                            "Population: " + rset.getInt(4) + "\n");
-                }
-            }
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get city report!.");
-        }
-        //return cityrept;
     }
-
 
 
 
