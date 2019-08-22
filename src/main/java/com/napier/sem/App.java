@@ -15,7 +15,8 @@ public class App {
         a.connect();
 
 
-        a.getCityCountry();
+        //a.getCityCountry();
+        a.getFiveLanguagePopulation();
 
 
         // Disconnect from database
@@ -71,9 +72,10 @@ public class App {
             }
         }
     }
-//All the functions related to the city table
+
 //
-//cities in a country by population
+//All the cities in a country
+// organised by largest population to smallest.
 //
     public void getCityCountry()
     {
@@ -97,6 +99,40 @@ public class App {
                     System.out.printf("\nCity Name: " + rset.getString(1) + "\n" +
                                     "Country Name: " + rset.getString(2) + "\n" +
                                       "Continent: " + rset.getString(3) + "\n" );
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city in a country!.");
+        }
+
+    }
+
+//
+//All the cities in a country
+// organised by largest population to smallest.
+//
+    public void getFiveLanguagePopulation()
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT countrylanguage.Language, sum(country.Population * countrylanguage.Percentage) AS Population "
+                            + "FROM country, countrylanguage "
+                            + "WHERE country.Code = countrylanguage.CountryCode AND countrylanguage.Language IN ('English','Chinese','Hindi','Arabic','Spanish') "
+                            + "GROUP BY countrylanguage.Language";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Country Report Not found!");
+            } else {
+                // Return city if valid.
+                while (rset.next()) {
+                    System.out.printf("\nLanguage: " + rset.getString(1) + "\n" +
+                            "Population: " + rset.getString(2) + "\n" );
                 }
             }
         }
