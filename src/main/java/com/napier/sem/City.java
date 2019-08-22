@@ -1,6 +1,3 @@
-
-//CITY.java
-
 package com.napier.sem;
 
 /**
@@ -10,6 +7,14 @@ public class City
 {
     private int ID;
 
+    public String Name;
+
+    private Country country;
+
+    private String District;
+
+    public int Population;
+
     public int getID() {
         return ID;
     }
@@ -18,44 +23,38 @@ public class City
         this.ID = ID;
     }
 
-    private String Name;
-
-    public String getName() {
-        return Name;
-    }
-
     public void setName(String name) {
         Name = name;
     }
 
-    private String CountryCode;
-
-    public String getCountryCode() {
-        return CountryCode;
-    }
-
-    public void setCountryCode(String countryCode) {
-        CountryCode = countryCode;
-    }
-
-    private String District;
-
-    public String getDistrict() {
-        return District;
+    public void setCountry(Country country) {
+        this.country = country;
     }
 
     public void setDistrict(String district) {
         District = district;
     }
 
-    private int Population;
+    public void setPopulation(int population) {
+        Population = population;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public String getDistrict() {
+        return District;
+    }
 
     public int getPopulation() {
         return Population;
     }
 
-    public void setPopulation(int population) {
-        Population = population;
-    }
+
 
 }
