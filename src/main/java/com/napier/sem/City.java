@@ -18,12 +18,52 @@ public class City
     /**
      * Country's code
      */
-    public String CountryCode;
+    public Country country;
 
     /**
      * District
      */
     public String District;
+
+    public int getID() {
+        return ID;
+    }
+
+    public void setID(int ID) {
+        this.ID = ID;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
+    public void setDistrict(String district) {
+        District = district;
+    }
+
+    public void setPopulation(int population) {
+        Population = population;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public String getDistrict() {
+        return District;
+    }
+
+    public int getPopulation() {
+        return Population;
+    }
 
     /**
      * City's population

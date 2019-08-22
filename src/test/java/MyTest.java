@@ -18,11 +18,24 @@ public class MyTest
         app = new App();
     }
 
+//    @Test
+//    protected void displayCityDistrict()
+//    {
+//        ArrayList<City> cty = new ArrayList<City>();
+//        cty.add(null);
+//        app.displayCityDistrict(cty);
+//    }
+
+
     @Test
-    protected void displayCityDistrict()
+    protected void  displayCityContinenttest()
     {
-        ArrayList<City> cty = new ArrayList<City>();
-        cty.add(null);
-        app.displayCityDistrict(cty);
+        app.displayCityContinent(null);
+    }
+    @Test
+    protected void  displayCityNulltest()
+    {   ArrayList<City> cities =new ArrayList<>();
+        cities.add(null);
+        app.displayCityContinent(cities);
     }
 }
