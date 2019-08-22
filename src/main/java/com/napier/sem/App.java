@@ -16,7 +16,8 @@ public class App {
 //        a.getCity_world();
 //        a.getCityContinent();
 //        a.getCityRegion();
-        a.getCityDistrict();
+//        a.getCityDistrict();
+        a.getPopulationRegion();
 
 //        a.getCountryContinent();
 //        a.getCountryRegion();
@@ -343,6 +344,39 @@ public class App {
         {
             System.out.println(e.getMessage());
             System.out.println("Failed to get country name by region");
+        }
+        //return continent;
+    }
+
+    public void getPopulationRegion()
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, city.Population, country.Region "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code AND country.Region = 'Caribbean' ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                // Return new city if valid.
+                // Check one is returned
+                while (rset.next()) {
+                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+                    //System.out.println("\n");
+                    System.out.printf(rset.getString(1)+"\t"+rset.getInt(2)+"\n");
+
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city population by region");
         }
         //return continent;
     }
