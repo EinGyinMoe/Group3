@@ -272,7 +272,15 @@ public class App {
                 while (rset.next()) {
                     System.out.printf("Total Population of a City District: " + rset.getLong(1) + "\n");
                 }
-                
+                String strSelect2 =
+                        "SELECT city.Population " +
+                                "FROM city " +
+                                "WHERE city.Name='Herat'";
+                ResultSet rset2 = stmt2.executeQuery(strSelect2);
+                while(rset2.next())
+                {
+                    System.out.printf("Total Population of a city: " + rset2.getInt(1) + "\n");
+                }
             }
         }
         catch (Exception e) {
