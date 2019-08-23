@@ -14,14 +14,54 @@ public class App {
         App a = new App();
 
         // Connect to database
-        a.connect();
+        a.connect("localhost:33060");
 
-//        a.getCity_world();
+        // 1. All the cities in a district by population
+        ArrayList ctydistrict = a.getCityDistrict();
+        a.displayCityDistrict(ctydistrict);
+
+        //2. All the country in a continent by Population
         ArrayList cty = a.getCityContinent();
         a.displayCityContinent(cty);
 
+        //3. city report requires the following columns:
+        //Name.
+        //Country.
+        //District.
+        //Population.
         ArrayList ctrept = a.getCity_report();
         a.displayCityReport(ctrept);
+
+        //4. All the city population in a region
+        ArrayList ctyregion = a.getCityRegion();
+        a.displayCityRegion(ctyregion);
+
+        //5. All the cities in a country
+        // organised by largest population to smallest.
+        ArrayList ctycountry = a.getCityCountry();
+        a.displayCityCountry(ctycountry);
+
+        //6.
+        // All the country in a continent by Population
+        ArrayList countrycontinent = a.getCountryContinent();
+        a.displayCountryContinent(countrycontinent);
+
+        //7.
+        //all the countries in a region by the population
+        ArrayList countryregion = a.getCountryRegion();
+        a.displayCountryRegion(countryregion);
+
+        //8.
+        //all the countries in the world by the population
+        ArrayList countryworld = a.getCountryWorld();
+        a.displayCountryWorld(countryworld);
+
+        //9.
+        //cities in the world by population
+        ArrayList ctyworld = a.getCity_world();
+        a.displayCityWorld(ctyworld);
+
+
 
         // Disconnect from database
         a.disconnect();
@@ -35,29 +75,39 @@ public class App {
     /**
      * Connect to the MySQL database.
      */
-    public void connect() {
-        try {
+    public void connect(String location)
+    {
+        try
+        {
             // Load Database driver
-            Class.forName("com.mysql.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        }
+        catch (ClassNotFoundException e)
+        {
             System.out.println("Could not load SQL driver");
             System.exit(-1);
         }
 
         int retries = 10;
-        for (int i = 0; i < retries; ++i) {
+        for (int i = 0; i < retries; ++i)
+        {
             System.out.println("Connecting to database...");
-            try {
+            try
+            {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://db:3306/world", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/employees?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
-            } catch (SQLException sqle) {
+            }
+            catch (SQLException sqle)
+            {
                 System.out.println("Failed to connect to database attempt " + Integer.toString(i));
                 System.out.println(sqle.getMessage());
-            } catch (InterruptedException ie) {
+            }
+            catch (InterruptedException ie)
+            {
                 System.out.println("Thread interrupted? Should not happen.");
             }
         }
@@ -77,12 +127,12 @@ public class App {
         }
     }
 
-//
+    //
 // 1. All the cities in a district by population
 //
-    public void getCityDistrict()
+    public ArrayList<City> getCityDistrict()
     {
-        ArrayList<City> cty = new ArrayList<>();
+        ArrayList<City> ctydistrict =null;
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -96,13 +146,14 @@ public class App {
             if (rset == null) {
                 System.out.print("Not found.");
             } else {
+                ctydistrict=new ArrayList<>();
                 // Return new city if valid.
                 while (rset.next()) {
                     City cities = new City();
-                    cities.Name = rset.getString("Name");
-                    cities.Population = rset.getInt("Population");
+                    cities.setName(rset.getString("Name"));
+                    cities.setPopulation( rset.getInt("Population"));
 
-                    cty.add(cities);
+                    ctydistrict.add(cities);
                 }
             }
         }
@@ -111,24 +162,29 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city name");
         }
-//        return cty;
+        return ctydistrict;
     }
 
-    public void displayCityDistrict(ArrayList<City> cty)
+    public void displayCityDistrict(ArrayList<City> ctydistrict)
     {
-        for(City c:cty)
+        if (ctydistrict== null)
+        {
+            System.out.println("* There is no null data in CityDistrict!\n");
+            return;
+        }
+        for(City c:ctydistrict)
         {
             if (c == null) {
-                System.out.println("There is no null data in CityDistrict!");
+                System.out.println("* No null data in each CityDistrict!\n");
                 continue;
             }
-            System.out.println(c.Name + "\t" + c.Population + "\n");
+            System.out.println(c.getName()+ "\t" + c.getPopulation() + "\n");
         }
-        System.out.print("\n");
+//        System.out.print("\n");
     }
 
 
-//2. All the country in a continent by Population
+    //2. All the country in a continent by Population
 //
     public ArrayList<City> getCityContinent()
     {
@@ -180,21 +236,21 @@ public class App {
 
         if (cty == null)
         {
-            System.out.println("There is no null data in CityContinent!\n");
+            System.out.println("* There is no null data in CityContinent!\n");
             return;
         }
         for(City c:cty)
         {
             if (c == null) {
-                System.out.println("There is no null data in each CityContinent!");
+                System.out.println("* No null data in each CityContinent!\n");
                 continue;
             }
-            System.out.println(c.Name + "\t" + c.Population + "\n");
+            System.out.println(c.getName() + "\t" + c.getPopulation() + "\t" + c.getCountry().getContinent() + "\n");
         }
-        System.out.print("\n");
+//        System.out.print("\n");
     }
 
-//
+    //
 //3. city report requires the following columns:
 //Name.
 //Country.
@@ -216,7 +272,7 @@ public class App {
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
-                System.out.print("No City Report!");
+                System.out.print("City Report Not found!");
             } else {
                 cityrept=new ArrayList<>();
                 // Return new city if valid.
@@ -242,21 +298,21 @@ public class App {
 
         if (ctyrp == null)
         {
-            System.out.println("No null data in CityReport!");
+            System.out.println("* There is no null data in City Report!\n");
             return;
         }
         for(City c:ctyrp)
         {
             if (c == null) {
-                System.out.println("No null data in each CityReport! ");
+                System.out.println("* No null data in each CityReport!\n");
                 continue;
             }
-            System.out.println(c.Name + "\t" + c.Population + "\n");
+            System.out.println(c.getName() + "\t" + c.getPopulation() + "\t" + c.getCountry().getContinent() + c.getCountry().getName() +"\n");
         }
-        System.out.print("\n");
+//        System.out.print("\n");
     }
 
-//4. All the city population in a region
+    //4. All the city population in a region
 //
     public ArrayList<City> getCityRegion()
     {
@@ -304,22 +360,22 @@ public class App {
 
         if (region == null)
         {
-            System.out.println("There is no null data in CityRegion!");
+            System.out.println("* There is no null data in CityRegion!\n");
             return;
         }
         for(City c:region)
         {
             if (c == null) {
-                System.out.println("There is no null data in each CityRegion! ");
+                System.out.println("* No null data in each CityRegion!\n");
                 continue;
             }
-            System.out.println(c.Name + "\t" + c.Population + "\n");
+            System.out.println(c.getName() + "\t" + c.getPopulation() + "\t" + c.getCountry().getName() + "\n");
         }
-        System.out.print("\n");
+//        System.out.print("\n");
     }
 
 
-//5. All the cities in a country
+    //5. All the cities in a country
 // organised by largest population to smallest.
 //
     public ArrayList<City> getCityCountry()
@@ -366,18 +422,256 @@ public class App {
 
         if (cityCountry == null)
         {
-            System.out.println("There is no null data in CityCountry!");
+            System.out.println("* There is no null data in CityCountry!\n");
             return;
         }
         for(City c:cityCountry)
         {
             if (c == null) {
-                System.out.println("No Null Data in each citycountry!");
+                System.out.println("* No null data in each CityCountry!\n ");
                 continue;
             }
-            System.out.println(c.Name + "\t" + c.Population + "\n");
+            System.out.println(c.getName() + "\t" + c.getCountry().getName() + "\t" + c.getPopulation() + "\t"+c.getCountry().getContinent() + "\n");
         }
-        System.out.print("\n");
+//        System.out.print("\n");
     }
+
+    //6.
+// All the country in a continent by Population
+//
+    public ArrayList<Country> getCountryContinent()
+    {
+        ArrayList<Country> countryContinent = null;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Name, country.Population, country.Continent  "
+                            + "FROM country "
+                            + "WHERE country.Continent = 'Asia' "
+                            + "ORDER BY country.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                countryContinent =new ArrayList<>();
+                // Return new city if valid.
+                // Check one is returned
+                while (rset.next()) {
+                    Country country = new Country();
+                    country.setName(rset.getString("Name"));
+                    country.setPopulation( rset.getInt("Population"));
+                    country.setContinent(rset.getString("Continent"));
+
+                    countryContinent.add(country);
+
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country name by continent");
+        }
+        return countryContinent;
+    }
+    public void displayCountryContinent(ArrayList<Country> countryContinent)
+    {
+
+        if (countryContinent == null)
+        {
+            System.out.println("* There is no null data in CountryContinent!\n");
+            return;
+        }
+        for(Country ct:countryContinent)
+        {
+            if (ct == null) {
+                System.out.println("* No null data in each CountryContinent!\n");
+                continue;
+            }
+            System.out.println(ct.getName() + "\t" + ct.getPopulation() + "\t"+ ct.getContinent() + "\n");
+        }
+//        System.out.print("\n");
+    }
+
+    //7.
+//all the countries in a region by the population
+//
+    public ArrayList<Country> getCountryRegion()
+    {
+        ArrayList<Country> countryRegion = null;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Name, country.Population, country.Region  "
+                            + "FROM country "
+                            + "WHERE country.Region = 'Caribbean' "
+                            + "ORDER BY country.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                countryRegion =new ArrayList<>();
+                // Return new city if valid.
+                // Check one is returned
+                while (rset.next()) {
+                    Country country = new Country();
+                    country.setName(rset.getString("Name"));
+                    country.setPopulation( rset.getInt("Population"));
+                    country.setRegion(rset.getString("Region"));
+
+                    countryRegion.add(country);
+
+
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country name by region");
+        }
+        return countryRegion;
+
+    }
+    public void displayCountryRegion(ArrayList<Country> countryRegion)
+    {
+
+        if (countryRegion == null)
+        {
+            System.out.println("* There is no null data in CountryRegion!\n");
+            return;
+        }
+        for(Country ct:countryRegion)
+        {
+            if (ct == null) {
+                System.out.println("* No null data in each CountryRegion!\n");
+                continue;
+            }
+            System.out.println(ct.getName() + "\t" + ct.getPopulation() + "\t"+ ct.getRegion() + "\n");
+        }
+//        System.out.print("\n");
+    }
+
+    //8.
+//    all the countries in the world by the population
+////
+    public ArrayList<Country> getCountryWorld()
+    {
+        ArrayList<Country> countryWorld = null;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Name, country.Population  "
+                            + "FROM country "
+                            + "ORDER BY country.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                countryWorld = new ArrayList<>();
+                // Return new city if valid.
+                // Check one is returned
+                while (rset.next()) {
+                    Country country = new Country();
+                    country.setName(rset.getString("Name"));
+                    country.setPopulation(rset.getInt("Population"));
+
+                    countryWorld.add(country);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country name in the world.");
+        }
+        return countryWorld;
+    }
+    public void displayCountryWorld(ArrayList<Country> countryWorld)
+    {
+
+        if (countryWorld == null)
+        {
+            System.out.println("* There is no null data in CountryWorld!\n");
+            return;
+        }
+        for(Country ct:countryWorld)
+        {
+            if (ct == null) {
+                System.out.println("* No null data in each CountryWorld!\n ");
+                continue;
+            }
+            System.out.println(ct.getName() + "\t" + ct.getPopulation() + "\n");
+        }
+//        System.out.print("\n");
+    }
+    //
+//9.
+//cities in the world by population
+////
+    public ArrayList<City> getCity_world()
+    {
+        ArrayList<City> ctyworld = null;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name,city.Population "
+                            + "FROM city "
+                            + "ORDER BY city.Population DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                ctyworld = new ArrayList<>();
+                // Return new city if valid.
+                // Check one is returned
+                while (rset.next()) {
+                    City city = new City();
+                    city.setName(rset.getString("Name"));
+                    city.setPopulation(rset.getInt("Population"));
+
+                    ctyworld.add(city);
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get city name in the world.");
+        }
+        return ctyworld;
+    }
+    public void displayCityWorld(ArrayList<City> ctyWorld)
+    {
+
+        if (ctyWorld == null)
+        {
+            System.out.println("* There is no null data in CityWorld!\n.");
+            return;
+        }
+        for(City c:ctyWorld)
+        {
+            if (c == null) {
+                System.out.println("* No null data in each CityWorld!\n");
+                continue;
+            }
+            System.out.println(c.getName() + "\t" + c.getPopulation() + "\n");
+        }
+//        System.out.print("\n");
+    }
+
+
+
 
 } /*This is the end of the public App class */
