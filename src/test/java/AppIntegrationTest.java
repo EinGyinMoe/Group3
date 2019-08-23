@@ -29,7 +29,7 @@ public class AppIntegrationTest
     void testgetCountryByCode() throws SQLException
     {
         Country ctry = app.getCountryByCode("ABW");
-        assertEquals(ctry.getCode(), "ABC");
+        assertEquals(ctry.getCode(), "ABW");
         assertEquals(ctry.getName(), "Aruba");
         assertEquals(ctry.getPopulation(), 103000);
     }
