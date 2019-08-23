@@ -97,7 +97,7 @@ public class App {
                 // Wait a bit for db to start
                 Thread.sleep(30000);
                 // Connect to database
-                con = DriverManager.getConnection("jdbc:mysql://" + location + "/employees?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
+                con = DriverManager.getConnection("jdbc:mysql://" + location + "/world?allowPublicKeyRetrieval=true&useSSL=false", "root", "example");
                 System.out.println("Successfully connected");
                 break;
             }
@@ -434,6 +434,38 @@ public class App {
             System.out.println(c.getName() + "\t" + c.getCountry().getName() + "\t" + c.getPopulation() + "\t"+c.getCountry().getContinent() + "\n");
         }
 //        System.out.print("\n");
+    }
+
+    public Country getCountryByCode(String code)throws SQLException
+    {   Country c=null;
+
+        // Create string for SQL statement
+        String strSelect =
+                "SELECT country.Code, country.Name, country.Population, country.Continent  "
+                        + "FROM country "
+                        + "WHERE country.Code = ?";
+        PreparedStatement stmt = con.prepareStatement(strSelect);
+        stmt.setString(1,code);
+
+
+
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery();
+        if (rset==null) System.out.println("No Country found");
+        else{ c=new Country();
+            while(rset.next())
+            {
+                c.setCode(rset.getString(1));
+                c.setName(rset.getString(2));
+                c.setPopulation(rset.getInt(3));
+                c.setContinent(rset.getString(4));
+
+            }
+
+
+        }
+       return c;
+
     }
 
     //6.
