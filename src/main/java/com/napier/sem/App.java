@@ -118,6 +118,10 @@ public class App {
     {
         for(City c:cty)
         {
+            if (c == null) {
+                System.out.println("There is no null data in CityDistrict!");
+                continue;
+            }
             System.out.println(c.Name + "\t" + c.Population + "\n");
         }
         System.out.print("\n");
@@ -176,13 +180,13 @@ public class App {
 
         if (cty == null)
         {
-            System.out.println("No cities data \n");
+            System.out.println("There is no null data in CityContinent!\n");
             return;
         }
         for(City c:cty)
         {
             if (c == null) {
-                System.out.println("Null City");
+                System.out.println("There is no null data in each CityContinent!");
                 continue;
             }
             System.out.println(c.Name + "\t" + c.Population + "\n");
@@ -212,7 +216,7 @@ public class App {
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
-                System.out.print("City Report Not found!");
+                System.out.print("No City Report!");
             } else {
                 cityrept=new ArrayList<>();
                 // Return new city if valid.
@@ -238,13 +242,13 @@ public class App {
 
         if (ctyrp == null)
         {
-            System.out.println("No city report.");
+            System.out.println("No null data in CityReport!");
             return;
         }
         for(City c:ctyrp)
         {
             if (c == null) {
-                System.out.println("Null City report data ");
+                System.out.println("No null data in each CityReport! ");
                 continue;
             }
             System.out.println(c.Name + "\t" + c.Population + "\n");
@@ -300,13 +304,13 @@ public class App {
 
         if (region == null)
         {
-            System.out.println("No region.");
+            System.out.println("There is no null data in CityRegion!");
             return;
         }
         for(City c:region)
         {
             if (c == null) {
-                System.out.println("Null Region data ");
+                System.out.println("There is no null data in each CityRegion! ");
                 continue;
             }
             System.out.println(c.Name + "\t" + c.Population + "\n");
@@ -362,13 +366,13 @@ public class App {
 
         if (cityCountry == null)
         {
-            System.out.println("No city in a country.");
+            System.out.println("There is no null data in CityCountry!");
             return;
         }
         for(City c:cityCountry)
         {
             if (c == null) {
-                System.out.println("Null City in a country data ");
+                System.out.println("No Null Data in each citycountry!");
                 continue;
             }
             System.out.println(c.Name + "\t" + c.Population + "\n");

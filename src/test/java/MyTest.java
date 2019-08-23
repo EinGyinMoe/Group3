@@ -1,5 +1,5 @@
 package com.napier.sem;
-
+//this is unit_testing ...........
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -18,13 +18,13 @@ public class MyTest
         app = new App();
     }
 
-//    @Test
-//    protected void displayCityDistrict()
-//    {
-//        ArrayList<City> cty = new ArrayList<City>();
-//        cty.add(null);
-//        app.displayCityDistrict(cty);
-//    }
+    @Test
+    protected void displayCityDistrict()
+    {
+        ArrayList<City> cty = new ArrayList<City>();
+        cty.add(null);
+        app.displayCityDistrict(cty);
+    }
 
 
     @Test
@@ -63,7 +63,7 @@ public class MyTest
     protected void  displayCityRegionNulltest()
     {   ArrayList<City> ct =new ArrayList<>();
         ct.add(null);
-        app.displayCityReport(ct);
+        app.displayCityRegion(ct);
     }
 
     @Test
@@ -76,6 +76,7 @@ public class MyTest
     protected void  displayCityCountryNulltest()
     {   ArrayList<City> cty =new ArrayList<>();
         cty.add(null);
-        app.displayCityReport(cty);
+        app.displayCityCountry(cty);
     }
+
 }
