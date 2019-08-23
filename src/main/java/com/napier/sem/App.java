@@ -41,7 +41,7 @@ public class App {
             System.exit(-1);
         }
 
-        int retries = 10;
+        int retries = 20;
         for (int i = 0; i < retries; ++i) {
             System.out.println("Connecting to database...");
             try {
@@ -205,6 +205,8 @@ public class App {
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
+            Statement stmt2 = con.createStatement();
+            Statement stmt3 = con.createStatement();
 
             // Create string for SQL statement
             String strSelect =
@@ -224,17 +226,25 @@ public class App {
                 String strSelect2 =
                         "SELECT SUM(country.Population) " +
                                 "FROM country ";
-                ResultSet rset2 = stmt.executeQuery(strSelect2);
+                ResultSet rset2 = stmt2.executeQuery(strSelect2);
                 while(rset2.next())
                 {
                     System.out.printf("Total Population of the world: " + rset2.getLong(1) + "\n");
                 }
-
+                String strSelect3 =
+                        "SELECT country.Population " +
+                                "FROM country " +
+                                "WHERE country.Name='Argentina'";
+                ResultSet rset3 = stmt3.executeQuery(strSelect3);
+                while(rset3.next())
+                {
+                    System.out.printf("Total Population of a country: " + rset3.getLong(1) + "\n");
+                }
             }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get the total population of the world, a region and a continent.");
+            System.out.println("Failed to get the total population of the world, a region, a continent and a country.");
         }
     }
 } /*This is the end of the public App class */
