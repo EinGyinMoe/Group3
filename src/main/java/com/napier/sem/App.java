@@ -97,7 +97,7 @@ public class App {
             if (rset == null) {
                 System.out.print("Not found.");
             } else {
-                // Return new city if valid.
+                // Return new capital city report if valid.
                 while (rset.next()) {
                     System.out.printf("\nCapital City: " + rset.getInt(1) + "\n" + "Country: " + rset.getString(2) + "\n" + "Population: " + rset.getInt(3) + "\n");
                 }
@@ -126,7 +126,7 @@ public class App {
             if (rset == null) {
                 System.out.print("Not found.");
             } else {
-                // Return new city if valid.
+                // Return new capital city world if valid.
                 while (rset.next()) {
                     System.out.printf("\nCapital City: " + rset.getInt(1) + "\n" + "Country: " + rset.getString(2) + "\n" + "Population: " + rset.getInt(3) + "\n");
                 }
@@ -141,7 +141,7 @@ public class App {
 // capital city in a continent
     public void getCapitalCityContinent()
     {
-        ArrayList<Country> cpcty_world = new ArrayList<>();
+        ArrayList<Country> cpcty_continent = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -157,7 +157,7 @@ public class App {
             if (rset == null) {
                 System.out.print("Not found.");
             } else {
-                // Return new city if valid.
+                // Return new capital city continent if valid.
                 while (rset.next()) {
                     System.out.printf("\nCapital City: " + rset.getInt(1) + "\n" + "Country: " + rset.getString(2) + "\n" + "Continent: " + rset.getString(3) + "\n" + "Population: " + rset.getInt(4) + "\n");
                 }
@@ -171,7 +171,7 @@ public class App {
     // capital city in a region
     public void getCapitalCityRegion()
     {
-        ArrayList<Country> cpcty_world = new ArrayList<>();
+        ArrayList<Country> cpcty_region = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -187,7 +187,7 @@ public class App {
             if (rset == null) {
                 System.out.print("Not found.");
             } else {
-                // Return new city if valid.
+                // Return new capital city region if valid.
                 while (rset.next()) {
                     System.out.printf("\nCapital City: " + rset.getInt(1) + "\n" + "Country: " + rset.getString(2) + "\n" + "Region: " + rset.getString(3) + "\n" + "Population: " + rset.getInt(4) + "\n");
                 }
@@ -199,17 +199,17 @@ public class App {
         }
     }
     // All the functions related to total population.
-    // Total population of the world, a region, a continent and a country
+    // Total population of the world, a region, a continent, and a country
     public void getTotalPopulationCountry()
     {
         ArrayList<Country> totl_popu_country = new ArrayList<>();
         try {
-            // Create an SQL statement
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
             Statement stmt = con.createStatement();
             Statement stmt2 = con.createStatement();
             Statement stmt3 = con.createStatement();
 
-            // Create string for SQL statement
+            // Create string for total population of a region and a continent SQL statement
             String strSelect =
                     "SELECT SUM(CASE WHEN country.Region='Caribbean' THEN country.Population END ) as totalregion, SUM(CASE WHEN country.Continent='Asia' THEN country.Population END ) as totalcontinent " +
                             "FROM country " +
@@ -220,23 +220,29 @@ public class App {
             if (rset == null) {
                 System.out.print("Not found.");
             } else {
-                // Return new city if valid.
+                // Return new total population of a region and a continent if valid.
                 while (rset.next()) {
                     System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
                 }
+                // Create string for total population of the world SQL statement
                 String strSelect2 =
                         "SELECT SUM(country.Population) " +
                                 "FROM country ";
+                // Execute SQL statement
                 ResultSet rset2 = stmt2.executeQuery(strSelect2);
+                // Return new total population of the world if valid.
                 while(rset2.next())
                 {
                     System.out.printf("Total Population of the world: " + rset2.getLong(1) + "\n");
                 }
+                // Create string for total population of a country SQL statement
                 String strSelect3 =
                         "SELECT country.Population " +
                                 "FROM country " +
                                 "WHERE country.Name='Argentina'";
+                // Execute SQL statement
                 ResultSet rset3 = stmt3.executeQuery(strSelect3);
+                // Return new total population of a country if valid.
                 while(rset3.next())
                 {
                     System.out.printf("Total Population of a country: " + rset3.getLong(1) + "\n");
@@ -248,16 +254,16 @@ public class App {
             System.out.println("Failed to get the total population of the world, a region, a continent and a country.");
         }
     }
-    // Total population of the world, a region, a continent and a country
+    // Total population of a city and a city district
     public void getTotalPopulationCity()
     {
         ArrayList<City> totl_popu_city = new ArrayList<>();
         try {
-            // Create an SQL statement
+            // Create SQL statements for the total population of a city district and a city.
             Statement stmt = con.createStatement();
             Statement stmt2 = con.createStatement();
 
-            // Create string for SQL statement
+            // Create string for the total population of a city district SQL statement
             String strSelect =
                     "SELECT SUM(CASE WHEN city.District='Kabol' THEN city.Population END ) as totaldistrict " +
                             "FROM city " +
@@ -268,15 +274,18 @@ public class App {
             if (rset == null) {
                 System.out.print("Not found.");
             } else {
-                // Return new city if valid.
+                // Return new total population of a city district if valid.
                 while (rset.next()) {
                     System.out.printf("Total Population of a City District: " + rset.getLong(1) + "\n");
                 }
+                // Create string for total population of a city SQL statement
                 String strSelect2 =
                         "SELECT city.Population " +
                                 "FROM city " +
                                 "WHERE city.Name='Herat'";
+                // Execute SQL statement
                 ResultSet rset2 = stmt2.executeQuery(strSelect2);
+                // Return new total population of a city if valid.
                 while(rset2.next())
                 {
                     System.out.printf("Total Population of a city: " + rset2.getInt(1) + "\n");
