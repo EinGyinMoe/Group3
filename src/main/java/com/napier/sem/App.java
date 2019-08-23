@@ -18,7 +18,8 @@ public class App {
         // a.getCapitalCityWorld();
         // a.getCapitalCityContinent();
         // a.getCapitalCityRegion();
-        a.getTotalPopulation();
+        // a.getTotalPopulationCountry();
+        a.getTotalPopulationCity();
 
         // Disconnect from database
         a.disconnect();
@@ -199,9 +200,9 @@ public class App {
     }
     // All the functions related to total population.
     // Total population of the world, a region, a continent and a country
-    public void getTotalPopulation()
+    public void getTotalPopulationCountry()
     {
-        ArrayList<Country> totl_population = new ArrayList<>();
+        ArrayList<Country> totl_popu_country = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -245,6 +246,38 @@ public class App {
         catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get the total population of the world, a region, a continent and a country.");
+        }
+    }
+    // Total population of the world, a region, a continent and a country
+    public void getTotalPopulationCity()
+    {
+        ArrayList<City> totl_popu_city = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            Statement stmt2 = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT SUM(CASE WHEN city.District='Kabol' THEN city.Population END ) as totaldistrict " +
+                            "FROM city " +
+                            "WHERE city.District='Kabol'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                // Return new city if valid.
+                while (rset.next()) {
+                    System.out.printf("Total Population of a City District: " + rset.getLong(1) + "\n");
+                }
+                
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total population of a city district, and a city.");
         }
     }
 } /*This is the end of the public App class */
