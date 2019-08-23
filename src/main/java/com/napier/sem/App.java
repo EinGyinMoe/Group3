@@ -17,7 +17,9 @@ public class App {
         // a.getCapitalCityReport();
         // a.getCapitalCityWorld();
         // a.getCapitalCityContinent();
-        a.getCapitalCityRegion();
+        // a.getCapitalCityRegion();
+        // a.getTotalWorld();
+        a.getTotl_Region_Continent();
 
         // Disconnect from database
         a.disconnect();
@@ -194,6 +196,37 @@ public class App {
         catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get capital city in a region.");
+        }
+    }
+    // All the functions related to total population.
+    // Total population of the world
+    // Total population of a region and a continent
+    public void getTotl_Region_Continent()
+    {
+        ArrayList<Country> totl_world = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT SUM(CASE WHEN country.Region='Caribbean' THEN country.Population END ) as totalworld, SUM(CASE WHEN country.Continent='Asia' THEN country.Population END ) as totalcontinent " +
+                            "FROM country " +
+                            "WHERE country.Continent='Asia' OR country.Region='Caribbean'";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                // Return new city if valid.
+                while (rset.next()) {
+                    System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(3));
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total population of a region and a continent.");
         }
     }
 } /*This is the end of the public App class */
