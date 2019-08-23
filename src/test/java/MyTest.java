@@ -32,10 +32,50 @@ public class MyTest
     {
         app.displayCityContinent(null);
     }
+
     @Test
     protected void  displayCityNulltest()
     {   ArrayList<City> cities =new ArrayList<>();
         cities.add(null);
         app.displayCityContinent(cities);
+    }
+
+    @Test
+    protected void  displayCityReporttest()
+    {
+        app.displayCityReport(null);
+    }
+
+    @Test
+    protected void  displayCityReportNulltest()
+    {   ArrayList<City> cit =new ArrayList<>();
+        cit.add(null);
+        app.displayCityReport(cit);
+    }
+
+    @Test
+    protected void  displayCityRegionttest()
+    {
+        app.displayCityRegion(null);
+    }
+
+    @Test
+    protected void  displayCityRegionNulltest()
+    {   ArrayList<City> ct =new ArrayList<>();
+        ct.add(null);
+        app.displayCityReport(ct);
+    }
+
+    @Test
+    protected void  displayCityCountrytest()
+    {
+        app.displayCityCountry(null);
+    }
+
+    @Test
+    protected void  displayCityCountryNulltest()
+    {   ArrayList<City> cty =new ArrayList<>();
+        cty.add(null);
+        app.displayCityReport(cty);
     }
 }

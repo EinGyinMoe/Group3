@@ -176,7 +176,7 @@ public class App {
 
         if (cty == null)
         {
-            System.out.println("No cities data");
+            System.out.println("No cities data \n");
             return;
         }
         for(City c:cty)
