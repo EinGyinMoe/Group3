@@ -34,6 +34,16 @@ public class AppIntegrationTest
         assertEquals(ctry.getPopulation(), 103000);
     }
 
-
+    @Test
+    void testgetCountryByCode2() throws SQLException
+    {
+        ArrayList<Country> ctries= app.getCountryContinent();
+        for (Country c: ctries) {
+            if (c.getName().equals("Canada")) {
+                assertEquals(c.getCode(), "CAN");
+                assertEquals(c.getContinent(), "North America");
+            }
+        }
+    }
 
 }

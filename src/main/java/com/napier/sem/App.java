@@ -145,8 +145,8 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT city.Name,city.Population "
-                            + "FROM city "
+                    "SELECT city.Name,city.Population, city.District "
+                            + "FROM city WHERE city.District = 'Kabol' "
                             + "ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -159,7 +159,7 @@ public class App {
                     City cities = new City();
                     cities.setName(rset.getString("Name"));
                     cities.setPopulation( rset.getInt("Population"));
-
+                    cities.setDistrict(rset.getString("District"));
                     ctydistrict.add(cities);
                 }
             }
@@ -185,7 +185,7 @@ public class App {
                 System.out.println("* No null data in each CityDistrict!\n");
                 continue;
             }
-            System.out.println(c.getName()+ "\t" + c.getPopulation() + "\n");
+            System.out.println(c.getName()+ "\t" + c.getPopulation() + c.getDistrict() + "\t" +"\n");
         }
 //        System.out.print("\n");
     }
