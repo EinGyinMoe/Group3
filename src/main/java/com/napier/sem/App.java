@@ -18,8 +18,7 @@ public class App {
         // a.getCapitalCityWorld();
         // a.getCapitalCityContinent();
         // a.getCapitalCityRegion();
-        // a.getTotalWorld();
-        a.getTotl_Region_Continent();
+        a.getTotalPopulation();
 
         // Disconnect from database
         a.disconnect();
@@ -199,20 +198,20 @@ public class App {
         }
     }
     // All the functions related to total population.
-    // Total population of the world
-    // Total population of a region and a continent
-    public void getTotl_Region_Continent()
+    // Total population of the world, a region, a continent and a country
+    public void getTotalPopulation()
     {
-        ArrayList<Country> totl_world = new ArrayList<>();
+        ArrayList<Country> totl_population = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
             // Create string for SQL statement
             String strSelect =
-                    "SELECT SUM(CASE WHEN country.Region='Caribbean' THEN country.Population END ) as totalworld, SUM(CASE WHEN country.Continent='Asia' THEN country.Population END ) as totalcontinent " +
+                    "SELECT SUM(CASE WHEN country.Region='Caribbean' THEN country.Population END ) as totalregion, SUM(CASE WHEN country.Continent='Asia' THEN country.Population END ) as totalcontinent " +
                             "FROM country " +
                             "WHERE country.Continent='Asia' OR country.Region='Caribbean'";
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
@@ -220,13 +219,22 @@ public class App {
             } else {
                 // Return new city if valid.
                 while (rset.next()) {
-                    System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(3));
+                    System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
                 }
+                String strSelect2 =
+                        "SELECT SUM(country.Population) " +
+                                "FROM country ";
+                ResultSet rset2 = stmt.executeQuery(strSelect2);
+                while(rset2.next())
+                {
+                    System.out.printf("Total Population of the world: " + rset2.getLong(1) + "\n");
+                }
+
             }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get the total population of a region and a continent.");
+            System.out.println("Failed to get the total population of the world, a region and a continent.");
         }
     }
 } /*This is the end of the public App class */
