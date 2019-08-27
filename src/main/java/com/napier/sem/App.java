@@ -440,7 +440,6 @@ public class App {
             }
             System.out.println(c.getName() + "\t" + c.getCountry().getName() + "\t" + c.getPopulation() + "\t"+c.getCountry().getContinent() + "\n");
         }
-//        System.out.print("\n");
     }
 
     public Country getCountryByCode(String code)throws SQLException
@@ -475,7 +474,7 @@ public class App {
 
     }
 
-    //6.
+//6.
 // All the country in a continent by Population
 //
     public ArrayList<Country> getCountryContinent()
@@ -532,10 +531,9 @@ public class App {
             }
             System.out.println(ct.getName() + "\t" + ct.getPopulation() + "\t"+ ct.getContinent() + "\n");
         }
-//        System.out.print("\n");
     }
 
-    //7.
+//7.
 //all the countries in a region by the population
 //
     public ArrayList<Country> getCountryRegion()
@@ -594,10 +592,9 @@ public class App {
             }
             System.out.println(ct.getName() + "\t" + ct.getPopulation() + "\t"+ ct.getRegion() + "\n");
         }
-//        System.out.print("\n");
     }
 
-    //8.
+//8.
 //    all the countries in the world by the population
 ////
     public ArrayList<Country> getCountryWorld()
@@ -651,12 +648,11 @@ public class App {
             }
             System.out.println(ct.getName() + "\t" + ct.getPopulation() + "\n");
         }
-//        System.out.print("\n");
     }
-    //
+
 //9.
 //cities in the world by population
-////
+//
     public ArrayList<City> getCity_world()
     {
         ArrayList<City> ctyworld = null;
@@ -707,10 +703,141 @@ public class App {
             }
             System.out.println(c.getName() + "\t" + c.getPopulation() + "\n");
         }
-//        System.out.print("\n");
+    }
+
+//10. cities in the world by population
+//
+    public ArrayList<Country> getCountry_report()
+    {
+        ArrayList<Country> countryrept = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.code,country.Name,country.Continent,country.Region,country.Population,country.Capital "
+                            + "FROM country "
+                            + "ORDER BY country.Name ASC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Country Report Not found!");
+            } else {
+                countryrept = new ArrayList<>();
+                // Return new city if valid.
+                // Check one is returned
+                while (rset.next()) {
+                    Country crty = new Country();
+                    crty.setName(rset.getString("Name"));
+                    crty.setPopulation(rset.getInt("Population"));
+                    crty.setContinent(rset.getString("Continent"));
+                    crty.setRegion(rset.getString("Region"));
+                    crty.setCapital(rset.getString("Capital"));
+
+                    countryrept.add(crty);
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get country report!.");
+        }
+        return countryrept;
+    }
+    public void getCountry_report(ArrayList<Country> countryrept)
+    {
+
+        if (countryrept == null)
+        {
+            System.out.println("* There is no null data in country report !\n.");
+            return;
+        }
+        for(Country crep:countryrept)
+        {
+            if (crep == null) {
+                System.out.println("* No null data in each country report!\n");
+                continue;
+            }
+            System.out.println(crep.getName() + "\t" + crep.getPopulation() + "\n");
+        }
     }
 
 
+//11. capital city report
+//
+    public ArrayList<Country> getCapitalCityReport()
+    {
+        ArrayList<Country> cpcty_report = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
 
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Capital,country.Name, country.Population "
+                            + "FROM country "
+                            + "ORDER BY country.Capital ASC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                cpcty_report = new ArrayList<>();
+                // Return new city if valid.
+                // Check one is returned
+                while (rset.next()) {
+                    Country cpcty = new Country();
+                    cpcty.setName(rset.getString("Name"));
+                    cpcty.setPopulation(rset.getInt("Population"));
+                    cpcty.setCapital(rset.getString("Capital"));
+
+                    cpcty_report.add(cpcty);
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city report.");
+        }
+       return cpcty_report;
+    }
+
+// capital city world
+    public ArrayList<Country> getCapitalCityWorld()
+    {
+        ArrayList<Country> cpcty_world = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Capital,country.Name, country.Population "
+                            + "FROM country "
+                            + "ORDER BY country.Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                cpcty_world = new ArrayList<>();
+                // Return new city if valid.
+                // Check one is returned
+                while (rset.next()) {
+                    Country cpworld = new Country();
+                    cpworld.setName(rset.getString("Name"));
+                    cpworld.setPopulation(rset.getInt("Population"));
+                    cpworld.setCapital(rset.getString("Capital"));
+
+                    cpcty_world.add(cpworld);
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city world.");
+        }
+        return cpcty_world;
+    }
 
 } /*This is the end of the public App class */

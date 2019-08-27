@@ -140,4 +140,6 @@ public class Country {
         Code2 = code2;
     }
 
+    public void setCapital(String capital) {
+    }
 }
