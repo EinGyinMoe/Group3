@@ -15,10 +15,8 @@ currently being supported with security updates.
 ## Reporting a Vulnerability
 
 Use this section to tell people how to report a vulnerability.
-
 Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+reported vulnerability, what to expect if the vulnerability is acknowledged or declined, and so on.
 
 ## Reporting Sensitive Data 
 * Invalidate tokens and passwords.
@@ -41,12 +39,12 @@ declined, etc.
      
 
 ## Reporting Security Issues
-We takes security bugs in the toolkit seriously.We appreciate your efforts to responsibly disclose your findings, and will make every effort to acknowledge your contributions.
+* We takes security bugs in the toolkit seriously.
+* We appreciate your efforts to responsibly disclose your findings, and will make every effort to acknowledge your contributions.
 
 ## Importing Projects 
-Before importing a project into a public GitHub repo, fully audit the
-history for sensitive data, and remove it before adding to GitHub.
+* Before importing a project into a public GitHub repo, fully audit the history for sensitive data, and remove it before adding to GitHub.
 
 To report a security issue, email
-[40414316@napier.ac.uk](mailto:40414316@napier.ac.uk?subject=SECURITY)and include the
+[40414316@napier.ac.uk](mailto:40414316@napier.ac.uk?subject=SECURITY) and include the
 word "SECURITY" in the subject line.
