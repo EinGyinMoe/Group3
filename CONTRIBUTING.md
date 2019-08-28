@@ -8,7 +8,8 @@ Please note we have a code of conduct, if it's not too much trouble it in the en
 
 ### Report bugs with using Github's issues
 ---------------------------------------------
-We use GitHub issues to track public bugs and interesting bugs.Report a bug by creating a new issue; it's that easy!!!
+Use issues to track public bugs, ideas, enhancements, tasks and interesting bugs for work on GitHub.
+Report a bug by creating a new issue.
 
 ### A typical Bug Report tend to have:
 ------------------------------------------
