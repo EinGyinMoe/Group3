@@ -19,10 +19,12 @@ If you have a question, you can ask it on [StackOverflow](https://stackoverflow.
 
 On Discuss and in the group3 team, there are a bunch of helpful community members that should be willing to point you in the right direction.
 
-[Please contact us](mailto:40414316@napier.ac.uk)
-[Please contact us](mailto:40414299@napier.ac.uk)
-[Please contact us](mailto:40414295@napier.ac.uk).
-[Please contact us](mailto:40414304@napier.ac.uk).
+### Contact Us
+
+- [Please contact us/EinGyinMoe](mailto:40414316@napier.ac.uk)
+- [Please contact us/Khin Shoon Lett Moe](mailto:40414299@napier.ac.uk)
+- [Please contact us/Nang Cherry Moe Myint](mailto:40414295@napier.ac.uk)
+- [Please contact us/Khin Myat Nwe](mailto:40414304@napier.ac.uk)
 
 
 
