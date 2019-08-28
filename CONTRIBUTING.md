@@ -7,9 +7,10 @@ Please note we have a code of conduct, if it's not too much trouble it in the en
 
 
 ### Report bugs with using Github's issues
----------------------------------------------
-Use issues to track public bugs, ideas, enhancements, tasks and interesting bugs for work on GitHub.
-Report a bug by creating a new issue.
+--------------------------------------------
+* Use issues to track public bugs, ideas, enhancements, tasks and interesting bugs for work on GitHub.
+
+* Report a bug by creating a new issue.
 
 ### A typical Bug Report tend to have:
 ------------------------------------------
@@ -30,8 +31,7 @@ Report a bug by creating a new issue.
 
 #### **Did you fix whitespace, format code, or make a purely cosmetic patch?**
 ----------------------------------------------------------------------------------
-
-Changes that are cosmetic in nature and do not add anything substantial to the stability, functionality, or testability of Rails will generally not be accepted.
+Changes that are corrective in nature and don't add anything generous to the usefulness or statibility, or test capacity of Rails will for the most part not be acknowledged.
 
 ### Summary 
 -------------
