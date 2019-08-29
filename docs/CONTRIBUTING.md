@@ -41,7 +41,7 @@ Changes that are corrective in nature and don't add anything generous to the use
 * Be ready to provide extra information if its needs it. If it didn't need it, it wouldn't be asking for it. 
 * Write clearly. Say what you mean, and make sure it can't be misinterpreted.
 
-Thanks You.....
+Thank You.....
 From Team Group_3
   
   
