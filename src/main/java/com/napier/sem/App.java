@@ -23,50 +23,69 @@ public class App {
             a.connect(args[0]);
         }
 
-        // 1. All the cities in a district by population
-        ArrayList ctydistrict = a.getCityDistrict();
-        a.displayCityDistrict(ctydistrict);
+//        // 1. All the cities in a district by population
+//        ArrayList ctydistrict = a.getCityDistrict();
+//        a.displayCityDistrict(ctydistrict);
+//
+//        //2. All the country in a continent by Population
+//        ArrayList cty = a.getCityContinent();
+//        a.displayCityContinent(cty);
+//
+//        //3. city report requires the following columns:
+//        //Name.
+//        //Country.
+//        //District.
+//        //Population.
+//        ArrayList ctrept = a.getCity_report();
+//        a.displayCityReport(ctrept);
+//
+//        //4. All the city population in a region
+//        ArrayList ctyregion = a.getCityRegion();
+//        a.displayCityRegion(ctyregion);
+//
+//        //5. All the cities in a country
+//        // organised by largest population to smallest.
+//        ArrayList ctycountry = a.getCityCountry();
+//        a.displayCityCountry(ctycountry);
+//
+//        //6.
+//        // All the country in a continent by Population
+//        ArrayList countrycontinent = a.getCountryContinent();
+//        a.displayCountryContinent(countrycontinent);
+//
+//        //7.
+//        //all the countries in a region by the population
+//        ArrayList countryregion = a.getCountryRegion();
+//        a.displayCountryRegion(countryregion);
+//
+//        //8.
+//        //all the countries in the world by the population
+//        ArrayList countryworld = a.getCountryWorld();
+//        a.displayCountryWorld(countryworld);
+//
+//        //9.
+//        //cities in the world by population
+//        ArrayList ctyworld = a.getCity_world();
+//        a.displayCityWorld(ctyworld);
 
-        //2. All the country in a continent by Population
-        ArrayList cty = a.getCityContinent();
-        a.displayCityContinent(cty);
+        //10. cities in the world by population
+        ArrayList countryreport = a.getCountry_report();
+        a.displayCountry_report(countryreport);
 
-        //3. city report requires the following columns:
-        //Name.
-        //Country.
-        //District.
-        //Population.
-        ArrayList ctrept = a.getCity_report();
-        a.displayCityReport(ctrept);
+//        //11. capital city report
+//        ArrayList capitalcityreport = a.getCapitalCityReport();
+//        a.displayCapitalCityReport(capitalcityreport);
+//
+//        //12. capital city world
+//        ArrayList capitalcityworld = a.getCapitalCityWorld();
+//        a.displayCapitalCityWorld(capitalcityworld);
+//
+//        //13. capital city in a continent
+//        ArrayList capitalcitycontinent = a.getCapitalCityContinent();
+//        a.displayCapitalCityContinent(capitalcitycontinent);
 
-        //4. All the city population in a region
-        ArrayList ctyregion = a.getCityRegion();
-        a.displayCityRegion(ctyregion);
 
-        //5. All the cities in a country
-        // organised by largest population to smallest.
-        ArrayList ctycountry = a.getCityCountry();
-        a.displayCityCountry(ctycountry);
 
-        //6.
-        // All the country in a continent by Population
-        ArrayList countrycontinent = a.getCountryContinent();
-        a.displayCountryContinent(countrycontinent);
-
-        //7.
-        //all the countries in a region by the population
-        ArrayList countryregion = a.getCountryRegion();
-        a.displayCountryRegion(countryregion);
-
-        //8.
-        //all the countries in the world by the population
-        ArrayList countryworld = a.getCountryWorld();
-        a.displayCountryWorld(countryworld);
-
-        //9.
-        //cities in the world by population
-        ArrayList ctyworld = a.getCity_world();
-        a.displayCityWorld(ctyworld);
 
 
 
@@ -707,16 +726,17 @@ public class App {
 
 //10. cities in the world by population
 //
-    public ArrayList<Country> getCountry_report()
+    public ArrayList<City> getCountry_report()
     {
-        ArrayList<Country> countryrept = new ArrayList<>();
+        ArrayList<City> countryrept = null;
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT country.code,country.Name,country.Continent,country.Region,country.Population,country.Capital "
-                            + "FROM country "
+                    "SELECT country.Name,country.Continent,country.Region,country.Population,city.Name "
+                            + "FROM country,city "
+                            + "WHERE city.ID=country.Capital "
                             + "ORDER BY country.Name ASC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -727,16 +747,18 @@ public class App {
                 // Return new city if valid.
                 // Check one is returned
                 while (rset.next()) {
-                    Country crty = new Country();
-                    crty.setName(rset.getString("Name"));
-                    crty.setPopulation(rset.getInt("Population"));
-                    crty.setContinent(rset.getString("Continent"));
-                    crty.setRegion(rset.getString("Region"));
-                    crty.setCapital(rset.getString("Capital"));
+                    Country crty10 = new Country();
+                    City ct10 = new City();
+                    crty10.setName(rset.getString("Name"));
+                    crty10.setPopulation(rset.getInt("Population"));
+                    crty10.setContinent(rset.getString("Continent"));
+                    crty10.setRegion(rset.getString("Region"));
+                    ct10.setName(rset.getString(5));
 
-                    countryrept.add(crty);
+                    ct10.setCountry(crty10);
+                    countryrept.add(ct10);
                 }
-            }
+                }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -744,22 +766,28 @@ public class App {
         }
         return countryrept;
     }
-    public void getCountry_report(ArrayList<Country> countryrept)
+    public void displayCountry_report(ArrayList<City> countryrept)
     {
 
-        if (countryrept == null)
-        {
+        if (countryrept == null) {
             System.out.println("* There is no null data in country report !\n.");
             return;
         }
-        for(Country crep:countryrept)
+        System.out.print("*********************************************************Country Report*********************************************************\n");
+        System.out.printf("%25s%25s%25s%25s%25s","Name","Population", "Continent","Region","Capital\n");
+        System.out.print("********************************************************************************************************************************\n");
+
+        for(City cty:countryrept)
         {
-            if (crep == null) {
+            if (cty == null) {
                 System.out.println("* No null data in each country report!\n");
                 continue;
             }
-            System.out.println(crep.getName() + "\t" + crep.getPopulation() + "\n");
+            System.out.printf("%25s%25s%25s%25s%25s",cty.getCountry().getName(), cty.getCountry().getPopulation(), cty.getCountry().getContinent(),
+                    cty.getCountry().getRegion(), cty.getName());
+            System.out.print("\n");
         }
+        System.out.print("************************************************************************************************************************************\n");
     }
 
 
@@ -789,7 +817,7 @@ public class App {
                     Country cpcty = new Country();
                     cpcty.setName(rset.getString("Name"));
                     cpcty.setPopulation(rset.getInt("Population"));
-                    cpcty.setCapital(rset.getString("Capital"));
+                    cpcty.setCapital(rset.getInt("Capital"));
 
                     cpcty_report.add(cpcty);
                 }
@@ -801,8 +829,26 @@ public class App {
         }
        return cpcty_report;
     }
+    public void displayCapitalCityReport(ArrayList<Country> capcityrept)
+    {
 
-// capital city world
+        if (capcityrept == null)
+        {
+            System.out.println("* There is no null data in capital city report !\n.");
+            return;
+        }
+        for(Country capcity:capcityrept)
+        {
+            if (capcity == null) {
+                System.out.println("* No null data in each country report!\n");
+                continue;
+            }
+            System.out.println(capcity.getName() + "\t" + capcity.getPopulation() + "\t" + capcity.getCapital() + "\n");
+        }
+    }
+
+
+//12. capital city world
     public ArrayList<Country> getCapitalCityWorld()
     {
         ArrayList<Country> cpcty_world = new ArrayList<>();
@@ -825,9 +871,9 @@ public class App {
                 // Check one is returned
                 while (rset.next()) {
                     Country cpworld = new Country();
+                    cpworld.setCapital(rset.getInt("Capital"));
                     cpworld.setName(rset.getString("Name"));
                     cpworld.setPopulation(rset.getInt("Population"));
-                    cpworld.setCapital(rset.getString("Capital"));
 
                     cpcty_world.add(cpworld);
                 }
@@ -839,5 +885,82 @@ public class App {
         }
         return cpcty_world;
     }
+    public void displayCapitalCityWorld(ArrayList<Country> capworld)
+    {
+
+        if (capworld == null)
+        {
+            System.out.println("* There is no null data in capital city report !\n.");
+            return;
+        }
+        for(Country capw:capworld)
+        {
+            if (capw == null) {
+                System.out.println("* No null data in each country report!\n");
+                continue;
+            }
+            System.out.println(capw.getCapital() + "\t" +capw.getName() + "\t" + capw.getPopulation() + "\n");
+        }
+    }
+
+//13. capital city in a continent
+    public ArrayList<Country> getCapitalCityContinent()
+    {
+        ArrayList<Country> cpcty_continent = new ArrayList<>();
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Capital,country.Name, country.Continent, country.Population "
+                            + "FROM country "
+                            + "WHERE country.Continent='Asia' "
+                            + "ORDER BY country.Population DESC ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            }  else {
+                cpcty_continent = new ArrayList<>();
+                // Return new city if valid.
+                // Check one is returned
+                while (rset.next()) {
+                    Country cpcontinent = new Country();
+                    cpcontinent.setCapital(rset.getInt("Capital"));
+                    cpcontinent.setName(rset.getString("Name"));
+                    cpcontinent.setContinent(rset.getString("Continent"));
+                    cpcontinent.setPopulation(rset.getInt("Population"));
+
+                    cpcty_continent.add(cpcontinent);
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get capital city in a continent.");
+        }
+        return cpcty_continent;
+    }
+    public void displayCapitalCityContinent(ArrayList<Country> capcontinent)
+    {
+
+        if (capcontinent == null)
+        {
+            System.out.println("* There is no null data in capital city report !\n.");
+            return;
+        }
+        for(Country capc:capcontinent)
+        {
+            if (capc == null) {
+                System.out.println("* No null data in each continent report!\n");
+                continue;
+            }
+            System.out.println(capc.getCapital() + "\t" +capc.getName() + "\t" +
+                    capc.getPopulation() + "\t" + capc.getContinent() + "\n");
+        }
+    }
+
+
 
 } /*This is the end of the public App class */
