@@ -40,7 +40,7 @@
 - Code Coverage [![codecov](https://codecov.io/gh/EinGyinMoe/Group3/branch/master/graph/badge.svg)](https://codecov.io/gh/EinGyinMoe/Group3)
 
 # Report 
-| ID | Name | Met | Screenshot |
+| No. | Task Name | Done | Screenshot |
 | --- | --- | --- | --- |
 | 1 | All the countries in the world organised by largest population to smallest. | Yes | ![](screenshot/1.png) |
 | 2 | All the countries in a continent organised by largest population to smallest. | Yes | ![](screenshot/2.png) |
