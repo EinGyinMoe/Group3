@@ -1,3 +1,4 @@
+# DevOps Group3
 <!DOCTYPE html>
 <html>
 <head></head>
@@ -6,22 +7,27 @@
   <tr>
     <th>Group-3 Members</th>
     <th>ID</th>
+    <th>Role</th>
   </tr>
   <tr>
     <td>Ein Gyin Moe</td>
     <td>40414316</td>
+    <td>Scrum Master</td>
   </tr>
    <tr>
     <td>Khin Shoon Lett Moe</td>
     <td>40414299</td>
+    <td>Product Owner</td>
   </tr>
    <tr>
     <td>Nang Cherry Moe Myint</td>
     <td>40414295</td>
+    <td>Developer</td>
   </tr>
    <tr>
     <td>Khin Myat Nwe</td>
     <td>40414304</td>
+    <td>Developer</td>
   </tr>
  
 </body>
