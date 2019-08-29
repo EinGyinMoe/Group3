@@ -23,21 +23,21 @@ public class App {
             a.connect(args[0]);
         }
 
-//        // 1. All the cities in a district by population
+//        // 1. All the cities in a district organised by largest population to smallest
 //        ArrayList ctydistrict = a.getCityDistrict();
 //        a.displayCityDistrict(ctydistrict);
-//
+
 //        //2. All the country in a continent by Population
 //        ArrayList cty = a.getCityContinent();
 //        a.displayCityContinent(cty);
 //
-//        //3. city report requires the following columns:
-//        //Name.
-//        //Country.
-//        //District.
-//        //Population.
-//        ArrayList ctrept = a.getCity_report();
-//        a.displayCityReport(ctrept);
+        //3. city report requires the following columns:
+        //Name.
+        //Country.
+        //District.
+        //Population.
+        ArrayList ctrept = a.getCity_report();
+        a.displayCityReport(ctrept);
 //
 //        //4. All the city population in a region
 //        ArrayList ctyregion = a.getCityRegion();
@@ -68,9 +68,9 @@ public class App {
 //        ArrayList ctyworld = a.getCity_world();
 //        a.displayCityWorld(ctyworld);
 
-        //10. cities in the world by population
-        ArrayList countryreport = a.getCountry_report();
-        a.displayCountry_report(countryreport);
+//        //10. cities in the world by population
+//        ArrayList countryreport = a.getCountry_report();
+//        a.displayCountry_report(countryreport);
 
 //        //11. capital city report
 //        ArrayList capitalcityreport = a.getCapitalCityReport();
@@ -153,8 +153,8 @@ public class App {
         }
     }
 
-    //
-// 1. All the cities in a district by population
+//
+// 1. All the cities in a district organised by largest population to smallest
 //
     public ArrayList<City> getCityDistrict()
     {
@@ -165,7 +165,7 @@ public class App {
             // Create string for SQL statement
             String strSelect =
                     "SELECT city.Name,city.Population, city.District "
-                            + "FROM city WHERE city.District = 'Kabol' "
+                            + "FROM city WHERE city.District = 'Gelderland' "
                             + "ORDER BY city.Population DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -198,19 +198,24 @@ public class App {
             System.out.println("* There is no null data in CityDistrict!\n");
             return;
         }
+
+        System.out.print("=============== All the cities in a district organised by largest population to smallest ===============\n");
+        System.out.printf("%25s%25s%25s","Name","Population","District\n");
+        System.out.print("========================================================================================================\n");
         for(City c:ctydistrict)
         {
             if (c == null) {
                 System.out.println("* No null data in each CityDistrict!\n");
                 continue;
             }
-            System.out.println(c.getName()+ "\t" + c.getPopulation() + c.getDistrict() + "\t" +"\n");
+            System.out.printf("%25s%25s%25s",c.getName(), c.getPopulation(), c.getDistrict());
+            System.out.print("\n");
         }
-//        System.out.print("\n");
+        System.out.print("========================================================================================================\n");
     }
 
 
-    //2. All the country in a continent by Population
+//2. All the cities in a continent organised by largest population to smallest
 //
     public ArrayList<City> getCityContinent()
     {
@@ -232,17 +237,14 @@ public class App {
                 cities=new ArrayList<>();
                 // Return new city if valid.
                 while (rset.next()) {
-                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-                    //System.out.println("\n");
-                    //  System.out.printf(rset.getString(1)+"\t"+rset.getInt(2)+"\t"+rset.getString(3)+"\n");
                     City ct=new City();
                     Country c =new Country();
                     ct.setName(rset.getString(1));
                     ct.setPopulation(rset.getInt(2));
                     c.setContinent(rset.getString(3));//set continent value to country object
+
                     ct.setCountry(c);
                     cities.add(ct);
-
 
                 }
             }
@@ -253,7 +255,6 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("Failed to get country name by continent");
         }
-        //return continent;
         return cities;
     }
 
@@ -265,18 +266,22 @@ public class App {
             System.out.println("* There is no null data in CityContinent!\n");
             return;
         }
+        System.out.print("=============== All the cities in a continent organised by largest population to smallest ===============\n");
+        System.out.printf("%25s%25s%25s","Name","Population","Continent\n");
+        System.out.print("========================================================================================================\n");
         for(City c:cty)
         {
             if (c == null) {
                 System.out.println("* No null data in each CityContinent!\n");
                 continue;
             }
-            System.out.println(c.getName() + "\t" + c.getPopulation() + "\t" + c.getCountry().getContinent() + "\n");
+            System.out.printf("%25s%25s%25s",c.getName(), c.getPopulation(), c.getCountry().getContinent());
+            System.out.print("\n");
         }
-//        System.out.print("\n");
+        System.out.print("========================================================================================================\n");
     }
 
-    //
+
 //3. city report requires the following columns:
 //Name.
 //Country.
@@ -327,15 +332,19 @@ public class App {
             System.out.println("* There is no null data in City Report!\n");
             return;
         }
+        System.out.print("============================================== City Report ==============================================\n");
+        System.out.printf("%25s%25s%25s","Name","Population","Continent","Country Name","\n");
+        System.out.print("=========================================================================================================\n");
         for(City c:ctyrp)
         {
             if (c == null) {
                 System.out.println("* No null data in each CityReport!\n");
                 continue;
             }
-            System.out.println(c.getName() + "\t" + c.getPopulation() + "\t" + c.getCountry().getContinent() + c.getCountry().getName() +"\n");
+            System.out.printf("%25s%25s%25s",c.getName(), c.getPopulation(), c.getCountry().getContinent(), c.getCountry().getName());
+            System.out.print("\n");
         }
-//        System.out.print("\n");
+        System.out.print("=========================================================================================================\n");
     }
 
     //4. All the city population in a region
