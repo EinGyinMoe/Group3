@@ -1,4 +1,4 @@
-## Collaborating with issues and pull requests
+## Collaborating with issues and pull_requests
 - GitHub flow
 - About collaborative development models
 - About conversations on GitHub
