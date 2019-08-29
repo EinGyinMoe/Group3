@@ -33,9 +33,6 @@
 </body>
 </html>
 
-
-# Software Engineering Methods
-
 - Master Build Status [![Build Status](https://travis-ci.org/EinGyinMoe/Group3.svg?branch=master)](https://travis-ci.org/EinGyinMoe/Group3)
 - Develop Build Status [![Build Status](https://travis-ci.org/EinGyinMoe/Group3.svg?branch=develop)](https://travis-ci.org/EinGyinMoe/Group3)
 - License [![LICENSE](https://img.shields.io/github/license/EinGyinMoe/Group3.svg?style=flat-square)](https://github.com/EinGyinMoe/Group3/blob/master/LICENSE)
@@ -43,7 +40,7 @@
 - Code Coverage [![codecov](https://codecov.io/gh/EinGyinMoe/Group3/branch/master/graph/badge.svg)](https://codecov.io/gh/EinGyinMoe/Group3)
 
 # Report 
-| ID | Name | Met | Screenshot |
+| No. | Task Name | Done | Screenshot |
 | --- | --- | --- | --- |
 | 1 | All the countries in the world organised by largest population to smallest. | Yes | ![](screenshot/1.png) |
 | 2 | All the countries in a continent organised by largest population to smallest. | Yes | ![](screenshot/2.png) |
@@ -76,8 +73,8 @@
 | 29 | The population of a country. | Yes | ![](screenshot/3.png) |
 | 30 | The population of a district. | Yes | ![](screenshot/city_1.PNG) |
 | 31 | The population of a city. | Yes | ![](screenshot/city_1.PNG) |
-| 32 | the number of people who speak the Chinese languages from greatest number to smallest, including the percentage of the world population. | No | ![](screenshot/2.png) |
-| 33 | the number of people who speak the English languages from greatest number to smallest, including the percentage of the world population. | No | ![](screenshot/3.png) |
-| 34 | the number of people who speak the Hindi languages from greatest number to smallest, including the percentage of the world population. | No | ![](screenshot/3.png) |
-| 35 | the number of people who speak the Spanish languages from greatest number to smallest, including the percentage of the world population. | No | ![](screenshot/3.png) |
-| 36 | the number of people who speak the Arabic languages from greatest number to smallest, including the percentage of the world population. | No | ![](screenshot/3.png) |
+| 32 | The number of people who speak the Chinese languages from greatest number to smallest, including the percentage of the world population. | No | ![](screenshot/2.png) |
+| 33 | The number of people who speak the English languages from greatest number to smallest, including the percentage of the world population. | No | ![](screenshot/3.png) |
+| 34 | The number of people who speak the Hindi languages from greatest number to smallest, including the percentage of the world population. | No | ![](screenshot/3.png) |
+| 35 | The number of people who speak the Spanish languages from greatest number to smallest, including the percentage of the world population. | No | ![](screenshot/3.png) |
+| 36 | The number of people who speak the Arabic languages from greatest number to smallest, including the percentage of the world population. | No | ![](screenshot/3.png) |
