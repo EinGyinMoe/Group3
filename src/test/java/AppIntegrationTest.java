@@ -87,7 +87,7 @@ public class AppIntegrationTest
         ArrayList<City> cities= app.getCityRegion();
         for (City c: cities) {
             if (c.getCountry().getRegion().equals("Caribbean")) {
-                assertEquals(c.getName(), "Bridgetown");
+                assertEquals(c.getName(), "La Habana");
                 assertEquals(c.getPopulation(), 6070);
 
             }
