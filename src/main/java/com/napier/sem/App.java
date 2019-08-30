@@ -14,12 +14,14 @@ public class App {
         // Connect to database
         a.connect();
 
-        // a.getCapitalCityReport();
+        a.getCapitalCityReport();
+        ArrayList cpcty_report = a.getCapitalCityReport();
+        a.displayCapitalCityReport(cpcty_report);
         // a.getCapitalCityWorld();
         // a.getCapitalCityContinent();
         // a.getCapitalCityRegion();
         // a.getTotalPopulationCountry();
-        a.getTotalPopulationCity();
+//        a.getTotalPopulationCity();
 
         // Disconnect from database
         a.disconnect();
@@ -78,28 +80,38 @@ public class App {
     //
 //All the functions related to the city table
 //
-//capital city report
+//Capital City report
 //
-    public void getCapitalCityReport()
+    public ArrayList<City> getCapitalCityReport()
     {
-        ArrayList<Country> cpcty_report = new ArrayList<>();
+        ArrayList<City> cpcty_report = null;
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
             // Create string for SQL statement
             String strSelect =
-                    "SELECT country.Capital,country.Name, country.Population "
-                            + "FROM country "
-                            + "ORDER BY country.Capital ASC";
+                    "SELECT city.Name,country.Name, city.Population "
+                            + "FROM city,country "
+                            + "WHERE city.ID=country.Capital "
+                            + "ORDER BY city.Name ASC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
-                System.out.print("Not found.");
+                System.out.print("Capital City Report Not found.");
             } else {
-                // Return new capital city report if valid.
+                cpcty_report=new ArrayList<>();
+                // Return new capital city if valid.
+                // Check one is returned.
                 while (rset.next()) {
-                    System.out.printf("\nCapital City: " + rset.getInt(1) + "\n" + "Country: " + rset.getString(2) + "\n" + "Population: " + rset.getInt(3) + "\n");
+                    Country country=new Country();
+                    City city=new City();
+                    city.setName(rset.getString(1));
+                    country.setName(rset.getString(2));
+                    city.setPopulation(rset.getInt(3));
+
+                    city.setCountry(country);
+                    cpcty_report.add(city);
                 }
             }
         }
@@ -107,6 +119,30 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("Failed to get capital city report.");
         }
+        return cpcty_report;
+    }
+    public void displayCapitalCityReport(ArrayList<City>cpcty_report)
+    {
+        if (cpcty_report==null)
+        {
+            System.out.println("* There is no null data in capital city report!\n");
+            return;
+        }
+        System.out.print("\n**************************************Capital City Report**************************************\n\n");
+        System.out.printf("%25s%25s%25s","Capital City","Country","Population\n");
+        System.out.print("\n***********************************************************************************************\n\n");
+
+        for (City cty:cpcty_report)
+        {
+            if(cty == null)
+            {
+                System.out.println("* No null data in each capital city report!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s%25s",cty.getName(), cty.getCountry().getName(), cty.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n***********************************************************************************************\n");
     }
 // capital city world
     public void getCapitalCityWorld()
