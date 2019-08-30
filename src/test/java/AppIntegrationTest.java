@@ -88,7 +88,7 @@ public class AppIntegrationTest
         for (City c: cities) {
             if (c.getCountry().getRegion().equals("Caribbean")) {
                 assertEquals(c.getName(), "La Habana");
-                assertEquals(c.getPopulation(), 6070);
+                assertEquals(c.getPopulation(), 2256000);
 
             }
         }
