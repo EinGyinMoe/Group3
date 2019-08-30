@@ -127,7 +127,6 @@ public class AppIntegrationTest
     }
 
 
-
 //7.
 //all the countries in a region by the population
 //
@@ -142,4 +141,31 @@ public class AppIntegrationTest
             }
         }
     }
+
+//8.
+//    all the countries in the world by the population
+    @Test
+    void testgetCountryWorld() throws SQLException
+    {
+        ArrayList<Country> countryWorld = app.getCountryWorld();
+        for (Country cr: countryWorld) {
+            if (cr.getName().equals("Brazil")) {
+                assertEquals(cr.getPopulation(), 170115000);
+            }
+        }
+    }
+
+//9.
+//cities in the world by population
+    @Test
+    void testgetCity_world() throws SQLException
+    {
+        ArrayList<City> ctyworld = app.getCity_world();
+        for (City c: ctyworld) {
+            if (c.getName().equals("Seoul")) {
+                assertEquals(c.getPopulation(), 9981619);
+            }
+        }
+    }
+
 }
