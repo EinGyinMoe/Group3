@@ -278,7 +278,7 @@ public class App {
             System.out.printf("%25s%25s%25s",c.getName(), c.getPopulation(), c.getCountry().getContinent());
             System.out.print("\n");
         }
-        System.out.print("========================================================================================================\n");
+//        System.out.print("========================================================================================================\n");
     }
 
 
@@ -344,7 +344,7 @@ public class App {
             System.out.printf("%25s%25s%25s",c.getName(), c.getPopulation(), c.getCountry().getContinent(), c.getCountry().getName());
             System.out.print("\n");
         }
-        System.out.print("=========================================================================================================\n");
+//        System.out.print("=========================================================================================================\n");
     }
 
     //4. All the city population in a region
