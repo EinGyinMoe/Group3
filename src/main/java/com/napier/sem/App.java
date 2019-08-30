@@ -14,9 +14,11 @@ public class App {
         // Connect to database
         a.connect();
 
-        a.getCapitalCityReport();
-        ArrayList cpcty_report = a.getCapitalCityReport();
-        a.displayCapitalCityReport(cpcty_report);
+//        ArrayList cpcty_report = a.getCapitalCityReport();
+//        a.displayCapitalCityReport(cpcty_report);
+
+        ArrayList cpcty_world = a.getCapitalCityWorld();
+        a.displayCapitalCityWorld(cpcty_world);
         // a.getCapitalCityWorld();
         // a.getCapitalCityContinent();
         // a.getCapitalCityRegion();
@@ -145,33 +147,67 @@ public class App {
         System.out.print("\n***********************************************************************************************\n");
     }
 // capital city world
-    public void getCapitalCityWorld()
-    {
-        ArrayList<Country> cpcty_world = new ArrayList<>();
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
+public ArrayList<City> getCapitalCityWorld()
+{
+    ArrayList<City> cpcty_world = null;
+    try {
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
 
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT country.Capital,country.Name, country.Population "
-                            + "FROM country "
-                            + "ORDER BY country.Population DESC ";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            if (rset == null) {
-                System.out.print("Not found.");
-            } else {
-                // Return new capital city world if valid.
-                while (rset.next()) {
-                    System.out.printf("\nCapital City: " + rset.getInt(1) + "\n" + "Country: " + rset.getString(2) + "\n" + "Population: " + rset.getInt(3) + "\n");
-                }
+        // Create string for SQL statement
+        String strSelect =
+                "SELECT city.Name,country.Name, city.Population "
+                        + "FROM city,country "
+                        + "WHERE city.ID=country.Capital "
+                        + "ORDER BY city.Population DESC";
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery(strSelect);
+        if (rset == null) {
+            System.out.print("Capital Cities in the world Not found.");
+        } else {
+            cpcty_world=new ArrayList<>();
+            // Return new capital city world if valid.
+            // Check one is returned.
+            while (rset.next()) {
+                Country countryworld=new Country();
+                City cityworld=new City();
+                cityworld.setName(rset.getString(1));
+                countryworld.setName(rset.getString(2));
+                cityworld.setPopulation(rset.getInt(3));
+
+                cityworld.setCountry(countryworld);
+                cpcty_world.add(cityworld);
             }
         }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get capital city world.");
+    }
+    catch (Exception e) {
+        System.out.println(e.getMessage());
+        System.out.println("Failed to get capital city world data.");
+    }
+    return cpcty_world;
+}
+    public void displayCapitalCityWorld(ArrayList<City>cpcty_world)
+    {
+        if (cpcty_world==null)
+        {
+            System.out.println("* There is no null data in capital cities in the world!\n");
+            return;
         }
+        System.out.print("\n**************************************Capital Cities in World**************************************\n\n");
+        System.out.printf("%25s%25s%25s","Capital City","Country","Population\n");
+        System.out.print("\n***************************************************************************************************\n\n");
+
+        for (City ctyworld:cpcty_world)
+        {
+            if(ctyworld == null)
+            {
+                System.out.println("* No null data in each capital city world!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s%25s",ctyworld.getName(), ctyworld.getCountry().getName(), ctyworld.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n***************************************************************************************************\n\n");
     }
 
 // capital city in a continent
