@@ -176,13 +176,14 @@ public class AppIntegrationTest
         ArrayList<City> countryrept = app.getCountry_report();
         for (City c: countryrept) {
             if (c.getName().equals("Seoul")) {
-                assertEquals(c.getCountry().getName(),"South Korea" )
+                assertEquals(c.getCountry().getName(),"South Korea" );
                 assertEquals(c.getCountry().getContinent(), "Asia");
-                assertEquals(c.getCountry().getRegion(), "Eastern Asia")
-                assertEquals(c.getPopulation(), 46844000)
+                assertEquals(c.getCountry().getRegion(), "Eastern Asia");
+                assertEquals(c.getPopulation(), 46844000);
             }
         }
     }
+
 
 
 }
