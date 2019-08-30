@@ -1,5 +1,7 @@
 package com.napier.sem;
 
+import com.sun.java_cup.internal.runtime.Scanner;
+
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -22,14 +24,15 @@ public class App {
         a.getTotalPopulationCity();
         a.getNotLivingPopulationRegion();
         a.getNotLivingPopulationCountry();
+        a.getNotLivingPopulationContinent();
 //        a.getPopulationCountry();
-
 //        a.getCountryContinent();
 //        a.getCountryRegion();
 //        a.getCountryWorld();
 
         // Disconnect from database
         a.disconnect();
+
     }
 
     /**
@@ -116,7 +119,6 @@ public class App {
         //return ctyworld;
     }
 
-
     //
     // All the cities in a district by population
     //
@@ -163,7 +165,6 @@ public class App {
         System.out.print("\n");
     }
 
-
 //All the functions related to the Countries Table
 //
 //All the country in a continent by Population
@@ -203,7 +204,6 @@ public class App {
 
     }
 
-
     //  All the cities in a region by the population
     public void getCityRegion()
     {
@@ -239,8 +239,6 @@ public class App {
         //return continent;
 
     }
-
-
 
     // All the country in a continent by Population
     //
@@ -279,7 +277,6 @@ public class App {
 
     }
 
-
 //    all the countries in a region by the population
 //
     public void getCountryRegion()
@@ -315,7 +312,6 @@ public class App {
             System.out.println("Failed to get country name by region");
         }
         //return continent;
-
     }
 
     //    all the countries in the world by the population
@@ -441,7 +437,7 @@ public class App {
                 while (rset.next()) {
                     //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
                     //System.out.println("\n");
-                    System.out.printf("City Population Total: "+rset.getInt(1)+"\n");
+                    System.out.printf("City Population in Caribbean Region Total: "+rset.getInt(1)+"\n");
 
                 }
             }
@@ -455,6 +451,7 @@ public class App {
     }
 
     public void getNotLivingPopulationRegion()
+
     {
         try {
             // Create an SQL statement
@@ -463,7 +460,7 @@ public class App {
             String strSelect =
                     "SELECT SUM(country.Population), SUM(city.Population)  "
                             + "FROM country " + "INNER JOIN city " + "ON city.CountryCode = country.Code "
-                            +"WHERE country.Region = 'Caribbean' ";
+                            +"WHERE country.Region = 'Caribbean' AND city.Name = 'Nassau'";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
@@ -471,12 +468,10 @@ public class App {
             } else {
                 // Return new city if valid.
                 // Check one is
-
                 while (rset.next()) {
                     //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
                     //System.out.println("\n");
-                    System.out.printf("People not living in Region: "+(rset.getInt(1) - rset.getInt(2))+"\n");
-
+                    System.out.printf("People not living in cities in Caribbean region: "+(rset.getInt(1) - rset.getInt(2))+"\n");
                 }
             }
         }
@@ -495,9 +490,9 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT SUM(country.Population), SUM(city.Population)  "
+                    "SELECT country.Population, SUM(city.Population) "
                             + "FROM country " + "INNER JOIN city " + "ON city.CountryCode = country.Code "
-                            +"WHERE country.Name = 'Aruba' ";
+                            +"WHERE country.Name = 'Afghanistan' AND city.Name = 'Kabul' ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
@@ -509,16 +504,90 @@ public class App {
                 while (rset.next()) {
                     //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
                     //System.out.println("\n");
-                    System.out.printf("People not living in Country: "+(rset.getInt(1) - rset.getInt(2))+"\n");
-
+                    System.out.printf("People not living cities in Afghanistan country: "+(rset.getInt(1) - rset.getInt(2))+"\n");
                 }
             }
         }
         catch (Exception e)
         {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get people who are not living in the city by region");
+            System.out.println("Failed to get people who are not living in the city by country");
         }
         //return continent;
     }
+
+    public void getNotLivingPopulationContinent()
+
+    {
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT SUM(country.Population), SUM(city.Population)  "
+                            + "FROM country " + "INNER JOIN city " + "ON city.CountryCode = country.Code "
+                            +"WHERE country.Continent = 'Asia' ";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                // Return new city if valid.
+                // Check one is
+                while (rset.next()) {
+                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+                    //System.out.println("\n");
+                    System.out.printf("People not living in cities in Asia Continent: "+(rset.getLong(1) - rset.getInt(2))+"\n");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get people who are not living in the city by continent");
+        }
+        //return continent;
+    }
+
+//    public void getUserInput()
+//    {
+//        try {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String strSelect =
+//                    "SELECT country.Name, country.Population  "
+//                            + "FROM country "
+//                            + "ORDER BY country.Population DESC";
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            if (rset == null) {
+//                System.out.print("Not found.");
+//            } else {
+//                // Return new city if valid.
+//                // Check one is
+//
+//                while (rset.next()) {
+//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+//                    //System.out.println("\n");
+////                    System.out.printf("People not living in Country: "+(rset.getInt(1) - rset.getInt(2))+"\n");
+//                    java.util.Scanner scanner = new java.util.Scanner(System.in);
+//                    System.out.println("Please enter country in the world");
+//                    String id = scanner.nextLine();
+//                    System.out.println("User id=" + rset.getString());
+//                    System.out.println("Please enter password to get details:");
+//                    String pwd = scanner.nextLine();
+//                    System.out.println("User password=" + pwd);
+//
+//                }
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get people who are not living in the city by region");
+//        }
+//        //return continent;
+//    }
+
 }
