@@ -36,21 +36,7 @@ public class AppIntegrationTest
         assertEquals(ctry.getPopulation(), 103000);
     }
 
-//6.
-// All the country in a continent by Population
-    @Test
-    void testgetCountryContinent() throws SQLException
-    {
-        ArrayList<Country> ctries= app.getCountryContinent();
-
-        for (Country c: ctries) {
-            if (c.getName().equals("Brunei")) {
-                assertEquals(c.getCode(),null);
-                assertEquals(c.getContinent(), "Asia");
-            }
-        }
-    }
-
+// 1. All the cities in a district organised by largest population to smallest
     @Test
     void testgetCityDistrict() throws SQLException
     {
@@ -63,7 +49,7 @@ public class AppIntegrationTest
         }
     }
 
-    //2. All the country in a continent by Population
+//2. All the country in a continent by Population
     @Test
     void testgetCityContinent() throws SQLException
     {
@@ -80,24 +66,69 @@ public class AppIntegrationTest
 //Country.
 //District.
 //Population.
+    @Test
+    void testgetCity_report() throws SQLException
+    {
+        ArrayList<City> cities= app.getCity_report();
+        for (City c: cities) {
+            if (c.getName().equals("Dubai")) {
+                assertEquals(c.getCountry().getName(), "United Arab Emirates");
+                assertEquals(c.getDistrict(), "Dubai");
+                assertEquals(c.getPopulation(), 669181);
+            }
+        }
+    }
+
+//4. All the city population in a region
 //
-//    @Test
-//    void testgetCity_report() throws SQLException
-//    {
-//        ArrayList<City> cities= app.getCity_report();
-//        for (City c: cities) {
-//            if (c.getName().equals("Dubai")) {
-//                assertEquals(c.getCountry().getName(), "United Arab Emirates");
-//                assertEquals(c.getDistrict(), "Dubai");
-//                assertEquals(c.getPopulation(), 669181);
-//            }
-//        }
-//    }
+    @Test
+    void testCityRegion() throws SQLException
+    {
+        ArrayList<City> cities= app.getCityRegion();
+        for (City c: cities) {
+            if (c.getCountry().getRegion().equals("Caribbean")) {
+                assertEquals(c.getName(), "Bridgetown");
+                assertEquals(c.getPopulation(), 6070);
+
+            }
+        }
+    }
+
+//5. All the cities in a country
+// organised by largest population to smallest.
+//
+    @Test
+    void testgetCityCountry() throws SQLException
+    {
+        ArrayList<City> cityCountry= app.getCityCountry();
+
+        for (City c: cityCountry) {
+            if (c.getCountry().getName().equals("Belgium")) {
+                assertEquals(c.getName(),"Namur");
+                assertEquals(c.getPopulation(), 105419);
+
+            }
+        }
+    }
+
+//6.
+// All the country in a continent by Population
+    @Test
+    void testgetCountryContinent() throws SQLException
+    {
+        ArrayList<Country> ctries= app.getCountryContinent();
+
+        for (Country c: ctries) {
+            if (c.getName().equals("Brunei")) {
+                assertEquals(c.getCode(),null);
+                assertEquals(c.getContinent(), "Asia");
+            }
+        }
+    }
 
 
 
-
-    //7.
+//7.
 //all the countries in a region by the population
 //
     @Test

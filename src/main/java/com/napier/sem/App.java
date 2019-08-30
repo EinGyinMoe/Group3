@@ -376,7 +376,7 @@ public class App {
                     Country c2 =new Country();
                     cty2.setName(rset.getString(1));
                     cty2.setPopulation(rset.getInt(2));
-                    c2.setContinent(rset.getString(3));//set continent value to country object
+                    c2.setRegion(rset.getString(3));//set continent value to country object
                     cty2.setCountry(c2);
                     region.add(cty2);
                 }
@@ -410,7 +410,7 @@ public class App {
     }
 
 
-    //5. All the cities in a country
+//5. All the cities in a country
 // organised by largest population to smallest.
 //
     public ArrayList<City> getCityCountry()
