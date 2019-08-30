@@ -17,8 +17,12 @@ public class App {
 //        ArrayList cpcty_report = a.getCapitalCityReport();
 //        a.displayCapitalCityReport(cpcty_report);
 
-        ArrayList cpcty_world = a.getCapitalCityWorld();
-        a.displayCapitalCityWorld(cpcty_world);
+//        ArrayList cpcty_world = a.getCapitalCityWorld();
+//        a.displayCapitalCityWorld(cpcty_world);
+
+        ArrayList cpcty_continent = a.getCapitalCityContinent();
+        a.displayCapitalCityContinent(cpcty_continent);
+
         // a.getCapitalCityWorld();
         // a.getCapitalCityContinent();
         // a.getCapitalCityRegion();
@@ -211,27 +215,37 @@ public ArrayList<City> getCapitalCityWorld()
     }
 
 // capital city in a continent
-    public void getCapitalCityContinent()
+    public ArrayList<City> getCapitalCityContinent()
     {
-        ArrayList<Country> cpcty_continent = new ArrayList<>();
+        ArrayList<City> cpcty_continent = null;
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
             // Create string for SQL statement
             String strSelect =
-                    "SELECT country.Capital,country.Name, country.Continent, country.Population "
-                            + "FROM country "
-                            + "WHERE country.Continent='Asia' "
-                            + "ORDER BY country.Population DESC ";
+                    "SELECT city.Name,country.Name, country.Continent, city.Population "
+                            + "FROM country,city "
+                            + "WHERE city.ID=country.Capital AND country.Continent='Asia' "
+                            + "ORDER BY city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
-                System.out.print("Not found.");
+                System.out.print("Capital City in a Continent Not Found.");
             } else {
+                cpcty_continent=new ArrayList<>();
                 // Return new capital city continent if valid.
+                // Check one is returned.
                 while (rset.next()) {
-                    System.out.printf("\nCapital City: " + rset.getInt(1) + "\n" + "Country: " + rset.getString(2) + "\n" + "Continent: " + rset.getString(3) + "\n" + "Population: " + rset.getInt(4) + "\n");
+                    Country crtycontinent=new Country();
+                    City ctycontinent=new City();
+                    ctycontinent.setName(rset.getString(1));
+                    crtycontinent.setName(rset.getString(2));
+                    crtycontinent.setContinent(rset.getString(3));
+                    ctycontinent.setPopulation(rset.getInt(4));
+
+                    ctycontinent.setCountry(crtycontinent);
+                    cpcty_continent.add(ctycontinent);
                 }
             }
         }
@@ -239,6 +253,30 @@ public ArrayList<City> getCapitalCityWorld()
             System.out.println(e.getMessage());
             System.out.println("Failed to get capital city in a continent.");
         }
+        return cpcty_continent;
+    }
+    public void displayCapitalCityContinent(ArrayList<City>cpcty_continent)
+    {
+        if (cpcty_continent == null)
+        {
+            System.out.println("* There is no null data in capital city in a continent!\n");
+            return;
+        }
+        System.out.print("\n*****************************************Capital Cities in Asia Continent*****************************************\n\n");
+        System.out.printf("%25s%25s%25s%25s","Capital City","Country","Continent","Population\n");
+        System.out.print("\n******************************************************************************************************************\n\n");
+
+        for (City ctycont:cpcty_continent)
+        {
+            if(ctycont == null)
+            {
+                System.out.println("* No null data in each capital city in a continent!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s%25s%25s",ctycont.getName(), ctycont.getCountry().getName(),ctycont.getCountry().getContinent(), ctycont.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n******************************************************************************************************************\n\n");
     }
     // capital city in a region
     public void getCapitalCityRegion()
