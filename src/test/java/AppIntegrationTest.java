@@ -179,7 +179,7 @@ public class AppIntegrationTest
                 assertEquals(c.getCountry().getName(),"South Korea" );
                 assertEquals(c.getCountry().getContinent(), "Asia");
                 assertEquals(c.getCountry().getRegion(), "Eastern Asia");
-                assertEquals(c.getPopulation(), 46844000);
+                assertEquals(c.getPopulation(), 0);
             }
         }
     }
