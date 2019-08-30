@@ -165,12 +165,12 @@ public class MyTest
 //        app.displayCountry_report(countries);
 //    }
 
-//    //Unit_testing for CapitalCity_Report
-//    @Test
-//    protected void  displayCapitalCity_Reporttest()
-//    {
-//        app.displayCapitalCityReport(null);
-//    }
+    //Unit_testing for CapitalCity_Report
+    @Test
+    protected void  displayCapitalCity_Reporttest()
+    {
+        app.displayCapitalCityReport(null);
+    }
 
 //    @Test
 //    protected void  displayCapitalCity_ReportNulltest()
@@ -179,12 +179,12 @@ public class MyTest
 //        app.displayCapitalCityReport(cities);
 //    }
 
-//    //Unit_testing for CapitalCity_World
-//    @Test
-//    protected void  displayCapitalCityWorldtest()
-//    {
-//        app.displayCapitalCityWorld(null);
-//    }
+    //Unit_testing for CapitalCity_World
+    @Test
+    protected void  displayCapitalCityWorldtest()
+    {
+        app.displayCapitalCityWorld(null);
+    }
 
 //    @Test
 //    protected void  displayCapitalCityWorldNulltest()
@@ -193,12 +193,12 @@ public class MyTest
 //        app.displayCapitalCityWorld(capitalcityreport);
 //    }
 
-//    //Unit_testing for CapitalCity_World
-//    @Test
-//    protected void  displayCapitalCityContinenttest()
-//    {
-//        app.displayCapitalCityContinent(null);
-//    }
+    //Unit_testing for CapitalCity_World
+    @Test
+    protected void  displayCapitalCityContinenttest()
+    {
+        app.displayCapitalCityContinent(null);
+    }
 
 //    @Test
 //    protected void  displayCapitalCityContinentNulltest()
