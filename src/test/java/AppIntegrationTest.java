@@ -45,7 +45,7 @@ public class AppIntegrationTest
 
         for (Country c: ctries) {
             if (c.getName().equals("Brunei")) {
-                assertEquals(c.getCode(), "BRN");
+                assertEquals(c.getCode(),null);
                 assertEquals(c.getContinent(), "Asia");
             }
         }
