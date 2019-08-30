@@ -19,7 +19,7 @@ public class AppIntegrationTest
     static void init()
     {
         app = new App();
-        app.connect("localhost:3306");
+        app.connect("localhost:33060");
         {
             System.out.println("\n................................\n" +
                     "Integration_Testing For WorldFact\n" +
@@ -36,14 +36,17 @@ public class AppIntegrationTest
         assertEquals(ctry.getPopulation(), 103000);
     }
 
+//6.
+// All the country in a continent by Population
     @Test
     void testgetCountryContinent() throws SQLException
     {
         ArrayList<Country> ctries= app.getCountryContinent();
+
         for (Country c: ctries) {
-            if (c.getName().equals("Canada")) {
-                assertEquals(c.getCode(), "CAN");
-                assertEquals(c.getContinent(), "North America");
+            if (c.getName().equals("Brunei")) {
+                assertEquals(c.getCode(), "BRN");
+                assertEquals(c.getContinent(), "Asia");
             }
         }
     }
