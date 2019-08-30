@@ -1034,6 +1034,60 @@ public class App {
         System.out.print("********************************************************************************************************************************\n");
     }
 
+//15. Total population of the world, a region, a continent, and a country
+    public void getTotalPopulationCountry()
+    {
+        ArrayList<Country> totl_popu_country = new ArrayList<>();
+        try {
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Statement stmt = con.createStatement();
+            Statement stmt2 = con.createStatement();
+            Statement stmt3 = con.createStatement();
 
+            // Create string for total population of a region and a continent SQL statement
+            String strSelect =
+                    "SELECT SUM(CASE WHEN country.Region='Caribbean' THEN country.Population END ) as totalregion, SUM(CASE WHEN country.Continent='Asia' THEN country.Population END ) as totalcontinent " +
+                            "FROM country " +
+                            "WHERE country.Continent='Asia' OR country.Region='Caribbean'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                // Return new total population of a region and a continent if valid.
+                while (rset.next()) {
+                    System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
+                }
+                // Create string for total population of the world SQL statement
+                String strSelect2 =
+                        "SELECT SUM(country.Population) " +
+                                "FROM country ";
+                // Execute SQL statement
+                ResultSet rset2 = stmt2.executeQuery(strSelect2);
+                // Return new total population of the world if valid.
+                while(rset2.next())
+                {
+                    System.out.printf("Total Population of the world: " + rset2.getLong(1) + "\n");
+                }
+                // Create string for total population of a country SQL statement
+                String strSelect3 =
+                        "SELECT country.Population " +
+                                "FROM country " +
+                                "WHERE country.Name='Argentina'";
+                // Execute SQL statement
+                ResultSet rset3 = stmt3.executeQuery(strSelect3);
+                // Return new total population of a country if valid.
+                while(rset3.next())
+                {
+                    System.out.printf("Total Population of a country: " + rset3.getLong(1) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total population of the world, a region, a continent and a country.");
+        }
+    }
 
 } /*This is the end of the public App class */
