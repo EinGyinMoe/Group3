@@ -24,8 +24,10 @@ public class App {
 //        a.getCountryTotalPopulationRegion();
 
 //      get population in the cities people who live and not living in each region
-        a.getTotalPopulationCityRegion();
-        a.getNotLivingPopulationRegion();
+//        a.getTotalPopulationCityRegion();
+//        a.getNotLivingPopulationRegion();
+        ArrayList totalpopulationregion = a.getTotalPopulationCityRegion();
+        a.displayTotalPopulationCityRegion(totalpopulationregion);
 
 //      get population in the cities people who live and not living in each country
 //        a.getTotalPopulationCityCountry();
@@ -393,49 +395,17 @@ public class App {
         //return continent;
     }
 
-//    public void getCountryTotalPopulationRegion()
-//    {
-//        try {
-//            // Create an SQL statement
-//            Statement stmt = con.createStatement();
-//            // Create string for SQL statement
-//            String strSelect =
-//                    "SELECT SUM(country.Population) "
-//                            + "FROM country "
-//                            +"WHERE country.Region = 'Caribbean' ";
-//            // Execute SQL statement
-//            ResultSet rset = stmt.executeQuery(strSelect);
-//            if (rset == null) {
-//                System.out.print("Not found.");
-//            } else {
-//                // Return new city if valid.
-//                // Check one is
-//
-//                while (rset.next()) {
-//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-//                    //System.out.println("\n");
-//                    System.out.printf("Total Population Live in Country: "+rset.getInt(1)+"\n");
-//
-//                }
-//            }
-//        }
-//        catch (Exception e)
-//        {
-//            System.out.println(e.getMessage());
-//            System.out.println("Failed to get people who are not living in the city by region");
-//        }
-//        //return continent;
-//    }
-
-    public void getTotalPopulationCityRegion()
+    public ArrayList<City> getTotalPopulationCityRegion()
     {
+        ArrayList<City> totalpopulationregion = null;
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT country.Region, (SUM(city.Population)) "
-                            + "FROM city " + "INNER JOIN country " + "ON city.CountryCode = country.Code ";
+                    "SELECT country.Region, SUM(city.Population) "
+                            + "FROM city " + "INNER JOIN country " + "ON city.CountryCode = country.Code "
+                    +"GROUP BY country.Region";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
@@ -443,11 +413,15 @@ public class App {
             } else {
                 // Return new city if valid.
                 // Check one is
-
+                totalpopulationregion = new ArrayList<>();
                 while (rset.next()) {
+                    Country countrytotalregion = new Country();
+                    City citytotalregion = new City();
+                    countrytotalregion.setRegion(rset.getString(1));
+                    citytotalregion.setPopulation(rset.getInt(2));
                     //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
                     //System.out.println("\n");
-                    System.out.printf("Country Region: "+rset.getString(1)+"\n"+"City population in each region: "+rset.getInt(2)+"\n"+"\n");
+//                    System.out.printf("Country Region: "+rset.getString(1)+"City population in each region: "+rset.getInt(2)+"\n");
 
                 }
             }
@@ -457,7 +431,30 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("Failed to get people who are not living in the city by region");
         }
-        //return continent;
+        return totalpopulationregion;
+    }
+
+    public void displayTotalPopulationCityRegion(ArrayList<City> totalpopulationregion)
+    {
+
+        if (totalpopulationregion == null) {
+            System.out.println("* There is no null data in total population in region !\n.");
+            return;
+        }
+        System.out.print("*********************************************************Total City Population in Region*********************************************************\n");
+        System.out.printf("%25s%25s","Region","City Population \n");
+        System.out.print("********************************************************************************************************************************\n");
+
+        for(City cty:totalpopulationregion)
+        {
+            if (cty == null) {
+                System.out.println("* No null data in city population in region!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s",cty.getCountry().getRegion(), cty.Population);
+            System.out.print("\n");
+        }
+        System.out.print("************************************************************************************************************************************\n");
     }
 
     public void getNotLivingPopulationRegion()
@@ -501,8 +498,9 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT country.Name, city.Name, city.Population "
-                            + "FROM city " + "INNER JOIN country " + "ON city.CountryCode = country.Code ";
+                    "SELECT country.Name, SUM(city.Population) "
+                            + "FROM city " + "INNER JOIN country " + "ON city.CountryCode = country.Code "
+                    +"GROUP BY country.Name";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
@@ -567,8 +565,9 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT country.Continent, city.Name, city.Population "
-                            + "FROM city " + "INNER JOIN country " + "ON city.CountryCode = country.Code ";
+                    "SELECT country.Continent, SUM(city.Population) "
+                            + "FROM city " + "INNER JOIN country " + "ON city.CountryCode = country.Code "
+                    +"GROUP BY country.Continent";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {

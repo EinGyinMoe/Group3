@@ -3,52 +3,143 @@ package com.napier.sem;
 /**
  * Represents an country
  */
+
 public class Country {
-    /**
-     * Code
-     */
-    public String Code;
 
-    /**
-     * Country's Name
-     */
-    public String Name;
+    private String Code;
+    private Object City;
 
-    /**
-     * Country's Continent
-     */
-    public String Continent;
+    public String getCode() {
+        return Code;
+    }
 
-    /**
-     * Region
-     */
-    public String Region;
+    public void setCode(String code) {
+        Code = code;
+    }
 
-    /**
-     * City's surface area
-     */
-    public float SurfaceArea;
+    private String Name;
+    public String getName() {
+        return Name;
+    }
 
-    /**
-     * City's IndepYear
-     */
-    public int IndepYear;
+    public void setName(String name) {
+        Name = name;
+    }
 
-    public int Population;
+    private String Continent;
+    public String getContinent() {
+        return Continent;
+    }
 
-    public float LifeExpectancy;
+    public void setContinent(String continent) {
+        Continent = continent;
+    }
 
-    public float GNP;
+    private String Region;
+    public String getRegion() {
+        return Region;
+    }
 
-    public float GNPOld;
+    public void setRegion(String region) {
+        Region = region;
+    }
 
-    public String LocalName;
+    private float SurfaceArea;
+    public float getSurfaceArea() {
+        return SurfaceArea;
+    }
 
-    public String GovernmentForm;
+    public void setSurfaceArea(float surfaceArea) {
+        SurfaceArea = surfaceArea;
+    }
 
-    public String HeadOfState;
+    private int IndepYear;
+    public int getIndepYear() {
+        return IndepYear;
+    }
 
-    public int Capital;
+    public void setIndepYear(int indepYear) {
+        IndepYear = indepYear;
+    }
 
-    public String Code2;
+    private int Population;
+    public int getPopulation() {
+        return Population;
+    }
+
+    public void setPopulation(int population) {
+        Population = population;
+    }
+
+    private float LifeExpectancy;
+    public float getLifeExpectancy() {
+        return LifeExpectancy;
+    }
+
+    public void setLifeExpectancy(float lifeExpectancy) {
+        LifeExpectancy = lifeExpectancy;
+    }
+
+    private float GNP;
+    public float getGNP() {
+        return GNP;
+    }
+
+    public void setGNP(float GNP) {
+        this.GNP = GNP;
+    }
+
+    private float GNPOld;
+    public float getGNPOld() {
+        return GNPOld;
+    }
+
+    public void setGNPOld(float GNPOld) {
+        this.GNPOld = GNPOld;
+    }
+
+    private String LocalName;
+    public String getLocalName() {
+        return LocalName;
+    }
+
+    public void setLocalName(String localName) {
+        LocalName = localName;
+    }
+
+    private String GovernmentForm;
+    public String getGovernmentForm() {
+        return GovernmentForm;
+    }
+
+    public void setGovernmentForm(String governmentForm) {
+        GovernmentForm = governmentForm;
+    }
+
+    private String HeadOfState;
+    public String getHeadOfState() {
+        return HeadOfState;
+    }
+
+    public void setHeadOfState(String headOfState) {
+        HeadOfState = headOfState;
+    }
+
+    private int Capital;
+    public int getCapital() {
+        return Capital;
+    }
+
+    public void setCapital(int capital) {
+        Capital = capital;
+    }
+
+    private String Code2;
+    public String getCode2() {
+        return Code2;
+    }
+
+    public void setCode2(String code2) {
+        Code2 = code2;
+    }
 }
