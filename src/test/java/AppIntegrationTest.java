@@ -168,4 +168,21 @@ public class AppIntegrationTest
         }
     }
 
+
+//10. cities in the world by population
+    @Test
+    void testgetCountry_report() throws SQLException
+    {
+        ArrayList<City> countryrept = app.getCountry_report();
+        for (City c: countryrept) {
+            if (c.getName().equals("Seoul")) {
+                assertEquals(c.getCountry().getName(),"South Korea" )
+                assertEquals(c.getCountry().getContinent(), "Asia");
+                assertEquals(c.getCountry().getRegion(), "Eastern Asia")
+                assertEquals(c.getPopulation(), 46844000)
+            }
+        }
+    }
+
+
 }
