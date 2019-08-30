@@ -103,8 +103,8 @@ public class AppIntegrationTest
         ArrayList<City> cityCountry= app.getCityCountry();
 
         for (City c: cityCountry) {
-            if (c.getCountry().getName().equals("Belgium")) {
-                assertEquals(c.getName(),"Namur");
+            if (c.getName().equals("Namur")) {
+                assertEquals(c.getCountry().getName(),"Belgium");
                 assertEquals(c.getPopulation(), 105419);
 
             }
