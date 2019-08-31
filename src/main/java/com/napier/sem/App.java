@@ -77,12 +77,12 @@ public class App {
 //        a.displayCapitalCityReport(cpcty_report);
 //
 //        //12. capital city world
-        ArrayList cpcty_world = a.getCapitalCityWorld();
-        a.displayCapitalCityWorld(cpcty_world);
+//        ArrayList cpcty_world = a.getCapitalCityWorld();
+//        a.displayCapitalCityWorld(cpcty_world);
 //
-//        //13. capital city in a continent
-//        ArrayList capitalcitycontinent = a.getCapitalCityContinent();
-//        a.displayCapitalCityContinent(capitalcitycontinent);
+//        //13. capital city continent
+        ArrayList cpcty_continent = a.getCapitalCityContinent();
+        a.displayCapitalCityContinent(cpcty_continent);
 
 
 
@@ -863,7 +863,6 @@ public class App {
 
 
     //12. capital city world
-    // capital city world
     public ArrayList<City> getCapitalCityWorld()
     {
         ArrayList<City> cpcty_world = null;
@@ -928,35 +927,37 @@ public class App {
     }
 
     //13. All the capital cities in a continent organised by largest population to smallest
-    public ArrayList<Country> getCapitalCityContinent()
+    public ArrayList<City> getCapitalCityContinent()
     {
-        ArrayList<Country> cpcty_continent = new ArrayList<>();
+        ArrayList<City> cpcty_continent = null;
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
             // Create string for SQL statement
             String strSelect =
-                    "SELECT country.Capital,country.Name, country.Continent, country.Population "
-                            + "FROM country "
-                            + "WHERE country.Continent='Asia' "
-                            + "ORDER BY country.Population DESC ";
+                    "SELECT city.Name,country.Name, country.Continent, city.Population "
+                            + "FROM country,city "
+                            + "WHERE city.ID=country.Capital AND country.Continent='Asia' "
+                            + "ORDER BY city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
-                System.out.print("Not found.");
-            }  else {
-                cpcty_continent = new ArrayList<>();
-                // Return new city if valid.
-                // Check one is returned
+                System.out.print("Capital City in a Continent Not Found.");
+            } else {
+                cpcty_continent=new ArrayList<>();
+                // Return new capital city continent if valid.
+                // Check one is returned.
                 while (rset.next()) {
-                    Country cpcontinent = new Country();
-                    cpcontinent.setCapital(rset.getInt("Capital"));
-                    cpcontinent.setName(rset.getString("Name"));
-                    cpcontinent.setContinent(rset.getString("Continent"));
-                    cpcontinent.setPopulation(rset.getInt("Population"));
+                    Country crtycontinent=new Country();
+                    City ctycontinent=new City();
+                    ctycontinent.setName(rset.getString(1));
+                    crtycontinent.setName(rset.getString(2));
+                    crtycontinent.setContinent(rset.getString(3));
+                    ctycontinent.setPopulation(rset.getInt(4));
 
-                    cpcty_continent.add(cpcontinent);
+                    ctycontinent.setCountry(crtycontinent);
+                    cpcty_continent.add(ctycontinent);
                 }
             }
         }
@@ -966,24 +967,28 @@ public class App {
         }
         return cpcty_continent;
     }
-    public void displayCapitalCityContinent(ArrayList<Country> capcontinent)
+    public void displayCapitalCityContinent(ArrayList<City>cpcty_continent)
     {
-
-        if (capcontinent == null)
+        if (cpcty_continent == null)
         {
-            System.out.println("* There is no null data in capital city report !\n.");
+            System.out.println("* There is no null data in capital city in a continent!\n");
             return;
         }
+        System.out.print("\n*****************************************Capital Cities in Asia Continent*****************************************\n\n");
+        System.out.printf("%25s%25s%25s%25s","Capital City","Country","Continent","Population\n");
+        System.out.print("\n******************************************************************************************************************\n\n");
 
-        for(Country capc:capcontinent)
+        for (City ctycont:cpcty_continent)
         {
-            if (capc == null) {
-                System.out.println("* No null data in each continent report!\n");
+            if(ctycont == null)
+            {
+                System.out.println("* No null data in each capital city in a continent!\n");
                 continue;
             }
-            System.out.println(capc.getCapital() + "\t" +capc.getName() + "\t" +
-                    capc.getPopulation() + "\t" + capc.getContinent() + "\n");
+            System.out.printf("%25s%25s%25s%25s",ctycont.getName(), ctycont.getCountry().getName(),ctycont.getCountry().getContinent(), ctycont.getPopulation());
+            System.out.print("\n");
         }
+        System.out.print("\n******************************************************************************************************************\n\n");
     }
 
     //14. All the capital cities in a region organised by largest to smallest
