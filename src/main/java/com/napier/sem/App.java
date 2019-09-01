@@ -23,8 +23,11 @@ public class App {
 //        ArrayList cpcty_continent = a.getCapitalCityContinent();
 //        a.displayCapitalCityContinent(cpcty_continent);
 
-        ArrayList cpcty_region = a.getCapitalCityRegion();
-        a.displayCapitalCityRegion(cpcty_region);
+//        ArrayList cpcty_region = a.getCapitalCityRegion();
+//        a.displayCapitalCityRegion(cpcty_region);
+
+        ArrayList totl_popu_country = a.getTotalPopulationCountry();
+        a.displayTotalPopulationCountry(totl_popu_country);
 
         // a.getCapitalCityWorld();
         // a.getCapitalCityContinent();
@@ -347,9 +350,9 @@ public ArrayList<City> getCapitalCityWorld()
     }
     // All the functions related to total population.
     // Total population of the world, a region, a continent, and a country
-    public void getTotalPopulationCountry()
+    public ArrayList<Country> getTotalPopulationCountry()
     {
-        ArrayList<Country> totl_popu_country = new ArrayList<>();
+        ArrayList<Country> totl_popu_country = null;
         try {
             // Create SQL statements for the total population of the world, a region, a continent, and a country.
             Statement stmt = con.createStatement();
@@ -358,9 +361,9 @@ public ArrayList<City> getCapitalCityWorld()
 
             // Create string for total population of a region and a continent SQL statement
             String strSelect =
-                    "SELECT SUM(CASE WHEN country.Region='Caribbean' THEN country.Population END ) as totalregion, SUM(CASE WHEN country.Continent='Asia' THEN country.Population END ) as totalcontinent " +
+                    "SELECT SUM(country.Population) " +
                             "FROM country " +
-                            "WHERE country.Continent='Asia' OR country.Region='Caribbean'";
+                            "WHERE country.Region='Caribbean' ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -369,37 +372,73 @@ public ArrayList<City> getCapitalCityWorld()
             } else {
                 // Return new total population of a region and a continent if valid.
                 while (rset.next()) {
-                    System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
+                    Country totlcrty=new Country();
+                    totlcrty.setPopulation(rset.getInt(1));
+
+                    totl_popu_country.add(totlcrty);
+                    //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
                 }
-                // Create string for total population of the world SQL statement
-                String strSelect2 =
-                        "SELECT SUM(country.Population) " +
-                                "FROM country ";
-                // Execute SQL statement
-                ResultSet rset2 = stmt2.executeQuery(strSelect2);
-                // Return new total population of the world if valid.
-                while(rset2.next())
-                {
-                    System.out.printf("Total Population of the world: " + rset2.getLong(1) + "\n");
-                }
-                // Create string for total population of a country SQL statement
-                String strSelect3 =
-                        "SELECT country.Population " +
-                                "FROM country " +
-                                "WHERE country.Name='Argentina'";
-                // Execute SQL statement
-                ResultSet rset3 = stmt3.executeQuery(strSelect3);
-                // Return new total population of a country if valid.
-                while(rset3.next())
-                {
-                    System.out.printf("Total Population of a country: " + rset3.getLong(1) + "\n");
-                }
+//                // Create string for total population of the world SQL statement
+//                String strSelect2 =
+//                        "SELECT SUM(country.P opulation) " +
+//                                "FROM country ";
+//                // Execute SQL statement
+//                ResultSet rset2 = stmt2.executeQuery(strSelect2);
+//                // Return new total population of the world if valid.
+//                while(rset2.next())
+//                {
+//                    Country totlcrty=new Country();
+//                    //((long)(d * 1e5)) / 1e5;
+//
+//                    totlcrty.setPopulation(rset2.getInt(1));
+//                    totl_popu_country.add(totlcrty);
+//                    //System.out.printf("Total Population of the world: " + rset2.getLong(1) + "\n");
+//                }
+//                // Create string for total population of a country SQL statement
+//                String strSelect3 =
+//                        "SELECT country.Population " +
+//                                "FROM country " +
+//                                "WHERE country.Name='Argentina'";
+//                // Execute SQL statement
+//                ResultSet rset3 = stmt3.executeQuery(strSelect3);
+//                // Return new total population of a country if valid.
+//                while(rset3.next())
+//                {
+//                    Country totlcrty=new Country();
+//                    totlcrty.setPopulation(rset3.getInt(1));
+//                    totl_popu_country.add(totlcrty);
+//                    //System.out.printf("Total Population of a country: " + rset3.getLong(1) + "\n");
+//                }
             }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
             System.out.println("Failed to get the total population of the world, a region, a continent and a country.");
         }
+        return totl_popu_country;
+    }
+    public void displayTotalPopulationCountry(ArrayList<Country>totl_popu_country)
+    {
+        if (totl_popu_country == null)
+        {
+            System.out.println("* There is null data in total population country!\n");
+            return;
+        }
+        System.out.print("\n*****************************************Total Population*****************************************\n\n");
+        System.out.printf("%25s","Region\n");
+        System.out.print("\n******************************************************************************************************************\n\n");
+
+        for (Country totlcountry:totl_popu_country)
+        {
+            if(totlcountry == null)
+            {
+                System.out.println("* Null data in each total population!\n");
+                continue;
+            }
+            System.out.printf("%25s",totlcountry.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n******************************************************************************************************************\n\n");
     }
     // Total population of a city and a city district
     public void getTotalPopulationCity()
