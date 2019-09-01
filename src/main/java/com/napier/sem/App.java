@@ -81,11 +81,12 @@ public class App {
 //        a.displayCapitalCityWorld(cpcty_world);
 //
 //        //13. capital city continent
-        ArrayList cpcty_continent = a.getCapitalCityContinent();
-        a.displayCapitalCityContinent(cpcty_continent);
+//        ArrayList cpcty_continent = a.getCapitalCityContinent();
+//        a.displayCapitalCityContinent(cpcty_continent);
 
-
-
+        //14. capital city region
+        ArrayList cpcty_region = a.getCapitalCityRegion();
+        a.displayCapitalCityRegion(cpcty_region);
         // Disconnect from database
         a.disconnect();
     }
@@ -992,66 +993,68 @@ public class App {
     }
 
     //14. All the capital cities in a region organised by largest to smallest
-    public ArrayList<Country> getCapitalCityRegion()
+    public ArrayList<City> getCapitalCityRegion()
     {
-        ArrayList<Country> cpcty_region = new ArrayList<>();
+        ArrayList<City> cpcty_region = new ArrayList<>();
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
 
             // Create string for SQL statement
             String strSelect =
-                    "SELECT country.Capital,country.Name, country.Region, country.Population "
-                            + "FROM country "
-                            + "WHERE country.Region='Caribbean' "
-                            + "ORDER BY country.Population DESC ";
+                    "SELECT city.Name,country.Name, country.Region, city.Population "
+                            + "FROM country, city "
+                            + "WHERE city.ID=country.Capital AND country.Region='Caribbean' "
+                            + "ORDER BY city.Population DESC ";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
-                System.out.print("Not found.");
-            }  else {
-                cpcty_region = new ArrayList<>();
-                // Return new city if valid.
-                // Check one is returned
+                System.out.print("Capital City in Caribbean Not Found.");
+            } else {
+                cpcty_region=new ArrayList<>();
+                // Return new capital city region if valid.
+                // Check one is returned.
                 while (rset.next()) {
-                    Country cpregion = new Country();
-                    cpregion.setCapital(rset.getInt("Capital"));
-                    cpregion.setName(rset.getString("Name"));
-                    cpregion.setRegion(rset.getString("Region"));
-                    cpregion.setPopulation(rset.getInt("Population"));
+                    Country crtyRegion=new Country();
+                    City ctyRegion = new City();
+                    ctyRegion.setName(rset.getString(1));
+                    crtyRegion.setName(rset.getString(2));
+                    crtyRegion.setRegion(rset.getString(3));
+                    ctyRegion.setPopulation(rset.getInt(4));
 
-                    cpcty_region.add(cpregion);
+                    ctyRegion.setCountry(crtyRegion);
+                    cpcty_region.add(ctyRegion);
                 }
             }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get capital city in a region.");
+            System.out.println("Failed to get capital city in Caribbean region.");
         }
         return cpcty_region;
     }
-    public void displayCapitalCityRegion(ArrayList<Country> capregion)
+    public void displayCapitalCityRegion(ArrayList<City>cpcty_region)
     {
-
-        if (capregion == null)
+        if (cpcty_region == null)
         {
-            System.out.println("* There is no null data in capital city report !\n.");
+            System.out.println("* There is no null data in capital city in a regiono!\n");
             return;
         }
-        System.out.print("***************************** All the capital cities in a region organised by largest to smallest *****************************\n");
-        System.out.printf("%25s%25s%25s%25s%25s","CountryName","Capital", "Population","Region\n");
-        System.out.print("********************************************************************************************************************************\n");
-        for(Country capr:capregion)
+        System.out.print("\n*****************************************Capital Cities in Caribbean Region*****************************************\n\n");
+        System.out.printf("%25s%25s%25s%25s","Capital City","Country","Region","Population\n");
+        System.out.print("\n******************************************************************************************************************\n\n");
+
+        for (City ctyreg:cpcty_region)
         {
-            if (capr == null) {
-                System.out.println("* No null data in each continent report!\n");
+            if(ctyreg == null)
+            {
+                System.out.println("* No null data in each capital city in a region!\n");
                 continue;
             }
-            System.out.printf("%25s%25s%25s%25s%25s",capr.getName(),capr.getCapital(),
-                    capr.getPopulation(),capr.getRegion());
+            System.out.printf("%25s%25s%25s%25s",ctyreg.getName(), ctyreg.getCountry().getName(),ctyreg.getCountry().getRegion(), ctyreg.getPopulation());
             System.out.print("\n");
         }
-        System.out.print("********************************************************************************************************************************\n");
+        System.out.print("\n******************************************************************************************************************\n\n");
     }
 
 
