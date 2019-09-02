@@ -1,0 +1,1 @@
+Screenshot of the task of the project will be store in this folder.
