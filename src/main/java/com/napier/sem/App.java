@@ -110,8 +110,7 @@ public class App {
     }
 
 //
-//All the cities in a country
-// organised by largest population to smallest.
+//the following languages from greatest number to smallest, including the percentage of the world population
 //
     public void getFiveLanguagePopulation()
     {

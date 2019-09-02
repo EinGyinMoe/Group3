@@ -6,6 +6,8 @@ package com.napier.sem;
 public class Country {
 
     private String Code;
+    private Object City;
+
     public String getCode() {
         return Code;
     }
@@ -123,6 +125,7 @@ public class Country {
     }
 
     private int Capital;
+
     public int getCapital() {
         return Capital;
     }
@@ -139,5 +142,8 @@ public class Country {
     public void setCode2(String code2) {
         Code2 = code2;
     }
+
+
+
 
 }
