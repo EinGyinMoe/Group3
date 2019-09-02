@@ -109,7 +109,40 @@ public class App {
 
     }
 
+////
+////the following languages from greatest number to smallest, including the percentage of the world population
+////
+//    public void getFiveLanguagePopulation()
+//    {
+//        try {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String strSelect =
+//                    "SELECT countrylanguage.Language, sum(country.Population * countrylanguage.Percentage) AS Population "
+//                            + "FROM country, countrylanguage "
+//                            + "WHERE country.Code = countrylanguage.CountryCode AND countrylanguage.Language IN ('English','Chinese','Hindi','Arabic','Spanish') "
+//                            + "GROUP BY countrylanguage.Language";
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            if (rset == null) {
+//                System.out.print("Country Report Not found!");
+//            } else {
+//                // Return city if valid.
+//                while (rset.next()) {
+//                    System.out.printf("\nLanguage: " + rset.getString(1) + "\n" +
+//                            "Population: " + rset.getString(2) + "\n" );
+//                }
+//            }
+//        }
+//        catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get city in a country!.");
+//        }
 //
+//    }
+
+    //
 //the following languages from greatest number to smallest, including the percentage of the world population
 //
     public void getFiveLanguagePopulation()
@@ -119,9 +152,10 @@ public class App {
             Statement stmt = con.createStatement();
             // Create string for SQL statement
             String strSelect =
-                    "SELECT countrylanguage.Language, sum(country.Population * countrylanguage.Percentage) AS Population "
+                    "SELECT countrylanguage.Language, sum(country.Population * countrylanguage.Percentage) AS PopulationLanguage, sum(country.Population * countrylanguage.percentage)/ (select sum(Population) FROM country) as Percentpopulation "
                             + "FROM country, countrylanguage "
-                            + "WHERE country.Code = countrylanguage.CountryCode AND countrylanguage.Language IN ('English','Chinese','Hindi','Arabic','Spanish') "
+                            + "WHERE countrylanguage.CountryCode = country.Code "
+                            + "AND countrylanguage.Language IN ('English','Chinese','Hindi','Arabic','Spanish') "
                             + "GROUP BY countrylanguage.Language";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
@@ -130,14 +164,15 @@ public class App {
             } else {
                 // Return city if valid.
                 while (rset.next()) {
-                    System.out.printf("\nLanguage: " + rset.getString(1) + "\n" +
-                            "Population: " + rset.getString(2) + "\n" );
+                    System.out.printf("\nLanguage: " + rset.getString(1) + "\n"
+                            + "PopulationLanguage: " + rset.getString(2) + "\n"
+                            + "PercentageOfPopulationLanguage: " + rset.getString(3) + "\n");
                 }
             }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get city in a country!.");
+            System.out.println("Failed to get Country Language!.");
         }
 
     }
