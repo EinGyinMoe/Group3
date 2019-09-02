@@ -93,6 +93,8 @@ public class App {
 //        a.getNotLivingPopulationRegion();
 //        a.getTotalPopulationCityCountry();
 //        a.getNotLivingPopulationCountry();
+//        a.getTotalPopulationCityContinent();
+//        a.getNotLivingPopulationContinent();
 
 
 
@@ -1259,6 +1261,73 @@ public class App {
 //        //return continent;
 //    }
 //
+
+//    public void getTotalPopulationCityContinent()
+//    {
+//        try {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String strSelect =
+//                    "SELECT country.Continent, SUM(city.Population) "
+//                            + "FROM city " + "INNER JOIN country " + "ON city.CountryCode = country.Code "
+//                            + "GROUP BY country.Continent";
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            if (rset == null) {
+//                System.out.print("Not found.");
+//            } else {
+//                // Return new city if valid.
+//                // Check one is
+//
+//                while (rset.next()) {
+//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+//                    //System.out.println("\n");
+//                    System.out.printf("Country Continent: "+rset.getString(1)+"\n"+"City Name: "+rset.getString(2)+"\n"+"City population in each continent: "+rset.getInt(3)+"\n"+"\n");
+//
+//                }
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get people who are not living in the city by region");
+//        }
+//        //return continent;
+//    }
+//
+//    public void getNotLivingPopulationContinent()
+//
+//    {
+//        try {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String strSelect =
+//                    "Select country.Continent, (SUM(country.population)-SUM((select SUM(city.population) from city where countrycode = country.code))) "
+//                            +" From country"
+//                            +" GROUP BY country.Continent;";
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            if (rset == null) {
+//                System.out.print("Not found.");
+//            } else {
+//                // Return new city if valid.
+//                // Check one is
+//                while (rset.next()) {
+//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+//                    //System.out.println("\n");
+//                    System.out.printf("Continent Name : "+rset.getString(1)+"\n"+"People not living in cities in each continent: "+rset.getLong(2)+"\n"+"\n");
+//                }
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get people who are not living in the city by region");
+//        }
+//        //return continent;
+//    }
 
 //    End of Cherry Coding
 
