@@ -17,7 +17,7 @@ rectangle "World factbook Information System " {
 
 
 
-    usecase UCa as "Print all information"
+'    usecase UCa as "Print all information"
 
 'To provide a name for usecases (use case UC1 as use case 1)
 
