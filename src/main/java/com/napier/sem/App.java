@@ -2,8 +2,7 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
-
-
+import java.util.Scanner;
 
 /**
  * This is the class to be accessed from other functions
@@ -22,6 +21,9 @@ public class App {
         {
             a.connect(args[0]);
         }
+
+        // Input Display Method
+        a.maindisplay();
 
 //        // 1. All the cities in a district organised by largest population to smallest
 //        ArrayList ctydistrict = a.getCityDistrict();
@@ -88,9 +90,18 @@ public class App {
 //        ArrayList cpcty_region = a.getCapitalCityRegion();
 //        a.displayCapitalCityRegion(cpcty_region);
 
-        //15. total country population of a region
+//15. total country population of a region
         ArrayList crtyTotlPopuRegion= a.getCountryTotalPopuRegion();
         a.displayCountryTotalPopuRegion(crtyTotlPopuRegion);
+//=======
+//        Cherry Get Function
+//        a.getTotalPopulationCityRegion();
+//        a.getNotLivingPopulationRegion();
+//        a.getTotalPopulationCityCountry();
+//        a.getNotLivingPopulationCountry();
+//        a.getTotalPopulationCityContinent();
+//        a.getNotLivingPopulationContinent();
+
         // Disconnect from database
         a.disconnect();
     }
@@ -152,6 +163,252 @@ public class App {
             } catch (Exception e) {
                 System.out.println("Error closing connection to database");
             }
+        }
+    }
+
+    public void maindisplay()
+    {
+        Scanner Obj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println("\n");
+        System.out.println("*****************************************");
+        System.out.println("*Welcome to WorldFact Book Report System*");
+        System.out.println("*****************************************");
+        boolean again = false;
+        do {
+            System.out.println("Choose Your Options for the following Report:");
+            System.out.println(
+                            "1. About Country Report " + "\n" +
+                            "2. About City Report " + "\n" +
+                            "3. About Capital City Report "+ "\n"
+            );
+            System.out.print("Enter your option: ");
+            int reportOp = Obj.nextInt();  // Read user input
+            System.out.println("\n");
+
+            // Country Report
+            if (reportOp == 1)
+            {
+                System.out.println("****************");
+                System.out.println("*Country Report*");
+                System.out.println("****************");
+                System.out.println(
+                                "1. All the countries in the world organised by largest population to smallest." + "\n" +
+                                "2. All the countries in a continent organised by largest population to smallest." + "\n" +
+                                "3. All the countries in a region organised by largest population to smallest."+ "\n"
+                );
+                System.out.print("Enter an option : ");
+                int CountryReport = Obj.nextInt();  // Read user input
+
+                if (CountryReport == 1)
+                {
+//                    ArrayList countryworld = a.getCountryWorld();
+//                    a.displayCountryWorld(countryworld);
+//                    again = Question();
+                    ArrayList countryworld = getCountryWorld();
+                    displayCountryWorld(countryworld);
+                    again = Question();
+                }
+                else if (CountryReport == 2)
+                {
+//                    ArrayList countrycontinent = a.getCountryContinent();
+//                    a.displayCountryContinent(countrycontinent);
+//                    again = Question();
+                    ArrayList countrycontinent = getCountryContinent();
+                    displayCountryContinent(countrycontinent);
+                    again = Question();
+                }
+                else if (CountryReport == 3)
+                {
+//                    ArrayList countryregion = a.getCountryRegion();
+//                    a.displayCountryRegion(countryregion);
+//                    again = Question();
+                    ArrayList countryregion = getCountryRegion();
+                    displayCountryRegion(countryregion);
+                    again = Question();
+                }
+                else
+                {
+                    again = true;
+                }
+            }
+
+            // City Report
+            else if(reportOp == 2)
+            {
+                System.out.println("*************");
+                System.out.println("*City Report*");
+                System.out.println("*************");
+                System.out.println(
+                                "1. All the cities in the world organised by largest population to smallest. " + "\n" +
+                                "2. All the cities in a continent organised by largest population to smallest. " + "\n" +
+                                "3. All the cities in a region organised by largest population to smallest. " + "\n" +
+                                "4. All the cities in a country organised by largest population to smallest. " + "\n" +
+                                "5. All the cities in a district organised by largest population to smallest."+ "\n"
+                );
+                System.out.print("Enter your option: ");
+                int CityReport = Obj.nextInt();  // Read user input
+
+                if (CityReport == 1)
+                {
+//                    ArrayList ctyworld = a.getCity_world();
+//                    a.displayCityWorld(ctyworld);
+//                    again = Question();
+                    ArrayList ctyworld = getCity_world();
+                    displayCityWorld(ctyworld);
+                    again = Question();
+                }
+                else if (CityReport == 2)
+                {
+//                    ArrayList cty = a.getCityContinent();
+//                    a.displayCityContinent(cty);
+//                    // getCitiesContinent(askContinent());
+//                    again = Question();
+
+                    ArrayList cty = getCityContinent();
+                    displayCityContinent(cty);
+                    // getCitiesContinent(askContinent());
+                    again = Question();
+                }
+                else if (CityReport == 3)
+                {
+//                    ArrayList ctyregion = a.getCityRegion();
+//                    a.displayCityRegion(ctyregion);
+//                    again = Question();
+                    ArrayList ctyregion = getCityRegion();
+                    displayCityRegion(ctyregion);
+                    again = Question();
+                }
+                else if (CityReport == 4)
+                {
+//                    ArrayList ctycountry = a.getCityCountry();
+//                    a.displayCityCountry(ctycountry);
+//                    again = Question();
+                    ArrayList ctycountry = getCityCountry();
+                    displayCityCountry(ctycountry);
+                    again = Question();
+                }
+                else if (CityReport == 5)
+                {
+//                    ArrayList ctydistrict = a.getCityDistrict();
+//                    a.displayCityDistrict(ctydistrict);
+//                    again = Question();
+                    ArrayList ctydistrict = getCityDistrict();
+                    displayCityDistrict(ctydistrict);
+                    again = Question();
+                }
+                else{
+                    again = true;
+                }
+            }
+
+            // Capital City Report
+            else if (reportOp == 3)
+            {
+                System.out.println("*********************");
+                System.out.println("*Capital City Report*");
+                System.out.println("*********************");
+                System.out.println
+                                (
+                                "1. All the capital cities in the world organised by largest population to smallest. " + "\n" +
+                                "2. All the capital cities in a continent organised by largest population to smallest. " + "\n" +
+                                "3. All the capital cities in a region organised by largest to smallest. " + "\n" );
+                System.out.print("Enter your option: ");
+                int CapCityReport = Obj.nextInt();  // Read user input
+
+                if (CapCityReport == 1)
+                {
+//                    ArrayList cpcty_world = a.getCapitalCityWorld();
+//                    a.displayCapitalCityWorld(cpcty_world);
+//                    again = askQuestion();
+                    ArrayList cpcty_world = getCapitalCityWorld();
+                    displayCapitalCityWorld(cpcty_world);
+                    again = Question();
+                }
+                else if (CapCityReport == 2)
+                {
+//                    ArrayList cpcty_continent = a.getCapitalCityContinent();
+//                    a.displayCapitalCityContinent(cpcty_continent);
+//                    again = askQuestion();
+                    ArrayList cpcty_continent = getCapitalCityContinent();
+                    displayCapitalCityContinent(cpcty_continent);
+                    again = Question();
+                }
+                else if (CapCityReport == 3)
+                {
+//                    ArrayList cpcty_region = a.getCapitalCityRegion();
+//                    a.displayCapitalCityRegion(cpcty_region);
+//                    again = askQuestion();
+                    ArrayList cpcty_region = getCapitalCityRegion();
+                    displayCapitalCityRegion(cpcty_region);
+                    again = Question();
+                }
+                else{
+                    again = true;
+                }
+            }
+            else
+            {
+                System.out.println("Invalid Input!");  // Output user input
+            }
+        }
+        while (again == true);
+
+    }
+
+    public String Continent()
+    {
+        Scanner Obj = new Scanner(System.in);  // Create a Scanner object
+        System.out.println(
+                "Choose one of the following continent " + "\n" +
+                        "('Asia','Oceania','Antarctica','Europe','North America','Africa','South America')");
+        System.out.print("Enter a continent: ");
+        String continent = Obj.nextLine();
+        System.out.println("\n");
+        return continent;
+    }
+
+    String Country()
+    {
+        Scanner Obj = new Scanner(System.in);  // Create a Scanner object
+        System.out.print(
+                "Enter a country : ");
+        String country = Obj.nextLine();
+        System.out.println("\n");
+        return country;
+    }
+
+
+    public String Region()
+    {
+        Scanner Obj = new Scanner(System.in);  // Create a Scanner object
+        System.out.print(
+                "Choose a region of the world " + "\n" +
+                        "('Caribbean','Southern and Central Asia','Central Africa','Southern Europe', 'Eastern Africa', 'Middle East','Polynesia', 'Western Europe', 'Antarctica','South America' etc.)");
+        String region = Obj.nextLine();
+        System.out.println("\n");
+        return region;
+    }
+
+    private boolean Question() {
+        Scanner Obj = new Scanner(System.in);
+        System.out.print("Do you want to continue or not???(Y/N): ");
+        String askQues = Obj.nextLine();  // To read the user input....
+        askQues = askQues.toLowerCase();
+
+        if (askQues.equals("y"))
+        {
+            System.out.println("\n");
+            return true;
+        }
+        else if (askQues.equals("n"))
+        {
+            System.out.println("\n");
+            return false;
+        }
+        else
+        {
+            System.out.println("Invalid Input! Please Try Again....");
+            return Question();
         }
     }
 
@@ -1118,5 +1375,213 @@ public class App {
         }
         System.out.print("\n*********************************************************\n\n");
     }
+
+//    ******Cherry Coding (People live and not living in each region, country, continent)********
+
+//    public void getTotalPopulationCityRegion()
+//    {
+//        try {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String strSelect =
+//                    "SELECT country.Region, SUM(city.Population) "
+//                            + "FROM city " + "INNER JOIN country " + "ON city.CountryCode = country.Code "
+//                            + "GROUP BY country.Region";
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            if (rset == null) {
+//                System.out.print("Not found.");
+//            } else {
+//                // Return new city if valid.
+//                // Check one is
+//
+//                while (rset.next()) {
+//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+//                    //System.out.println("\n");
+//                    System.out.printf("Country Region: "+rset.getString(1)+"\n"+"City Name: "+"City population in each region: "+rset.getInt(2)+"\n"+"\n");
+//
+//                }
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get people who are not living in the city by region");
+//        }
+//        //return continent;
+//    }
+//
+//    public void getNotLivingPopulationRegion()
+//
+//    {
+//        try {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String strSelect =
+//                    "Select country.Region, (SUM(country.population)-SUM((select SUM(city.population) from city where countrycode = country.code))) "
+//                            +" From country"
+//                            +" GROUP BY country.Region;";
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            if (rset == null) {
+//                System.out.print("Not found.");
+//            } else {
+//                // Return new city if valid.
+//                // Check one is
+//                while (rset.next()) {
+//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+//                    //System.out.println("\n");
+//                    System.out.printf("Region Name : "+rset.getString(1)+"\n"+"People not living in cities in each continent: "+rset.getLong(2)+"\n"+"\n");
+//                }
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get people who are not living in the city by region");
+//        }
+//        //return continent;
+//    }
+
+//    public void getTotalPopulationCityCountry()
+//    {
+//        try {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String strSelect =
+//                    "SELECT country.Name, SUM(city.Population) "
+//                            + "FROM city " + "INNER JOIN country " + "ON city.CountryCode = country.Code "
+//                            +"GROUP BY country.Name";
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            if (rset == null) {
+//                System.out.print("Not found.");
+//            } else {
+//                // Return new city if valid.
+//                // Check one is
+//
+//                while (rset.next()) {
+//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+//                    //System.out.println("\n");
+//                    System.out.printf("Country Name: "+rset.getString(1)+"\n"+"City population in each country: "+rset.getInt(2)+"\n"+"\n");
+//
+//                }
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get people who are not living in the city by region");
+//        }
+//        //return continent;
+//    }
+//
+//    public void getNotLivingPopulationCountry()
+//
+//    {
+//        try {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String strSelect =
+//                    "Select country.Name, (country.Population - SUM(city.population)) "
+//                            +" From country" + "INNER JOIN country " + "ON city.CountryCode = country.Code "
+//                            +" GROUP BY country.Name;";
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            if (rset == null) {
+//                System.out.print("Not found.");
+//            } else {
+//                // Return new city if valid.
+//                // Check one is
+//                while (rset.next()) {
+//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+//                    //System.out.println("\n");
+//                    System.out.printf("Country Name : "+rset.getString(1)+"\n"+"People not living in cities in each country: "+rset.getLong(2)+"\n"+"\n");
+//                }
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get people who are not living in the city by region");
+//        }
+//        //return continent;
+//    }
+//
+
+//    public void getTotalPopulationCityContinent()
+//    {
+//        try {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String strSelect =
+//                    "SELECT country.Continent, SUM(city.Population) "
+//                            + "FROM city " + "INNER JOIN country " + "ON city.CountryCode = country.Code "
+//                            + "GROUP BY country.Continent";
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            if (rset == null) {
+//                System.out.print("Not found.");
+//            } else {
+//                // Return new city if valid.
+//                // Check one is
+//
+//                while (rset.next()) {
+//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+//                    //System.out.println("\n");
+//                    System.out.printf("Country Continent: "+rset.getString(1)+"\n"+"City Name: "+rset.getString(2)+"\n"+"City population in each continent: "+rset.getInt(3)+"\n"+"\n");
+//
+//                }
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get people who are not living in the city by region");
+//        }
+//        //return continent;
+//    }
+//
+//    public void getNotLivingPopulationContinent()
+//
+//    {
+//        try {
+//            // Create an SQL statement
+//            Statement stmt = con.createStatement();
+//            // Create string for SQL statement
+//            String strSelect =
+//                    "Select country.Continent, (SUM(country.population)-SUM((select SUM(city.population) from city where countrycode = country.code))) "
+//                            +" From country"
+//                            +" GROUP BY country.Continent;";
+//            // Execute SQL statement
+//            ResultSet rset = stmt.executeQuery(strSelect);
+//            if (rset == null) {
+//                System.out.print("Not found.");
+//            } else {
+//                // Return new city if valid.
+//                // Check one is
+//                while (rset.next()) {
+//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+//                    //System.out.println("\n");
+//                    System.out.printf("Continent Name : "+rset.getString(1)+"\n"+"People not living in cities in each continent: "+rset.getLong(2)+"\n"+"\n");
+//                }
+//            }
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e.getMessage());
+//            System.out.println("Failed to get people who are not living in the city by region");
+//        }
+//        //return continent;
+//    }
+
+//    End of Cherry Coding
+
+
 
 } /*This is the end of the public App class */
