@@ -37,8 +37,11 @@ public class App {
 //        ArrayList crtyTotlPopuCont = a.getCountryTotalPopuCont();
 //        a.displayCountryTotalPopuCont(crtyTotlPopuCont);
 
-        ArrayList crtyTotlPopu = a.getCountryTotalPopu();
-        a.displayCountryTotalPopu(crtyTotlPopu);
+//        ArrayList crtyTotlPopu = a.getCountryTotalPopu();
+//        a.displayCountryTotalPopu(crtyTotlPopu);
+
+        ArrayList ctyTotlPopu = a.getCityTotalPopu();
+        a.displayCityTotalPopu(ctyTotlPopu);
 
 //        ArrayList topcont = a.getTopContinent();
 //        a.displayTopContinent(topcont);
@@ -593,18 +596,76 @@ public ArrayList<City> getCapitalCityWorld()
         }
         System.out.print("\n*********************************************************\n\n");
     }
-    // Total population of a city and a city district
-    public void getTotalPopulationCity()
-    {
-        ArrayList<City> totl_popu_city = new ArrayList<>();
-        try {
-            // Create SQL statements for the total population of a city district and a city.
-            Statement stmt = con.createStatement();
-            Statement stmt2 = con.createStatement();
 
-            // Create string for the total population of a city district SQL statement
+    // Total population of a city
+    public ArrayList<City> getCityTotalPopu()
+    {
+        ArrayList<City> ctyTotlPopu = null;
+        try {
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Statement stmt = con.createStatement();
+
+            // Create string for total population of a region and a continent SQL statement
             String strSelect =
-                    "SELECT SUM(CASE WHEN city.District='Kabol' THEN city.Population END ) as totaldistrict " +
+                    "SELECT city.Population " +
+                            "FROM city " +
+                            "WHERE city.Name='Herat'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                ctyTotlPopu=new ArrayList<>();
+                // Return new total population of a region and a continent if valid.
+                while (rset.next()) {
+                    City totlcty=new City();
+                    totlcty.setPopulation(rset.getInt(1));
+
+                    ctyTotlPopu.add(totlcty);
+                    //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total population of Herat City.");
+        }
+        return ctyTotlPopu;
+    }
+    public void displayCityTotalPopu(ArrayList<City>ctyTotlPopu)
+    {
+        if (ctyTotlPopu == null)
+        {
+            System.out.println("* There is null data in total population of Herat City!\n");
+            return;
+        }
+        System.out.print("\n*********************************************************\n\n");
+
+        for (City totlctypopu:ctyTotlPopu)
+        {
+            if(totlctypopu == null)
+            {
+                System.out.println("* Null data in each total population of Herat city!\n");
+                continue;
+            }
+            System.out.println("Total Country Population of Herat City: " + totlctypopu.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n*********************************************************\n\n");
+    }
+
+    // Total city population in a district.
+    public ArrayList<City> getCityTotalPopuDistrict()
+    {
+        ArrayList<City> ctyTotlPopuDistrict = null;
+        try {
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Statement stmt = con.createStatement();
+
+            // Create string for total population of a region and a continent SQL statement
+            String strSelect =
+                    "SELECT SUM(city.Population) as totaldistrict " +
                             "FROM city " +
                             "WHERE city.District='Kabol'";
 
@@ -613,28 +674,43 @@ public ArrayList<City> getCapitalCityWorld()
             if (rset == null) {
                 System.out.print("Not found.");
             } else {
-                // Return new total population of a city district if valid.
+                ctyTotlPopuDistrict=new ArrayList<>();
+                // Return new total population of a district if valid.
                 while (rset.next()) {
-                    System.out.printf("Total Population of a City District: " + rset.getLong(1) + "\n");
-                }
-                // Create string for total population of a city SQL statement
-                String strSelect2 =
-                        "SELECT city.Population " +
-                                "FROM city " +
-                                "WHERE city.Name='Herat'";
-                // Execute SQL statement
-                ResultSet rset2 = stmt2.executeQuery(strSelect2);
-                // Return new total population of a city if valid.
-                while(rset2.next())
-                {
-                    System.out.printf("Total Population of a city: " + rset2.getInt(1) + "\n");
+                    City totlctyDistrict=new City();
+                    totlctyDistrict.setPopulation(rset.getInt(1));
+
+                    ctyTotlPopuDistrict.add(totlctyDistrict);
+                    //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
                 }
             }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get the total population of a city district, and a city.");
+            System.out.println("Failed to get the total country population of the world.");
         }
+        return ctyTotlPopuDistrict;
+    }
+    public void displayCityTotalPopuDistrict(ArrayList<City>ctyTotlPopuDistrict)
+    {
+        if (ctyTotlPopuDistrict == null)
+        {
+            System.out.println("* There is null data in total city population in Kabol District!\n");
+            return;
+        }
+        System.out.print("\n*********************************************************\n\n");
+
+        for (City totlctypopudistrict:ctyTotlPopuDistrict)
+        {
+            if(totlctypopudistrict == null)
+            {
+                System.out.println("* Null data in each total city population of Kabol district!\n");
+                continue;
+            }
+            System.out.println("Total City Population in Kabol District: " + totlctypopudistrict.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n*********************************************************\n\n");
     }
 
     //The top N populated cities in the continent where N is provided by the user.
