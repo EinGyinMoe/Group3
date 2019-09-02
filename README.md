@@ -74,4 +74,4 @@
 | 30 | The population of a district. | Yes | ![](screenshot/city_1.PNG) |
 | 31 | The population of a city. | Yes | ![](screenshot/city_1.PNG) |
 | 32 | The number of people who speak the Chinese/English/Hindi/Spanish/Arabic languages from greatest number to smallest, including the percentage of the world population. | Yes | ![](screenshot/2.png) |
-| 33 | The Country Report | Yes | ![](Screenshots/10_Country Report.PNG) |
+| 33 | The Country Report | Yes | ![](Screenshots/10_Country_Report.PNG) |
