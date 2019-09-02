@@ -2,6 +2,8 @@ package com.napier.sem;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Scanner;
+import java.io.*;
 
 /**
  * This is the class to be accessed from other functions
@@ -28,6 +30,9 @@ public class App {
 
         ArrayList totl_popu_country = a.getTotalPopulationCountry();
         a.displayTotalPopulationCountry(totl_popu_country);
+
+//        ArrayList topcont = a.getTopContinent();
+//        a.displayTopContinent(topcont);
 
         // a.getCapitalCityWorld();
         // a.getCapitalCityContinent();
@@ -361,54 +366,55 @@ public ArrayList<City> getCapitalCityWorld()
 
             // Create string for total population of a region and a continent SQL statement
             String strSelect =
-                    "SELECT SUM(country.Population) " +
+                    "SELECT SUM(country.Population) as crtyregionpoputotl " +
                             "FROM country " +
-                            "WHERE country.Region='Caribbean' ";
+                            "WHERE country.Region='Central Africa' ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
                 System.out.print("Not found.");
             } else {
+                totl_popu_country=new ArrayList<>();
                 // Return new total population of a region and a continent if valid.
                 while (rset.next()) {
-                    Country totlcrty=new Country();
-                    totlcrty.setPopulation(rset.getInt(1));
+                    Country crtyregion=new Country();
+                    crtyregion.setPopulation(rset.getInt(1));
 
-                    totl_popu_country.add(totlcrty);
+                    totl_popu_country.add(crtyregion);
                     //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
                 }
-//                // Create string for total population of the world SQL statement
-//                String strSelect2 =
-//                        "SELECT SUM(country.P opulation) " +
-//                                "FROM country ";
-//                // Execute SQL statement
-//                ResultSet rset2 = stmt2.executeQuery(strSelect2);
-//                // Return new total population of the world if valid.
-//                while(rset2.next())
-//                {
-//                    Country totlcrty=new Country();
-//                    //((long)(d * 1e5)) / 1e5;
-//
-//                    totlcrty.setPopulation(rset2.getInt(1));
-//                    totl_popu_country.add(totlcrty);
-//                    //System.out.printf("Total Population of the world: " + rset2.getLong(1) + "\n");
-//                }
-//                // Create string for total population of a country SQL statement
-//                String strSelect3 =
-//                        "SELECT country.Population " +
-//                                "FROM country " +
-//                                "WHERE country.Name='Argentina'";
-//                // Execute SQL statement
-//                ResultSet rset3 = stmt3.executeQuery(strSelect3);
-//                // Return new total population of a country if valid.
-//                while(rset3.next())
-//                {
-//                    Country totlcrty=new Country();
-//                    totlcrty.setPopulation(rset3.getInt(1));
-//                    totl_popu_country.add(totlcrty);
-//                    //System.out.printf("Total Population of a country: " + rset3.getLong(1) + "\n");
-//                }
+                // Create string for total population of the world SQL statement
+                String strSelect2 =
+                        "SELECT SUM(country.Population) as crtyworldpoputotl " +
+                                "FROM country ";
+                // Execute SQL statement
+                ResultSet rset2 = stmt2.executeQuery(strSelect2);
+                // Return new total population of the world if valid.
+                while(rset2.next())
+                {
+                    Country crtyworld=new Country();
+                    //((long)(d * 1e5)) / 1e5;
+
+                    crtyworld.setPopulation(rset2.getInt(1));
+                    totl_popu_country.add(crtyworld);
+                    //System.out.printf("Total Population of the world: " + rset2.getLong(1) + "\n");
+                }
+                // Create string for total population of a country SQL statement
+                String strSelect3 =
+                        "SELECT country.Population " +
+                                "FROM country " +
+                                "WHERE country.Name='Argentina'";
+                // Execute SQL statement
+                ResultSet rset3 = stmt3.executeQuery(strSelect3);
+                // Return new total population of a country if valid.
+                while(rset3.next())
+                {
+                    Country totlcrty=new Country();
+                    totlcrty.setPopulation(rset3.getInt(1));
+                    totl_popu_country.add(totlcrty);
+                    //System.out.printf("Total Population of a country: " + rset3.getLong(1) + "\n");
+                }
             }
         }
         catch (Exception e) {
@@ -425,7 +431,7 @@ public ArrayList<City> getCapitalCityWorld()
             return;
         }
         System.out.print("\n*****************************************Total Population*****************************************\n\n");
-        System.out.printf("%25s","Region\n");
+        System.out.printf("%25s%25s%25s","Region","World","Country\n");
         System.out.print("\n******************************************************************************************************************\n\n");
 
         for (Country totlcountry:totl_popu_country)
@@ -435,7 +441,7 @@ public ArrayList<City> getCapitalCityWorld()
                 System.out.println("* Null data in each total population!\n");
                 continue;
             }
-            System.out.printf("%25s",totlcountry.getPopulation());
+            System.out.printf("%25s%25s%25s",totlcountry.getPopulation(),totlcountry.getPopulation(),totlcountry.getPopulation());
             System.out.print("\n");
         }
         System.out.print("\n******************************************************************************************************************\n\n");
@@ -482,5 +488,84 @@ public ArrayList<City> getCapitalCityWorld()
             System.out.println(e.getMessage());
             System.out.println("Failed to get the total population of a city district, and a city.");
         }
+    }
+
+    //The top N populated cities in the continent where N is provided by the user.
+    public ArrayList<City> getTopContinent()
+    {
+        ArrayList<City> topcont = null;
+        try {
+            // Create an SQL statement
+            //System.out.println("You entered " + num);
+            Statement stmt = con.createStatement();
+//            Scanner input = new Scanner(System.in);
+//            System.out.print("Enter text: ");
+//            String cont = input.next();
+
+            DataInputStream KB=new DataInputStream(System.in);
+
+            //input a particular employee id of which we want to display record
+            System.out.print("Enter Continent:");
+            String cont=KB.readLine();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Continent, city.Population "
+                            + "FROM city, country "
+                            + "WHERE country.Continent='\"+eid+\"' "
+                            + "ORDER BY city.Population DESC";
+
+//            Scanner input = new Scanner(System.in);
+//            System.out.print("Enter Continent: ");
+//            String cont = input.nextLine();
+
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Capital City Report Not found.");
+            } else {
+                topcont=new ArrayList<>();
+                // Return new capital city if valid.
+                // Check one is returned.
+                while (rset.next()) {
+                    City city=new City();
+                    Country country=new Country();
+                    city.setName(rset.getString(1));
+                    country.setName(rset.getString(2));
+                    city.setPopulation(rset.getInt(3));
+
+                    city.setCountry(country);
+                    topcont.add(city);
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get N Continent.");
+        }
+        return topcont;
+    }
+    public void displayTopContinent(ArrayList<City>topcont)
+    {
+        if (topcont==null)
+        {
+            System.out.println("* There is no null data in top continent!\n");
+            return;
+        }
+        System.out.print("\n**************************************Top Continent**************************************\n\n");
+        System.out.printf("%25s%25s%25s","City","Continent","Population\n");
+        System.out.print("\n***********************************************************************************************\n\n");
+
+        for (City cty:topcont)
+        {
+            if(cty == null)
+            {
+                System.out.println("* No null data in each capital city report!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s%25s",cty.getName(), cty.getCountry().getName(), cty.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n***********************************************************************************************\n");
     }
 } /*This is the end of the public App class */
