@@ -28,8 +28,11 @@ public class App {
 //        ArrayList cpcty_region = a.getCapitalCityRegion();
 //        a.displayCapitalCityRegion(cpcty_region);
 
-        ArrayList totl_popu_country = a.getTotalPopulationCountry();
-        a.displayTotalPopulationCountry(totl_popu_country);
+//        ArrayList crtyTotlPopuWorld = a.getCountryTotalPopuWorld();
+//        a.displayCountryTotalPopuWorld(crtyTotlPopuWorld);
+
+        ArrayList crtyTotlPopuRegion = a.getCountryTotalPopuRegion();
+        a.displayCountryTotalPopuRegion(crtyTotlPopuRegion);
 
 //        ArrayList topcont = a.getTopContinent();
 //        a.displayTopContinent(topcont);
@@ -205,7 +208,7 @@ public ArrayList<City> getCapitalCityWorld()
     {
         if (cpcty_world==null)
         {
-            System.out.println("* There is no null data in capital cities in the world!\n");
+            System.out.println("* There is null data in capital cities in the world!\n");
             return;
         }
         System.out.print("\n**************************************Capital Cities in World**************************************\n\n");
@@ -216,7 +219,7 @@ public ArrayList<City> getCapitalCityWorld()
         {
             if(ctyworld == null)
             {
-                System.out.println("* No null data in each capital city world!\n");
+                System.out.println("* Null data in each capital city world!\n");
                 continue;
             }
             System.out.printf("%25s%25s%25s",ctyworld.getName(), ctyworld.getCountry().getName(), ctyworld.getPopulation());
@@ -354,97 +357,119 @@ public ArrayList<City> getCapitalCityWorld()
         System.out.print("\n******************************************************************************************************************\n\n");
     }
     // All the functions related to total population.
-    // Total population of the world, a region, a continent, and a country
-    public ArrayList<Country> getTotalPopulationCountry()
+    // Total population of the world.
+    public ArrayList<Country> getCountryTotalPopuWorld()
     {
-        ArrayList<Country> totl_popu_country = null;
+        ArrayList<Country> crtyTotlPopuWorld = null;
         try {
             // Create SQL statements for the total population of the world, a region, a continent, and a country.
             Statement stmt = con.createStatement();
-            Statement stmt2 = con.createStatement();
-            Statement stmt3 = con.createStatement();
 
             // Create string for total population of a region and a continent SQL statement
             String strSelect =
-                    "SELECT SUM(country.Population) as crtyregionpoputotl " +
-                            "FROM country " +
-                            "WHERE country.Region='Central Africa' ";
+                    "SELECT SUM(country.Population) as crtytotlworld " +
+                            "FROM country ";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
                 System.out.print("Not found.");
             } else {
-                totl_popu_country=new ArrayList<>();
+                crtyTotlPopuWorld=new ArrayList<>();
                 // Return new total population of a region and a continent if valid.
                 while (rset.next()) {
-                    Country crtyregion=new Country();
-                    crtyregion.setPopulation(rset.getInt(1));
+                    Country totlcrtyworld=new Country();
+                    totlcrtyworld.setPopulation(rset.getInt(1));
 
-                    totl_popu_country.add(crtyregion);
+                    crtyTotlPopuWorld.add(totlcrtyworld);
                     //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
-                }
-                // Create string for total population of the world SQL statement
-                String strSelect2 =
-                        "SELECT SUM(country.Population) as crtyworldpoputotl " +
-                                "FROM country ";
-                // Execute SQL statement
-                ResultSet rset2 = stmt2.executeQuery(strSelect2);
-                // Return new total population of the world if valid.
-                while(rset2.next())
-                {
-                    Country crtyworld=new Country();
-                    //((long)(d * 1e5)) / 1e5;
-
-                    crtyworld.setPopulation(rset2.getInt(1));
-                    totl_popu_country.add(crtyworld);
-                    //System.out.printf("Total Population of the world: " + rset2.getLong(1) + "\n");
-                }
-                // Create string for total population of a country SQL statement
-                String strSelect3 =
-                        "SELECT country.Population " +
-                                "FROM country " +
-                                "WHERE country.Name='Argentina'";
-                // Execute SQL statement
-                ResultSet rset3 = stmt3.executeQuery(strSelect3);
-                // Return new total population of a country if valid.
-                while(rset3.next())
-                {
-                    Country totlcrty=new Country();
-                    totlcrty.setPopulation(rset3.getInt(1));
-                    totl_popu_country.add(totlcrty);
-                    //System.out.printf("Total Population of a country: " + rset3.getLong(1) + "\n");
                 }
             }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get the total population of the world, a region, a continent and a country.");
+            System.out.println("Failed to get the total country population of the world.");
         }
-        return totl_popu_country;
+        return crtyTotlPopuWorld;
     }
-    public void displayTotalPopulationCountry(ArrayList<Country>totl_popu_country)
+    public void displayCountryTotalPopuWorld(ArrayList<Country>crtyTotlPopuWorld)
     {
-        if (totl_popu_country == null)
+        if (crtyTotlPopuWorld == null)
         {
-            System.out.println("* There is null data in total population country!\n");
+            System.out.println("* There is null data in total country population of the world!\n");
             return;
         }
-        System.out.print("\n*****************************************Total Population*****************************************\n\n");
-        System.out.printf("%25s%25s%25s","Region","World","Country\n");
-        System.out.print("\n******************************************************************************************************************\n\n");
+        System.out.print("\n**************************************************************\n\n");
 
-        for (Country totlcountry:totl_popu_country)
+        for (Country totlcrtypopuworld:crtyTotlPopuWorld)
         {
-            if(totlcountry == null)
+            if(totlcrtypopuworld == null)
             {
                 System.out.println("* Null data in each total population!\n");
                 continue;
             }
-            System.out.printf("%25s%25s%25s",totlcountry.getPopulation(),totlcountry.getPopulation(),totlcountry.getPopulation());
+            System.out.println("Total Country Population of the world: " + totlcrtypopuworld.getPopulation());
             System.out.print("\n");
         }
-        System.out.print("\n******************************************************************************************************************\n\n");
+        System.out.print("\n**************************************************************\n\n");
+    }
+
+    // Total population of a region, a continent, and a country
+    public ArrayList<Country> getCountryTotalPopuRegion()
+    {
+        ArrayList<Country> crtyTotlPopuRegion = null;
+        try {
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Statement stmt = con.createStatement();
+
+            // Create string for total population of a region and a continent SQL statement
+            String strSelect =
+                    "SELECT SUM(country.Population) as crtytotlworld " +
+                            "FROM country " +
+                            "WHERE country.Region='Central Africa'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                crtyTotlPopuRegion=new ArrayList<>();
+                // Return new total population of a region and a continent if valid.
+                while (rset.next()) {
+                    Country totlcrtyRegion=new Country();
+                    totlcrtyRegion.setPopulation(rset.getInt(1));
+
+                    crtyTotlPopuRegion.add(totlcrtyRegion);
+                    //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total country population of the world.");
+        }
+        return crtyTotlPopuRegion;
+    }
+    public void displayCountryTotalPopuRegion(ArrayList<Country>crtyTotlPopuRegion)
+    {
+        if (crtyTotlPopuRegion == null)
+        {
+            System.out.println("* There is null data in total country population of Central Africa Region!\n");
+            return;
+        }
+        System.out.print("\n*********************************************************\n\n");
+
+        for (Country totlcrtypopuregion:crtyTotlPopuRegion)
+        {
+            if(totlcrtypopuregion == null)
+            {
+                System.out.println("* Null data in each total country population of Central Africa Region!\n");
+                continue;
+            }
+            System.out.println("Total Country Population of Central Africa Region: " + totlcrtypopuregion.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n*********************************************************\n\n");
     }
     // Total population of a city and a city district
     public void getTotalPopulationCity()
