@@ -31,8 +31,11 @@ public class App {
 //        ArrayList crtyTotlPopuWorld = a.getCountryTotalPopuWorld();
 //        a.displayCountryTotalPopuWorld(crtyTotlPopuWorld);
 
-        ArrayList crtyTotlPopuRegion = a.getCountryTotalPopuRegion();
-        a.displayCountryTotalPopuRegion(crtyTotlPopuRegion);
+//        ArrayList crtyTotlPopuRegion = a.getCountryTotalPopuRegion();
+//        a.displayCountryTotalPopuRegion(crtyTotlPopuRegion);
+
+        ArrayList crtyTotlPopuCont = a.getCountryTotalPopuCont();
+        a.displayCountryTotalPopuCont(crtyTotlPopuCont);
 
 //        ArrayList topcont = a.getTopContinent();
 //        a.displayTopContinent(topcont);
@@ -414,7 +417,7 @@ public ArrayList<City> getCapitalCityWorld()
         System.out.print("\n**************************************************************\n\n");
     }
 
-    // Total population of a region, a continent, and a country
+    // Total population of a region.
     public ArrayList<Country> getCountryTotalPopuRegion()
     {
         ArrayList<Country> crtyTotlPopuRegion = null;
@@ -467,6 +470,64 @@ public ArrayList<City> getCapitalCityWorld()
                 continue;
             }
             System.out.println("Total Country Population of Central Africa Region: " + totlcrtypopuregion.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n*********************************************************\n\n");
+    }
+
+    // Total population of a region, a continent, and a country
+    public ArrayList<Country> getCountryTotalPopuCont()
+    {
+        ArrayList<Country> crtyTotlPopuCont = null;
+        try {
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Statement stmt = con.createStatement();
+
+            // Create string for total population of a region and a continent SQL statement
+            String strSelect =
+                    "SELECT SUM(country.Population) as crtytotlcont " +
+                            "FROM country " +
+                            "WHERE country.Continent='Asia'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                crtyTotlPopuCont=new ArrayList<>();
+                // Return new total population of a region and a continent if valid.
+                while (rset.next()) {
+                    Country totlcrtyCont=new Country();
+                    totlcrtyCont.setPopulation(rset.getInt(1));
+
+                    crtyTotlPopuCont.add(totlcrtyCont);
+                    //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total country population of Asia Continent.");
+        }
+        return crtyTotlPopuCont;
+    }
+    public void displayCountryTotalPopuCont(ArrayList<Country>crtyTotlPopuCont)
+    {
+        if (crtyTotlPopuCont == null)
+        {
+            System.out.println("* There is null data in total country population of Asia Continent!\n");
+            return;
+        }
+        System.out.print("\n*********************************************************\n\n");
+
+        for (Country totlcrtypopucont:crtyTotlPopuCont)
+        {
+            if(totlcrtypopucont == null)
+            {
+                System.out.println("* Null data in each total country population of Asia Continent!\n");
+                continue;
+            }
+            System.out.println("Total Country Population of Asia Continent: " + totlcrtypopucont.getPopulation());
             System.out.print("\n");
         }
         System.out.print("\n*********************************************************\n\n");
