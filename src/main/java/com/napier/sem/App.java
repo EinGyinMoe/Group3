@@ -15,7 +15,12 @@ public class App {
         a.connect();
 
 
-        //a.getCityCountry();
+        //All the cities in a country
+        // organised by largest population to smallest.
+        ArrayList ctycountry = a.getCityCountry();
+        a.displayCityCountry(ctycountry);
+
+        
         a.getFiveLanguagePopulation();
 
 
@@ -73,13 +78,14 @@ public class App {
         }
     }
 
+
 //
 //All the cities in a country
 // organised by largest population to smallest.
 //
-    public void getCityCountry()
+    public ArrayList<City> getCityCountry()
     {
-        //ArrayList<City> cityCountry = new ArrayList<>();
+        ArrayList<City> cityCountry = null;
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -89,16 +95,23 @@ public class App {
                             + "FROM country, city "
                             + "WHERE city.CountryCode = country.Code AND country.Name = 'Belgium' "
                             + "ORDER BY city.Population DESC";
+
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
                 System.out.print("Country Report Not found!");
             } else {
+                cityCountry = new ArrayList<>();
                 // Return city if valid.
                 while (rset.next()) {
-                    System.out.printf("\nCity Name: " + rset.getString(1) + "\n" +
-                                    "Country Name: " + rset.getString(2) + "\n" +
-                                      "Continent: " + rset.getString(3) + "\n" );
+                    City cities = new City();
+                    Country countries = new Country();
+                    cities.setName(rset.getString(1));
+                    countries.setName( rset.getString(2));
+                    countries.setContinent(rset.getString(3));
+
+                    cities.setCountry(countries);
+                    cityCountry.add(cities);
                 }
             }
         }
@@ -106,41 +119,31 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("Failed to get city in a country!.");
         }
+        return cityCountry;
+    }
+    public void displayCityCountry(ArrayList<City> citycountry)
+    {
 
+        if (citycountry == null) {
+            System.out.println("* There is null city data in country report !\n.");
+            return;
+        }
+        System.out.print("============================ All the Cities in a Country ===========================\n");
+        System.out.printf("%25s%25s%25s","CityName","CountryName", "Continent\n");
+        System.out.print("====================================================================================\n");
+
+        for(City cty:citycountry)
+        {
+            if (cty == null) {
+                System.out.println("* No null data in each country report!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s%25s",cty.getName(),cty.getCountry().getName(),cty.getCountry().getContinent());
+            System.out.print("\n");
+        }
+        System.out.print("====================================================================================\n");
     }
 
-////
-////the following languages from greatest number to smallest, including the percentage of the world population
-////
-//    public void getFiveLanguagePopulation()
-//    {
-//        try {
-//            // Create an SQL statement
-//            Statement stmt = con.createStatement();
-//            // Create string for SQL statement
-//            String strSelect =
-//                    "SELECT countrylanguage.Language, sum(country.Population * countrylanguage.Percentage) AS Population "
-//                            + "FROM country, countrylanguage "
-//                            + "WHERE country.Code = countrylanguage.CountryCode AND countrylanguage.Language IN ('English','Chinese','Hindi','Arabic','Spanish') "
-//                            + "GROUP BY countrylanguage.Language";
-//            // Execute SQL statement
-//            ResultSet rset = stmt.executeQuery(strSelect);
-//            if (rset == null) {
-//                System.out.print("Country Report Not found!");
-//            } else {
-//                // Return city if valid.
-//                while (rset.next()) {
-//                    System.out.printf("\nLanguage: " + rset.getString(1) + "\n" +
-//                            "Population: " + rset.getString(2) + "\n" );
-//                }
-//            }
-//        }
-//        catch (Exception e) {
-//            System.out.println(e.getMessage());
-//            System.out.println("Failed to get city in a country!.");
-//        }
-//
-//    }
 
     //
 //the following languages from greatest number to smallest, including the percentage of the world population
