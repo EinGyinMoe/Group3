@@ -3,10 +3,7 @@ package com.napier.sem;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
-
-/**
- * This is the class to be accessed from other functions
- */
+/*** This is the class to be accessed from other function*/
 public class App {
     public static void main(String[] args) {
         // Create new Application
@@ -16,6 +13,7 @@ public class App {
         if (args.length < 1)
         {
             a.connect("localhost:3306");
+            a.displayapp();
         }
         else
         {
@@ -23,7 +21,7 @@ public class App {
         }
 
         // Input Display Method
-        a.maindisplay();
+
 
 //        // 1. All the cities in a district organised by largest population to smallest
 //        ArrayList ctydistrict = a.getCityDistrict();
@@ -111,8 +109,8 @@ public class App {
 //        a.displayCityTotalPopu(ctyTotlPopu);
 
         //20. total city population in a district
-        ArrayList ctyTotlPopuDistrict= a.getCityTotalPopuDistrict();
-        a.displayCityTotalPopuDistrict(ctyTotlPopuDistrict);
+//        ArrayList ctyTotlPopuDistrict= a.getCityTotalPopuDistrict();
+//        a.displayCityTotalPopuDistrict(ctyTotlPopuDistrict);
 
 //=======
 //        Cherry Get Function
@@ -184,7 +182,7 @@ public class App {
         }
     }
 
-    public void maindisplay()
+    public void displayapp()
     {
         Scanner Obj = new Scanner(System.in);  // Create a Scanner object
         System.out.println("\n");
@@ -219,27 +217,18 @@ public class App {
 
                 if (CountryReport == 1)
                 {
-//                    ArrayList countryworld = a.getCountryWorld();
-//                    a.displayCountryWorld(countryworld);
-//                    again = Question();
                     ArrayList countryworld = getCountryWorld();
                     displayCountryWorld(countryworld);
                     again = Question();
                 }
                 else if (CountryReport == 2)
                 {
-//                    ArrayList countrycontinent = a.getCountryContinent();
-//                    a.displayCountryContinent(countrycontinent);
-//                    again = Question();
                     ArrayList countrycontinent = getCountryContinent();
                     displayCountryContinent(countrycontinent);
                     again = Question();
                 }
                 else if (CountryReport == 3)
                 {
-//                    ArrayList countryregion = a.getCountryRegion();
-//                    a.displayCountryRegion(countryregion);
-//                    again = Question();
                     ArrayList countryregion = getCountryRegion();
                     displayCountryRegion(countryregion);
                     again = Question();
@@ -268,48 +257,30 @@ public class App {
 
                 if (CityReport == 1)
                 {
-//                    ArrayList ctyworld = a.getCity_world();
-//                    a.displayCityWorld(ctyworld);
-//                    again = Question();
                     ArrayList ctyworld = getCity_world();
                     displayCityWorld(ctyworld);
                     again = Question();
                 }
                 else if (CityReport == 2)
                 {
-//                    ArrayList cty = a.getCityContinent();
-//                    a.displayCityContinent(cty);
-//                    // getCitiesContinent(askContinent());
-//                    again = Question();
-
                     ArrayList cty = getCityContinent();
                     displayCityContinent(cty);
-                    // getCitiesContinent(askContinent());
                     again = Question();
                 }
                 else if (CityReport == 3)
                 {
-//                    ArrayList ctyregion = a.getCityRegion();
-//                    a.displayCityRegion(ctyregion);
-//                    again = Question();
                     ArrayList ctyregion = getCityRegion();
                     displayCityRegion(ctyregion);
                     again = Question();
                 }
                 else if (CityReport == 4)
                 {
-//                    ArrayList ctycountry = a.getCityCountry();
-//                    a.displayCityCountry(ctycountry);
-//                    again = Question();
                     ArrayList ctycountry = getCityCountry();
                     displayCityCountry(ctycountry);
                     again = Question();
                 }
                 else if (CityReport == 5)
                 {
-//                    ArrayList ctydistrict = a.getCityDistrict();
-//                    a.displayCityDistrict(ctydistrict);
-//                    again = Question();
                     ArrayList ctydistrict = getCityDistrict();
                     displayCityDistrict(ctydistrict);
                     again = Question();
@@ -335,27 +306,18 @@ public class App {
 
                 if (CapCityReport == 1)
                 {
-//                    ArrayList cpcty_world = a.getCapitalCityWorld();
-//                    a.displayCapitalCityWorld(cpcty_world);
-//                    again = askQuestion();
                     ArrayList cpcty_world = getCapitalCityWorld();
                     displayCapitalCityWorld(cpcty_world);
                     again = Question();
                 }
                 else if (CapCityReport == 2)
                 {
-//                    ArrayList cpcty_continent = a.getCapitalCityContinent();
-//                    a.displayCapitalCityContinent(cpcty_continent);
-//                    again = askQuestion();
                     ArrayList cpcty_continent = getCapitalCityContinent();
                     displayCapitalCityContinent(cpcty_continent);
                     again = Question();
                 }
                 else if (CapCityReport == 3)
                 {
-//                    ArrayList cpcty_region = a.getCapitalCityRegion();
-//                    a.displayCapitalCityRegion(cpcty_region);
-//                    again = askQuestion();
                     ArrayList cpcty_region = getCapitalCityRegion();
                     displayCapitalCityRegion(cpcty_region);
                     again = Question();
