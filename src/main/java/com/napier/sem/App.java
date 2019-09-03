@@ -16,16 +16,14 @@ public class App {
         if (args.length < 1)
         {
             a.connect("localhost:3306");
-            a.displayapp();
         }
         else
         {
             a.connect(args[0]);
-
         }
 
         // Input Display Method
-//        a.displayapp();
+        a.maindisplay();
 
 //        // 1. All the cities in a district organised by largest population to smallest
 //        ArrayList ctydistrict = a.getCityDistrict();
@@ -92,22 +90,35 @@ public class App {
 //        ArrayList cpcty_region = a.getCapitalCityRegion();
 //        a.displayCapitalCityRegion(cpcty_region);
 
-//15. total country population of a region
+        // 15. total country population in the world
+//        ArrayList crtyTotlPopuWorld= a.getCountryTotalPopuWorld();
+//        a.displayCountryTotalPopuWorld(crtyTotlPopuWorld);
+
+        //16. total country population of a region
 //        ArrayList crtyTotlPopuRegion= a.getCountryTotalPopuRegion();
 //        a.displayCountryTotalPopuRegion(crtyTotlPopuRegion);
 
-        // 16. total population of a country
+        // 17. total country population of a continent
+//        ArrayList crtyTotlPopuContinent= a.getCountryTotalPopuCont();
+//        a.displayCountryTotalPopuCont(crtyTotlPopuContinent);
+
+        // 18. total country population of a country
 //        ArrayList crtyTotlPopu= a.getCountryTotalPopu();
 //        a.displayCountryTotalPopu(crtyTotlPopu);
 
+        // 19. total city population
+//        ArrayList ctyTotlPopu= a.getCityTotalPopu();
+//        a.displayCityTotalPopu(ctyTotlPopu);
+
+        //20. total city population in a district
+        ArrayList ctyTotlPopuDistrict= a.getCityTotalPopuDistrict();
+        a.displayCityTotalPopuDistrict(ctyTotlPopuDistrict);
+
 //=======
 //        Cherry Get Function
-//        a.getTotalPopulationCityRegion();
-//        a.getNotLivingPopulationRegion();
-//        a.getTotalPopulationCityCountry();
-//        a.getNotLivingPopulationCountry();
-//        a.getTotalPopulationCityContinent();
-//        a.getNotLivingPopulationContinent();
+//      get population in the cities people who live and not living in each region
+//        a.getLivePopulationRegion();
+
 
         // Disconnect from database
         a.disconnect();
@@ -173,7 +184,7 @@ public class App {
         }
     }
 
-    public void displayapp()
+    public void maindisplay()
     {
         Scanner Obj = new Scanner(System.in);  // Create a Scanner object
         System.out.println("\n");
@@ -186,11 +197,10 @@ public class App {
             System.out.println(
                             "1. About Country Report " + "\n" +
                             "2. About City Report " + "\n" +
-                            "3. About Capital City Report "+ "\n" +
-                            "4. About Population Report "+ "\n"
+                            "3. About Capital City Report "+ "\n"
             );
             System.out.print("Enter your option: ");
-            int reportOp = Obj.nextInt();  // To read user input
+            int reportOp = Obj.nextInt();  // Read user input
             System.out.println("\n");
 
             // Country Report
@@ -209,20 +219,27 @@ public class App {
 
                 if (CountryReport == 1)
                 {
+//                    ArrayList countryworld = a.getCountryWorld();
+//                    a.displayCountryWorld(countryworld);
+//                    again = Question();
                     ArrayList countryworld = getCountryWorld();
                     displayCountryWorld(countryworld);
                     again = Question();
                 }
                 else if (CountryReport == 2)
                 {
-
+//                    ArrayList countrycontinent = a.getCountryContinent();
+//                    a.displayCountryContinent(countrycontinent);
+//                    again = Question();
                     ArrayList countrycontinent = getCountryContinent();
                     displayCountryContinent(countrycontinent);
                     again = Question();
                 }
                 else if (CountryReport == 3)
                 {
-
+//                    ArrayList countryregion = a.getCountryRegion();
+//                    a.displayCountryRegion(countryregion);
+//                    again = Question();
                     ArrayList countryregion = getCountryRegion();
                     displayCountryRegion(countryregion);
                     again = Question();
@@ -251,30 +268,48 @@ public class App {
 
                 if (CityReport == 1)
                 {
+//                    ArrayList ctyworld = a.getCity_world();
+//                    a.displayCityWorld(ctyworld);
+//                    again = Question();
                     ArrayList ctyworld = getCity_world();
                     displayCityWorld(ctyworld);
                     again = Question();
                 }
                 else if (CityReport == 2)
                 {
+//                    ArrayList cty = a.getCityContinent();
+//                    a.displayCityContinent(cty);
+//                    // getCitiesContinent(askContinent());
+//                    again = Question();
+
                     ArrayList cty = getCityContinent();
                     displayCityContinent(cty);
+                    // getCitiesContinent(askContinent());
                     again = Question();
                 }
                 else if (CityReport == 3)
                 {
+//                    ArrayList ctyregion = a.getCityRegion();
+//                    a.displayCityRegion(ctyregion);
+//                    again = Question();
                     ArrayList ctyregion = getCityRegion();
                     displayCityRegion(ctyregion);
                     again = Question();
                 }
                 else if (CityReport == 4)
                 {
+//                    ArrayList ctycountry = a.getCityCountry();
+//                    a.displayCityCountry(ctycountry);
+//                    again = Question();
                     ArrayList ctycountry = getCityCountry();
                     displayCityCountry(ctycountry);
                     again = Question();
                 }
                 else if (CityReport == 5)
                 {
+//                    ArrayList ctydistrict = a.getCityDistrict();
+//                    a.displayCityDistrict(ctydistrict);
+//                    again = Question();
                     ArrayList ctydistrict = getCityDistrict();
                     displayCityDistrict(ctydistrict);
                     again = Question();
@@ -300,119 +335,32 @@ public class App {
 
                 if (CapCityReport == 1)
                 {
+//                    ArrayList cpcty_world = a.getCapitalCityWorld();
+//                    a.displayCapitalCityWorld(cpcty_world);
+//                    again = askQuestion();
                     ArrayList cpcty_world = getCapitalCityWorld();
                     displayCapitalCityWorld(cpcty_world);
                     again = Question();
                 }
                 else if (CapCityReport == 2)
                 {
+//                    ArrayList cpcty_continent = a.getCapitalCityContinent();
+//                    a.displayCapitalCityContinent(cpcty_continent);
+//                    again = askQuestion();
                     ArrayList cpcty_continent = getCapitalCityContinent();
                     displayCapitalCityContinent(cpcty_continent);
                     again = Question();
                 }
                 else if (CapCityReport == 3)
                 {
+//                    ArrayList cpcty_region = a.getCapitalCityRegion();
+//                    a.displayCapitalCityRegion(cpcty_region);
+//                    again = askQuestion();
                     ArrayList cpcty_region = getCapitalCityRegion();
                     displayCapitalCityRegion(cpcty_region);
                     again = Question();
                 }
                 else{
-                    again = true;
-                }
-            }
-
-            //Population Report
-            if (reportOp == 4)
-            {
-                System.out.println("*******************");
-                System.out.println("*Population Report*");
-                System.out.println("*******************");
-                System.out.println(
-                        "1. The top N populated countries in the world where N is provided by the user." + "\n" +
-                                "2. The top N populated countries in a continent where N is provided by the user." + "\n" +
-                                "3. The top N populated countries in a region where N is provided by the user. "+ "\n" +
-                                "4. The top N populated cities in the world where N is provided by the user. "+ "\n" +
-                                "5. The top N populated cities in a continent where N is provided by the user. "+ "\n" +
-                                "6. The top N populated cities in a region where N is provided by the user. "+ "\n" +
-                                "7. The top N populated cities in a country where N is provided by the user. "+ "\n" +
-                                "8. The top N populated cities in a district where N is provided by the user. "+ "\n" +
-                                "9. The top N populated capital cities in the world where N is provided by the user.. "+ "\n" +
-                                "10. The top N populated capital cities in a continent where N is provided by the user. "+ "\n" +
-                                "11. The top N populated capital cities in a region where N is provided by the user.  "+ "\n"
-
-
-                );
-                System.out.print("Enter an option : ");
-                int PopReport = Obj.nextInt();  // Read user input
-
-                if (PopReport == 1)
-                {
-                    ArrayList countryworld = getCountryWorld();
-                    displayCountryWorld(countryworld);
-                    again = Question();
-                }
-                else if (PopReport == 2)
-                {
-                    ArrayList countrycontinent = getCountryContinent();
-                    displayCountryContinent(countrycontinent);
-                    again = Question();
-                }
-                else if (PopReport == 3)
-                {
-                    ArrayList crtyTotlPopuRegion= getCountryTotalPopuRegion();
-                    displayCountryTotalPopuRegion(crtyTotlPopuRegion);
-                    again = Question();
-                }
-                else if (PopReport == 4)
-                {
-                    ArrayList countryregion = getCountryRegion();
-                    displayCountryRegion(countryregion);
-                    again = Question();
-                }
-                else if (PopReport == 5)
-                {
-                    ArrayList countryregion = getCountryRegion();
-                    displayCountryRegion(countryregion);
-                    again = Question();
-                }
-                else if (PopReport == 6)
-                {
-                    ArrayList countryregion = getCountryRegion();
-                    displayCountryRegion(countryregion);
-                    again = Question();
-                }
-                else if (PopReport == 7)
-                {
-                    ArrayList countryregion = getCountryRegion();
-                    displayCountryRegion(countryregion);
-                    again = Question();
-                }
-                else if (PopReport == 8)
-                {
-                    ArrayList countryregion = getCountryRegion();
-                    displayCountryRegion(countryregion);
-                    again = Question();
-                }
-                else if (PopReport == 9)
-                {
-                    ArrayList countryregion = getCountryRegion();
-                    displayCountryRegion(countryregion);
-                    again = Question();
-                }
-                else if (PopReport == 10)
-                {
-                    ArrayList countryregion = getCountryRegion();
-                    displayCountryRegion(countryregion);
-                    again = Question();
-                }
-                else if (PopReport == 11)
-                {
-                    ArrayList countryregion = getCountryRegion();
-                    displayCountryRegion(countryregion);
-                    again = Question();
-                }
-                else
-                {
                     again = true;
                 }
             }
@@ -506,7 +454,7 @@ public class App {
                 while (rset.next()) {
                     City cities = new City();
                     cities.setName(rset.getString("Name"));
-                    cities.setPopulation( rset.getInt("Population"));
+                    cities.setPopulation( rset.getLong("Population"));
                     cities.setDistrict(rset.getString("District"));
                     ctydistrict.add(cities);
                 }
@@ -569,7 +517,7 @@ public class App {
                     City ct=new City();
                     Country c =new Country();
                     ct.setName(rset.getString(1));
-                    ct.setPopulation(rset.getInt(2));
+                    ct.setPopulation(rset.getLong(2));
                     c.setContinent(rset.getString(3));//set continent value to country object
 
                     ct.setCountry(c);
@@ -640,7 +588,7 @@ public class App {
                     City cty=new City();
                     Country c1 =new Country();
                     cty.setName(rset.getString(1));
-                    cty.setPopulation(rset.getInt(2));
+                    cty.setPopulation(rset.getLong(2));
                     c1.setContinent(rset.getString(3));//set continent value to country object
                     cty.setCountry(c1);
                     cityrept.add(cty);
@@ -704,7 +652,7 @@ public class App {
                     City cty2=new City();
                     Country c2 =new Country();
                     cty2.setName(rset.getString(1));
-                    cty2.setPopulation(rset.getInt(2));
+                    cty2.setPopulation(rset.getLong(2));
                     c2.setRegion(rset.getString(3));//set continent value to country object
                     cty2.setCountry(c2);
                     region.add(cty2);
@@ -767,7 +715,7 @@ public class App {
                     City cty3=new City();
                     Country c3 =new Country();
                     cty3.setName(rset.getString(1));
-                    cty3.setPopulation(rset.getInt(2));
+                    cty3.setPopulation(rset.getLong(2));
                     c3.setContinent(rset.getString(3));//set continent value to country object
                     cty3.setCountry(c3);
                     cityCountry.add(cty3);
@@ -820,7 +768,7 @@ public class App {
             {
                 c.setCode(rset.getString(1));
                 c.setName(rset.getString(2));
-                c.setPopulation(rset.getInt(3));
+                c.setPopulation(rset.getLong(3));
                 c.setContinent(rset.getString(4));
 
             }
@@ -857,7 +805,7 @@ public class App {
                 while (rset.next()) {
                     Country country = new Country();
                     country.setName(rset.getString("Name"));
-                    country.setPopulation( rset.getInt("Population"));
+                    country.setPopulation( rset.getLong("Population"));
                     country.setContinent(rset.getString("Continent"));
 
                     countryContinent.add(country);
@@ -916,7 +864,7 @@ public class App {
                 while (rset.next()) {
                     Country country = new Country();
                     country.setName(rset.getString("Name"));
-                    country.setPopulation( rset.getInt("Population"));
+                    country.setPopulation( rset.getLong("Population"));
                     country.setRegion(rset.getString("Region"));
 
                     countryRegion.add(country);
@@ -976,7 +924,7 @@ public class App {
                 while (rset.next()) {
                     Country country = new Country();
                     country.setName(rset.getString("Name"));
-                    country.setPopulation(rset.getInt("Population"));
+                    country.setPopulation(rset.getLong("Population"));
 
                     countryWorld.add(country);
                 }
@@ -1032,7 +980,7 @@ public class App {
                 while (rset.next()) {
                     City city = new City();
                     city.setName(rset.getString("Name"));
-                    city.setPopulation(rset.getInt("Population"));
+                    city.setPopulation(rset.getLong("Population"));
 
                     ctyworld.add(city);
                 }
@@ -1088,7 +1036,7 @@ public class App {
                     Country crty10 = new Country();
                     City ct10 = new City();
                     crty10.setName(rset.getString("Name"));
-                    crty10.setPopulation(rset.getInt("Population"));
+                    crty10.setPopulation(rset.getLong("Population"));
                     crty10.setContinent(rset.getString("Continent"));
                     crty10.setRegion(rset.getString("Region"));
                     ct10.setName(rset.getString(5));
@@ -1156,7 +1104,7 @@ public class App {
                     City cityreport=new City();
                     cityreport.setName(rset.getString(1));
                     countryreport.setName(rset.getString(2));
-                    cityreport.setPopulation(rset.getInt(3));
+                    cityreport.setPopulation(rset.getLong(3));
 
                     cityreport.setCountry(countryreport);
                     cpcty_report.add(cityreport);
@@ -1221,7 +1169,7 @@ public class App {
                     City cityworld=new City();
                     cityworld.setName(rset.getString(1));
                     countryworld.setName(rset.getString(2));
-                    cityworld.setPopulation(rset.getInt(3));
+                    cityworld.setPopulation(rset.getLong(3));
 
                     cityworld.setCountry(countryworld);
                     cpcty_world.add(cityworld);
@@ -1286,7 +1234,7 @@ public class App {
                     ctycontinent.setName(rset.getString(1));
                     crtycontinent.setName(rset.getString(2));
                     crtycontinent.setContinent(rset.getString(3));
-                    ctycontinent.setPopulation(rset.getInt(4));
+                    ctycontinent.setPopulation(rset.getLong(4));
 
                     ctycontinent.setCountry(crtycontinent);
                     cpcty_continent.add(ctycontinent);
@@ -1351,7 +1299,7 @@ public class App {
                     ctyRegion.setName(rset.getString(1));
                     crtyRegion.setName(rset.getString(2));
                     crtyRegion.setRegion(rset.getString(3));
-                    ctyRegion.setPopulation(rset.getInt(4));
+                    ctyRegion.setPopulation(rset.getLong(4));
 
                     ctyRegion.setCountry(crtyRegion);
                     cpcty_region.add(ctyRegion);
@@ -1388,7 +1336,64 @@ public class App {
         System.out.print("\n******************************************************************************************************************\n\n");
     }
 
-    // 15. Total country population of a region.
+    //15. Total population of the world.
+    public ArrayList<Country> getCountryTotalPopuWorld()
+    {
+        ArrayList<Country> crtyTotlPopuWorld = null;
+        try {
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Statement stmt = con.createStatement();
+
+            // Create string for total population of a region and a continent SQL statement
+            String strSelect =
+                    "SELECT SUM(country.Population) as crtytotlworld " +
+                            "FROM country ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                crtyTotlPopuWorld=new ArrayList<>();
+                // Return new total population of a region and a continent if valid.
+                while (rset.next()) {
+                    Country totlcrtyworld=new Country();
+                    totlcrtyworld.setPopulation(rset.getLong(1));
+
+                    crtyTotlPopuWorld.add(totlcrtyworld);
+                    //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total country population of the world.");
+        }
+        return crtyTotlPopuWorld;
+    }
+    public void displayCountryTotalPopuWorld(ArrayList<Country>crtyTotlPopuWorld)
+    {
+        if (crtyTotlPopuWorld == null)
+        {
+            System.out.println("* There is null data in total country population of the world!\n");
+            return;
+        }
+        System.out.print("\n**************************************************************\n\n");
+
+        for (Country totlcrtypopuworld:crtyTotlPopuWorld)
+        {
+            if(totlcrtypopuworld == null)
+            {
+                System.out.println("* Null data in each total population!\n");
+                continue;
+            }
+            System.out.println("Total Country Population of the world: " + totlcrtypopuworld.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n**************************************************************\n\n");
+    }
+
+    // 16. Total country population of a region.
     public ArrayList<Country> getCountryTotalPopuRegion()
     {
         ArrayList<Country> crtyTotlPopuRegion = null;
@@ -1411,7 +1416,7 @@ public class App {
                 // Return new total population of a region and a continent if valid.
                 while (rset.next()) {
                     Country totlcrtyRegion=new Country();
-                    totlcrtyRegion.setPopulation(rset.getInt(1));
+                    totlcrtyRegion.setPopulation(rset.getLong(1));
 
                     crtyTotlPopuRegion.add(totlcrtyRegion);
                     //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
@@ -1446,7 +1451,65 @@ public class App {
         System.out.print("\n*********************************************************\n\n");
     }
 
-    // Total population of a country
+    //17. Total population of a continent.
+    public ArrayList<Country> getCountryTotalPopuCont()
+    {
+        ArrayList<Country> crtyTotlPopuCont = null;
+        try {
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Statement stmt = con.createStatement();
+
+            // Create string for total population of a region and a continent SQL statement
+            String strSelect =
+                    "SELECT SUM(country.Population) as crtytotlcont " +
+                            "FROM country " +
+                            "WHERE country.Continent='Asia'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                crtyTotlPopuCont=new ArrayList<>();
+                // Return new total population of a region and a continent if valid.
+                while (rset.next()) {
+                    Country totlcrtyCont=new Country();
+                    totlcrtyCont.setPopulation(rset.getLong(1));
+
+                    crtyTotlPopuCont.add(totlcrtyCont);
+                    //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total country population of Asia Continent.");
+        }
+        return crtyTotlPopuCont;
+    }
+    public void displayCountryTotalPopuCont(ArrayList<Country>crtyTotlPopuCont)
+    {
+        if (crtyTotlPopuCont == null)
+        {
+            System.out.println("* There is null data in total country population of Asia Continent!\n");
+            return;
+        }
+        System.out.print("\n*********************************************************\n\n");
+
+        for (Country totlcrtypopucont:crtyTotlPopuCont)
+        {
+            if(totlcrtypopucont == null)
+            {
+                System.out.println("* Null data in each total country population of Asia Continent!\n");
+                continue;
+            }
+            System.out.println("Total Country Population of Asia Continent: " + totlcrtypopucont.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n*********************************************************\n\n");
+    }
+
+    //18. Total population of a country
     public ArrayList<Country> getCountryTotalPopu()
     {
         ArrayList<Country> crtyTotlPopu = null;
@@ -1469,7 +1532,7 @@ public class App {
                 // Return new total population of a region and a continent if valid.
                 while (rset.next()) {
                     Country totlcrty=new Country();
-                    totlcrty.setPopulation(rset.getInt(1));
+                    totlcrty.setPopulation(rset.getLong(1));
 
                     crtyTotlPopu.add(totlcrty);
                     //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
@@ -1504,54 +1567,136 @@ public class App {
         System.out.print("\n*********************************************************\n\n");
     }
 
+    //19. Total population of a city
+    public ArrayList<City> getCityTotalPopu()
+    {
+        ArrayList<City> ctyTotlPopu = null;
+        try {
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Statement stmt = con.createStatement();
 
+            // Create string for total population of a region and a continent SQL statement
+            String strSelect =
+                    "SELECT city.Population " +
+                            "FROM city " +
+                            "WHERE city.Name='Herat'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                ctyTotlPopu=new ArrayList<>();
+                // Return new total population of a region and a continent if valid.
+                while (rset.next()) {
+                    City totlcty=new City();
+                    totlcty.setPopulation(rset.getLong(1));
+
+                    ctyTotlPopu.add(totlcty);
+                    //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total population of Herat City.");
+        }
+        return ctyTotlPopu;
+    }
+    public void displayCityTotalPopu(ArrayList<City>ctyTotlPopu)
+    {
+        if (ctyTotlPopu == null)
+        {
+            System.out.println("* There is null data in total population of Herat City!\n");
+            return;
+        }
+        System.out.print("\n*********************************************************\n\n");
+
+        for (City totlctypopu:ctyTotlPopu)
+        {
+            if(totlctypopu == null)
+            {
+                System.out.println("* Null data in each total population of Herat city!\n");
+                continue;
+            }
+            System.out.println("Total Country Population of Herat City: " + totlctypopu.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n*********************************************************\n\n");
+    }
+
+    //20. Total city population in a district.
+    public ArrayList<City> getCityTotalPopuDistrict()
+    {
+        ArrayList<City> ctyTotlPopuDistrict = null;
+        try {
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Statement stmt = con.createStatement();
+
+            // Create string for total population of a region and a continent SQL statement
+            String strSelect =
+                    "SELECT SUM(city.Population) as totaldistrict " +
+                            "FROM city " +
+                            "WHERE city.District='Kabol'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                ctyTotlPopuDistrict=new ArrayList<>();
+                // Return new total population of a district if valid.
+                while (rset.next()) {
+                    City totlctyDistrict=new City();
+                    totlctyDistrict.setPopulation(rset.getLong(1));
+
+                    ctyTotlPopuDistrict.add(totlctyDistrict);
+                    //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total country population of the world.");
+        }
+        return ctyTotlPopuDistrict;
+    }
+    public void displayCityTotalPopuDistrict(ArrayList<City>ctyTotlPopuDistrict)
+    {
+        if (ctyTotlPopuDistrict == null)
+        {
+            System.out.println("* There is null data in total city population in Kabol District!\n");
+            return;
+        }
+        System.out.print("\n*********************************************************\n\n");
+
+        for (City totlctypopudistrict:ctyTotlPopuDistrict)
+        {
+            if(totlctypopudistrict == null)
+            {
+                System.out.println("* Null data in each total city population of Kabol district!\n");
+                continue;
+            }
+            System.out.println("Total City Population in Kabol District: " + totlctypopudistrict.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n*********************************************************\n\n");
+    }
 
 //    ******Cherry Coding (People live and not living in each region, country, continent)********
 
-//    public void getTotalPopulationCityRegion()
-//    {
-//        try {
-//            // Create an SQL statement
-//            Statement stmt = con.createStatement();
-//            // Create string for SQL statement
-//            String strSelect =
-//                    "SELECT country.Region, SUM(city.Population) "
-//                            + "FROM city " + "INNER JOIN country " + "ON city.CountryCode = country.Code "
-//                            + "GROUP BY country.Region";
-//            // Execute SQL statement
-//            ResultSet rset = stmt.executeQuery(strSelect);
-//            if (rset == null) {
-//                System.out.print("Not found.");
-//            } else {
-//                // Return new city if valid.
-//                // Check one is
-//
-//                while (rset.next()) {
-//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-//                    //System.out.println("\n");
-//                    System.out.printf("Country Region: "+rset.getString(1)+"\n"+"City Name: "+"City population in each region: "+rset.getInt(2)+"\n"+"\n");
-//
-//                }
-//            }
-//        }
-//        catch (Exception e)
-//        {
-//            System.out.println(e.getMessage());
-//            System.out.println("Failed to get people who are not living in the city by region");
-//        }
-//        //return continent;
-//    }
-//
-//    public void getNotLivingPopulationRegion()
+//    public void getLivePopulationRegion()
 //
 //    {
 //        try {
 //            // Create an SQL statement
 //            Statement stmt = con.createStatement();
-//            // Create string for SQL statement
+//            // Create string for SQL statements
 //            String strSelect =
-//                    "Select country.Region, (SUM(country.population)-SUM((select SUM(city.population) from city where countrycode = country.code))) "
-//                            +" From country"
+//                    "SELECT country.Region, SUM(country.Population) as CountryTotalPopulation, SUM((select SUM(population) from city where countrycode = country.code)) as PeopleLiveInCity,"
+//                            +" (SUM((select SUM(population) from city where countrycode = country.code)) / SUM(country.Population))*100 as PercentagePeopleLiveInCity , (SUM(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) as PeopleNotInCity,"
+//                            +" ((SUM(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) / SUM(country.Population))*100 as PercentagePeopleNotInCity"
+//                            +" FROM country"
 //                            +" GROUP BY country.Region;";
 //            // Execute SQL statement
 //            ResultSet rset = stmt.executeQuery(strSelect);
@@ -1563,41 +1708,7 @@ public class App {
 //                while (rset.next()) {
 //                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
 //                    //System.out.println("\n");
-//                    System.out.printf("Region Name : "+rset.getString(1)+"\n"+"People not living in cities in each continent: "+rset.getLong(2)+"\n"+"\n");
-//                }
-//            }
-//        }
-//        catch (Exception e)
-//        {
-//            System.out.println(e.getMessage());
-//            System.out.println("Failed to get people who are not living in the city by region");
-//        }
-//        //return continent;
-//    }
-
-//    public void getTotalPopulationCityCountry()
-//    {
-//        try {
-//            // Create an SQL statement
-//            Statement stmt = con.createStatement();
-//            // Create string for SQL statement
-//            String strSelect =
-//                    "SELECT country.Name, SUM(city.Population) "
-//                            + "FROM city " + "INNER JOIN country " + "ON city.CountryCode = country.Code "
-//                            +"GROUP BY country.Name";
-//            // Execute SQL statement
-//            ResultSet rset = stmt.executeQuery(strSelect);
-//            if (rset == null) {
-//                System.out.print("Not found.");
-//            } else {
-//                // Return new city if valid.
-//                // Check one is
-//
-//                while (rset.next()) {
-//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-//                    //System.out.println("\n");
-//                    System.out.printf("Country Name: "+rset.getString(1)+"\n"+"City population in each country: "+rset.getInt(2)+"\n"+"\n");
-//
+//                    System.out.printf("Region Name : "+rset.getString(1)+"\n"+"People not living in cities in each region: "+rset.getLong(2)+"\n"+"\n");
 //                }
 //            }
 //        }
@@ -1609,7 +1720,7 @@ public class App {
 //        //return continent;
 //    }
 //
-//    public void getNotLivingPopulationCountry()
+//    public void getLivePopulationCountry()
 //
 //    {
 //        try {
@@ -1617,9 +1728,12 @@ public class App {
 //            Statement stmt = con.createStatement();
 //            // Create string for SQL statement
 //            String strSelect =
-//                    "Select country.Name, (country.Population - SUM(city.population)) "
-//                            +" From country" + "INNER JOIN country " + "ON city.CountryCode = country.Code "
-//                            +" GROUP BY country.Name;";
+//                    "SELECT country.name, country.Population, country.Population-sum(city.Population) as 'PeopleNotInCity', "
+//                            + "((country.Population-sum(city.Population))/country.Population)*100 as 'PercentagePeopleNotInCity', country.Population - (country.Population-sum(city.Population)) as 'PeopleLiveInCity', "
+//                            + "((country.Population - (country.Population-sum(city.Population)))/country.Population)*100 as 'PercentagePeopleLiveInCity' "
+//                            + "FROM country country join city city on country.code = city.countrycode "
+//                            + "WHERE city.CountryCode = country.Code GROUP BY country.Name,"
+//                            + "country.Population ORDER BY country.Name;";
 //            // Execute SQL statement
 //            ResultSet rset = stmt.executeQuery(strSelect);
 //            if (rset == null) {
@@ -1642,42 +1756,7 @@ public class App {
 //        //return continent;
 //    }
 //
-
-//    public void getTotalPopulationCityContinent()
-//    {
-//        try {
-//            // Create an SQL statement
-//            Statement stmt = con.createStatement();
-//            // Create string for SQL statement
-//            String strSelect =
-//                    "SELECT country.Continent, SUM(city.Population) "
-//                            + "FROM city " + "INNER JOIN country " + "ON city.CountryCode = country.Code "
-//                            + "GROUP BY country.Continent";
-//            // Execute SQL statement
-//            ResultSet rset = stmt.executeQuery(strSelect);
-//            if (rset == null) {
-//                System.out.print("Not found.");
-//            } else {
-//                // Return new city if valid.
-//                // Check one is
-//
-//                while (rset.next()) {
-//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-//                    //System.out.println("\n");
-//                    System.out.printf("Country Continent: "+rset.getString(1)+"\n"+"City Name: "+rset.getString(2)+"\n"+"City population in each continent: "+rset.getInt(3)+"\n"+"\n");
-//
-//                }
-//            }
-//        }
-//        catch (Exception e)
-//        {
-//            System.out.println(e.getMessage());
-//            System.out.println("Failed to get people who are not living in the city by region");
-//        }
-//        //return continent;
-//    }
-//
-//    public void getNotLivingPopulationContinent()
+//    public void getLivePopulationContinent()
 //
 //    {
 //        try {
@@ -1685,9 +1764,11 @@ public class App {
 //            Statement stmt = con.createStatement();
 //            // Create string for SQL statement
 //            String strSelect =
-//                    "Select country.Continent, (SUM(country.population)-SUM((select SUM(city.population) from city where countrycode = country.code))) "
-//                            +" From country"
-//                            +" GROUP BY country.Continent;";
+//                    "SELECT country.Continent, SUM(country.Population) as CountryTotalPopulation, SUM((select SUM(population) from city where countrycode = country.code)) as PeopleLiveInCity, "
+//                            + "(SUM((select SUM(population) from city where countrycode = country.code)) / SUM(country.Population))*100 as PercentagePeopleLiveInCity, "
+//                            + " (sum(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) as PeopleNotLiveInCity, "
+//                            + " ((sum(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) / SUM(country.Population))*100 as PercentagePeopleNotInCity"
+//                            + " FROM country GROUP BY country.Continent;";
 //            // Execute SQL statement
 //            ResultSet rset = stmt.executeQuery(strSelect);
 //            if (rset == null) {
