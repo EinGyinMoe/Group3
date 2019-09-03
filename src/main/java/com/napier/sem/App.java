@@ -13,14 +13,12 @@ public class App {
         if (args.length < 1)
         {
             a.connect("localhost:3306");
-            a.displayapp();
+            a.displayapp();  // Input Display Method
         }
         else
         {
             a.connect(args[0]);
         }
-
-        // Input Display Method
 
 
 //        // 1. All the cities in a district organised by largest population to smallest
@@ -111,8 +109,7 @@ public class App {
         //20. total city population in a district
 //        ArrayList ctyTotlPopuDistrict= a.getCityTotalPopuDistrict();
 //        a.displayCityTotalPopuDistrict(ctyTotlPopuDistrict);
-
-//=======
+        
 //        Cherry Get Function
 //      get population in the cities people who live and not living in each region
 //        a.getLivePopulationRegion();
@@ -239,7 +236,7 @@ public class App {
                 }
             }
 
-            // City Report
+            // City_Report
             else if(reportOp == 2)
             {
                 System.out.println("*************");
@@ -290,7 +287,7 @@ public class App {
                 }
             }
 
-            // Capital City Report
+            // Capital_City_Report
             else if (reportOp == 3)
             {
                 System.out.println("*********************");
