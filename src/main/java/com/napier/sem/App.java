@@ -162,7 +162,7 @@ public class App {
                             + "FROM country, countrylanguage "
                             + "WHERE countrylanguage.CountryCode = country.Code "
                             + "AND countrylanguage.Language IN ('English','Chinese','Hindi','Arabic','Spanish') "
-                            + "GROUP BY countrylanguage.Language";
+                            + "GROUP BY countrylanguage.Language ORDER BY PopulationLanguage DESC";
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
