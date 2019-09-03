@@ -40,8 +40,11 @@ public class App {
 //        ArrayList crtyTotlPopu = a.getCountryTotalPopu();
 //        a.displayCountryTotalPopu(crtyTotlPopu);
 
-        ArrayList ctyTotlPopu = a.getCityTotalPopu();
-        a.displayCityTotalPopu(ctyTotlPopu);
+//        ArrayList ctyTotlPopu = a.getCityTotalPopu();
+//        a.displayCityTotalPopu(ctyTotlPopu);
+
+//        ArrayList ctyTotlPopuDistrict = a.getCityTotalPopuDistrict();
+//        a.displayCityTotalPopuDistrict(ctyTotlPopuDistrict);
 
 //        ArrayList topcont = a.getTopContinent();
 //        a.displayTopContinent(topcont);
@@ -388,7 +391,7 @@ public ArrayList<City> getCapitalCityWorld()
                 // Return new total population of a region and a continent if valid.
                 while (rset.next()) {
                     Country totlcrtyworld=new Country();
-                    totlcrtyworld.setPopulation(rset.getInt(1));
+                    totlcrtyworld.setPopulation(rset.getLong(1));
 
                     crtyTotlPopuWorld.add(totlcrtyworld);
                     //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
@@ -446,7 +449,7 @@ public ArrayList<City> getCapitalCityWorld()
                 // Return new total population of a region and a continent if valid.
                 while (rset.next()) {
                     Country totlcrtyRegion=new Country();
-                    totlcrtyRegion.setPopulation(rset.getInt(1));
+                    totlcrtyRegion.setPopulation(rset.getLong(1));
 
                     crtyTotlPopuRegion.add(totlcrtyRegion);
                     //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
@@ -504,7 +507,7 @@ public ArrayList<City> getCapitalCityWorld()
                 // Return new total population of a region and a continent if valid.
                 while (rset.next()) {
                     Country totlcrtyCont=new Country();
-                    totlcrtyCont.setPopulation(rset.getInt(1));
+                    totlcrtyCont.setPopulation(rset.getLong(1));
 
                     crtyTotlPopuCont.add(totlcrtyCont);
                     //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
@@ -562,7 +565,7 @@ public ArrayList<City> getCapitalCityWorld()
                 // Return new total population of a region and a continent if valid.
                 while (rset.next()) {
                     Country totlcrty=new Country();
-                    totlcrty.setPopulation(rset.getInt(1));
+                    totlcrty.setPopulation(rset.getLong(1));
 
                     crtyTotlPopu.add(totlcrty);
                     //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
