@@ -90,13 +90,21 @@ public class App {
 //        ArrayList cpcty_region = a.getCapitalCityRegion();
 //        a.displayCapitalCityRegion(cpcty_region);
 
-//15. total country population of a region
+        // 15. total country population in the world
+//        ArrayList crtyTotlPopuWorld= a.getCountryTotalPopuWorld();
+//        a.displayCountryTotalPopuWorld(crtyTotlPopuWorld);
+
+//16. total country population of a region
 //        ArrayList crtyTotlPopuRegion= a.getCountryTotalPopuRegion();
 //        a.displayCountryTotalPopuRegion(crtyTotlPopuRegion);
 
-        // 16. total country population of a country
-        ArrayList crtyTotlPopu= a.getCountryTotalPopu();
-        a.displayCountryTotalPopu(crtyTotlPopu);
+        // 17. total country population of a continent
+        ArrayList crtyTotlPopuContinent= a.getCountryTotalPopuCont();
+        a.displayCountryTotalPopuCont(crtyTotlPopuContinent);
+
+        // 18. total country population of a country
+//        ArrayList crtyTotlPopu= a.getCountryTotalPopu();
+//        a.displayCountryTotalPopu(crtyTotlPopu);
 
 //=======
 //        Cherry Get Function
@@ -441,7 +449,7 @@ public class App {
                 while (rset.next()) {
                     City cities = new City();
                     cities.setName(rset.getString("Name"));
-                    cities.setPopulation( rset.getInt("Population"));
+                    cities.setPopulation( rset.getLong("Population"));
                     cities.setDistrict(rset.getString("District"));
                     ctydistrict.add(cities);
                 }
@@ -504,7 +512,7 @@ public class App {
                     City ct=new City();
                     Country c =new Country();
                     ct.setName(rset.getString(1));
-                    ct.setPopulation(rset.getInt(2));
+                    ct.setPopulation(rset.getLong(2));
                     c.setContinent(rset.getString(3));//set continent value to country object
 
                     ct.setCountry(c);
@@ -575,7 +583,7 @@ public class App {
                     City cty=new City();
                     Country c1 =new Country();
                     cty.setName(rset.getString(1));
-                    cty.setPopulation(rset.getInt(2));
+                    cty.setPopulation(rset.getLong(2));
                     c1.setContinent(rset.getString(3));//set continent value to country object
                     cty.setCountry(c1);
                     cityrept.add(cty);
@@ -639,7 +647,7 @@ public class App {
                     City cty2=new City();
                     Country c2 =new Country();
                     cty2.setName(rset.getString(1));
-                    cty2.setPopulation(rset.getInt(2));
+                    cty2.setPopulation(rset.getLong(2));
                     c2.setRegion(rset.getString(3));//set continent value to country object
                     cty2.setCountry(c2);
                     region.add(cty2);
@@ -702,7 +710,7 @@ public class App {
                     City cty3=new City();
                     Country c3 =new Country();
                     cty3.setName(rset.getString(1));
-                    cty3.setPopulation(rset.getInt(2));
+                    cty3.setPopulation(rset.getLong(2));
                     c3.setContinent(rset.getString(3));//set continent value to country object
                     cty3.setCountry(c3);
                     cityCountry.add(cty3);
@@ -755,7 +763,7 @@ public class App {
             {
                 c.setCode(rset.getString(1));
                 c.setName(rset.getString(2));
-                c.setPopulation(rset.getInt(3));
+                c.setPopulation(rset.getLong(3));
                 c.setContinent(rset.getString(4));
 
             }
@@ -792,7 +800,7 @@ public class App {
                 while (rset.next()) {
                     Country country = new Country();
                     country.setName(rset.getString("Name"));
-                    country.setPopulation( rset.getInt("Population"));
+                    country.setPopulation( rset.getLong("Population"));
                     country.setContinent(rset.getString("Continent"));
 
                     countryContinent.add(country);
@@ -851,7 +859,7 @@ public class App {
                 while (rset.next()) {
                     Country country = new Country();
                     country.setName(rset.getString("Name"));
-                    country.setPopulation( rset.getInt("Population"));
+                    country.setPopulation( rset.getLong("Population"));
                     country.setRegion(rset.getString("Region"));
 
                     countryRegion.add(country);
@@ -911,7 +919,7 @@ public class App {
                 while (rset.next()) {
                     Country country = new Country();
                     country.setName(rset.getString("Name"));
-                    country.setPopulation(rset.getInt("Population"));
+                    country.setPopulation(rset.getLong("Population"));
 
                     countryWorld.add(country);
                 }
@@ -967,7 +975,7 @@ public class App {
                 while (rset.next()) {
                     City city = new City();
                     city.setName(rset.getString("Name"));
-                    city.setPopulation(rset.getInt("Population"));
+                    city.setPopulation(rset.getLong("Population"));
 
                     ctyworld.add(city);
                 }
@@ -1023,7 +1031,7 @@ public class App {
                     Country crty10 = new Country();
                     City ct10 = new City();
                     crty10.setName(rset.getString("Name"));
-                    crty10.setPopulation(rset.getInt("Population"));
+                    crty10.setPopulation(rset.getLong("Population"));
                     crty10.setContinent(rset.getString("Continent"));
                     crty10.setRegion(rset.getString("Region"));
                     ct10.setName(rset.getString(5));
@@ -1091,7 +1099,7 @@ public class App {
                     City cityreport=new City();
                     cityreport.setName(rset.getString(1));
                     countryreport.setName(rset.getString(2));
-                    cityreport.setPopulation(rset.getInt(3));
+                    cityreport.setPopulation(rset.getLong(3));
 
                     cityreport.setCountry(countryreport);
                     cpcty_report.add(cityreport);
@@ -1156,7 +1164,7 @@ public class App {
                     City cityworld=new City();
                     cityworld.setName(rset.getString(1));
                     countryworld.setName(rset.getString(2));
-                    cityworld.setPopulation(rset.getInt(3));
+                    cityworld.setPopulation(rset.getLong(3));
 
                     cityworld.setCountry(countryworld);
                     cpcty_world.add(cityworld);
@@ -1221,7 +1229,7 @@ public class App {
                     ctycontinent.setName(rset.getString(1));
                     crtycontinent.setName(rset.getString(2));
                     crtycontinent.setContinent(rset.getString(3));
-                    ctycontinent.setPopulation(rset.getInt(4));
+                    ctycontinent.setPopulation(rset.getLong(4));
 
                     ctycontinent.setCountry(crtycontinent);
                     cpcty_continent.add(ctycontinent);
@@ -1286,7 +1294,7 @@ public class App {
                     ctyRegion.setName(rset.getString(1));
                     crtyRegion.setName(rset.getString(2));
                     crtyRegion.setRegion(rset.getString(3));
-                    ctyRegion.setPopulation(rset.getInt(4));
+                    ctyRegion.setPopulation(rset.getLong(4));
 
                     ctyRegion.setCountry(crtyRegion);
                     cpcty_region.add(ctyRegion);
@@ -1323,7 +1331,64 @@ public class App {
         System.out.print("\n******************************************************************************************************************\n\n");
     }
 
-    // 15. Total country population of a region.
+    //15. Total population of the world.
+    public ArrayList<Country> getCountryTotalPopuWorld()
+    {
+        ArrayList<Country> crtyTotlPopuWorld = null;
+        try {
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Statement stmt = con.createStatement();
+
+            // Create string for total population of a region and a continent SQL statement
+            String strSelect =
+                    "SELECT SUM(country.Population) as crtytotlworld " +
+                            "FROM country ";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                crtyTotlPopuWorld=new ArrayList<>();
+                // Return new total population of a region and a continent if valid.
+                while (rset.next()) {
+                    Country totlcrtyworld=new Country();
+                    totlcrtyworld.setPopulation(rset.getLong(1));
+
+                    crtyTotlPopuWorld.add(totlcrtyworld);
+                    //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total country population of the world.");
+        }
+        return crtyTotlPopuWorld;
+    }
+    public void displayCountryTotalPopuWorld(ArrayList<Country>crtyTotlPopuWorld)
+    {
+        if (crtyTotlPopuWorld == null)
+        {
+            System.out.println("* There is null data in total country population of the world!\n");
+            return;
+        }
+        System.out.print("\n**************************************************************\n\n");
+
+        for (Country totlcrtypopuworld:crtyTotlPopuWorld)
+        {
+            if(totlcrtypopuworld == null)
+            {
+                System.out.println("* Null data in each total population!\n");
+                continue;
+            }
+            System.out.println("Total Country Population of the world: " + totlcrtypopuworld.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n**************************************************************\n\n");
+    }
+
+    // 16. Total country population of a region.
     public ArrayList<Country> getCountryTotalPopuRegion()
     {
         ArrayList<Country> crtyTotlPopuRegion = null;
@@ -1346,7 +1411,7 @@ public class App {
                 // Return new total population of a region and a continent if valid.
                 while (rset.next()) {
                     Country totlcrtyRegion=new Country();
-                    totlcrtyRegion.setPopulation(rset.getInt(1));
+                    totlcrtyRegion.setPopulation(rset.getLong(1));
 
                     crtyTotlPopuRegion.add(totlcrtyRegion);
                     //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
@@ -1381,7 +1446,65 @@ public class App {
         System.out.print("\n*********************************************************\n\n");
     }
 
-    // Total population of a country
+    //17. Total population of a continent.
+    public ArrayList<Country> getCountryTotalPopuCont()
+    {
+        ArrayList<Country> crtyTotlPopuCont = null;
+        try {
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Statement stmt = con.createStatement();
+
+            // Create string for total population of a region and a continent SQL statement
+            String strSelect =
+                    "SELECT SUM(country.Population) as crtytotlcont " +
+                            "FROM country " +
+                            "WHERE country.Continent='Asia'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                crtyTotlPopuCont=new ArrayList<>();
+                // Return new total population of a region and a continent if valid.
+                while (rset.next()) {
+                    Country totlcrtyCont=new Country();
+                    totlcrtyCont.setPopulation(rset.getLong(1));
+
+                    crtyTotlPopuCont.add(totlcrtyCont);
+                    //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total country population of Asia Continent.");
+        }
+        return crtyTotlPopuCont;
+    }
+    public void displayCountryTotalPopuCont(ArrayList<Country>crtyTotlPopuCont)
+    {
+        if (crtyTotlPopuCont == null)
+        {
+            System.out.println("* There is null data in total country population of Asia Continent!\n");
+            return;
+        }
+        System.out.print("\n*********************************************************\n\n");
+
+        for (Country totlcrtypopucont:crtyTotlPopuCont)
+        {
+            if(totlcrtypopucont == null)
+            {
+                System.out.println("* Null data in each total country population of Asia Continent!\n");
+                continue;
+            }
+            System.out.println("Total Country Population of Asia Continent: " + totlcrtypopucont.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n*********************************************************\n\n");
+    }
+
+    //18. Total population of a country
     public ArrayList<Country> getCountryTotalPopu()
     {
         ArrayList<Country> crtyTotlPopu = null;
@@ -1404,7 +1527,7 @@ public class App {
                 // Return new total population of a region and a continent if valid.
                 while (rset.next()) {
                     Country totlcrty=new Country();
-                    totlcrty.setPopulation(rset.getInt(1));
+                    totlcrty.setPopulation(rset.getLong(1));
 
                     crtyTotlPopu.add(totlcrty);
                     //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
