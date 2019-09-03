@@ -34,8 +34,8 @@ public class App {
 //        ArrayList crtyTotlPopuRegion = a.getCountryTotalPopuRegion();
 //        a.displayCountryTotalPopuRegion(crtyTotlPopuRegion);
 
-//        ArrayList crtyTotlPopuCont = a.getCountryTotalPopuCont();
-//        a.displayCountryTotalPopuCont(crtyTotlPopuCont);
+        ArrayList crtyTotlPopuCont = a.getCountryTotalPopuCont();
+        a.displayCountryTotalPopuCont(crtyTotlPopuCont);
 
 //        ArrayList crtyTotlPopu = a.getCountryTotalPopu();
 //        a.displayCountryTotalPopu(crtyTotlPopu);
@@ -140,7 +140,7 @@ public class App {
                     City city=new City();
                     city.setName(rset.getString(1));
                     country.setName(rset.getString(2));
-                    city.setPopulation(rset.getInt(3));
+                    city.setPopulation(rset.getLong(3));
 
                     city.setCountry(country);
                     cpcty_report.add(city);
@@ -203,7 +203,7 @@ public ArrayList<City> getCapitalCityWorld()
                 City cityworld=new City();
                 cityworld.setName(rset.getString(1));
                 countryworld.setName(rset.getString(2));
-                cityworld.setPopulation(rset.getInt(3));
+                cityworld.setPopulation(rset.getLong(3));
 
                 cityworld.setCountry(countryworld);
                 cpcty_world.add(cityworld);
@@ -268,7 +268,7 @@ public ArrayList<City> getCapitalCityWorld()
                     ctycontinent.setName(rset.getString(1));
                     crtycontinent.setName(rset.getString(2));
                     crtycontinent.setContinent(rset.getString(3));
-                    ctycontinent.setPopulation(rset.getInt(4));
+                    ctycontinent.setPopulation(rset.getLong(4));
 
                     ctycontinent.setCountry(crtycontinent);
                     cpcty_continent.add(ctycontinent);
@@ -332,7 +332,7 @@ public ArrayList<City> getCapitalCityWorld()
                     ctyRegion.setName(rset.getString(1));
                     crtyRegion.setName(rset.getString(2));
                     crtyRegion.setRegion(rset.getString(3));
-                    ctyRegion.setPopulation(rset.getInt(4));
+                    ctyRegion.setPopulation(rset.getLong(4));
 
                     ctyRegion.setCountry(crtyRegion);
                     cpcty_region.add(ctyRegion);
@@ -623,7 +623,7 @@ public ArrayList<City> getCapitalCityWorld()
                 // Return new total population of a region and a continent if valid.
                 while (rset.next()) {
                     City totlcty=new City();
-                    totlcty.setPopulation(rset.getInt(1));
+                    totlcty.setPopulation(rset.getLong(1));
 
                     ctyTotlPopu.add(totlcty);
                     //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
@@ -681,7 +681,7 @@ public ArrayList<City> getCapitalCityWorld()
                 // Return new total population of a district if valid.
                 while (rset.next()) {
                     City totlctyDistrict=new City();
-                    totlctyDistrict.setPopulation(rset.getInt(1));
+                    totlctyDistrict.setPopulation(rset.getLong(1));
 
                     ctyTotlPopuDistrict.add(totlctyDistrict);
                     //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
@@ -758,7 +758,7 @@ public ArrayList<City> getCapitalCityWorld()
                     Country country=new Country();
                     city.setName(rset.getString(1));
                     country.setName(rset.getString(2));
-                    city.setPopulation(rset.getInt(3));
+                    city.setPopulation(rset.getLong(3));
 
                     city.setCountry(country);
                     topcont.add(city);

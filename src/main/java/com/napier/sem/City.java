@@ -45,13 +45,13 @@ public class City
         District = district;
     }
 
-    private int Population;
+    private Long Population;
 
-    public int getPopulation() {
+    public Long getPopulation() {
         return Population;
     }
 
-    public void setPopulation(int population) {
+    public void setPopulation(Long population) {
         Population = population;
     }
 
