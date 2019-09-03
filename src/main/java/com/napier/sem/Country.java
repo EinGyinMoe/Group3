@@ -61,12 +61,12 @@ public class Country {
         IndepYear = indepYear;
     }
 
-    private int Population;
-    public int getPopulation() {
+    private long Population;
+    public long getPopulation() {
         return Population;
     }
 
-    public void setPopulation(int population) {
+    public void setPopulation(long population) {
         Population = population;
     }
 

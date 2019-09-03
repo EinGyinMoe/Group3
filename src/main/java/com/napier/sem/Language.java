@@ -1,6 +1,24 @@
 package com.napier.sem;
 
 public class Language {
+    private String CountryCode;
+
+    private String Language;
+
+    private String IsOfficial;
+
+    private Float Percentage;
+
+    private Country country;
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public void setCountry(Country country) {
+        this.country = country;
+    }
+
     public String getCountryCode() {
         return CountryCode;
     }
@@ -33,13 +51,7 @@ public class Language {
         Percentage = percentage;
     }
 
-    private String CountryCode;
 
-    private String Language;
-
-    private String IsOfficial;
-
-    private Float Percentage;
 
 }
 

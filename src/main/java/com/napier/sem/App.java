@@ -20,8 +20,10 @@ public class App {
         ArrayList ctycountry = a.getCityCountry();
         a.displayCityCountry(ctycountry);
 
-        
-        a.getFiveLanguagePopulation();
+        //the following languages from greatest number to smallest, including the percentage of the world population
+        ArrayList languagePopulation = a.getFiveLanguagePopulation();
+        a.displayFiveLanguagePopulation(languagePopulation);
+
 
 
         // Disconnect from database
@@ -145,11 +147,12 @@ public class App {
     }
 
 
-    //
+//
 //the following languages from greatest number to smallest, including the percentage of the world population
 //
-    public void getFiveLanguagePopulation()
+    public ArrayList<Language> getFiveLanguagePopulation()
     {
+        ArrayList<Language> LanguagePopulation = null;
         try {
             // Create an SQL statement
             Statement stmt = con.createStatement();
@@ -163,13 +166,24 @@ public class App {
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
             if (rset == null) {
-                System.out.print("Country Report Not found!");
+                System.out.print("Population for each language Not found!");
             } else {
-                // Return city if valid.
+                LanguagePopulation = new ArrayList<>();
+                // Return population if valid.
                 while (rset.next()) {
-                    System.out.printf("\nLanguage: " + rset.getString(1) + "\n"
-                            + "PopulationLanguage: " + rset.getString(2) + "\n"
-                            + "PercentageOfPopulationLanguage: " + rset.getString(3) + "\n");
+                    Country country=new Country();
+                    Language lan =new Language();
+                    lan.setLanguage(rset.getString(1));
+                    country.setPopulation(rset.getLong(2));
+                    lan.setPercentage(rset.getFloat(3));
+
+                    lan.setCountry(country);
+                    LanguagePopulation.add(lan);
+
+
+//                    System.out.printf("\nLanguage: " + rset.getString(1) + "\n"
+//                            + "PopulationLanguage: " + rset.getString(2) + "\n"
+//                            + "PercentageOfPopulationLanguage: " + rset.getString(3) + "\n");
                 }
             }
         }
@@ -177,10 +191,31 @@ public class App {
             System.out.println(e.getMessage());
             System.out.println("Failed to get Country Language!.");
         }
-
+        return LanguagePopulation;
     }
 
+    public void displayFiveLanguagePopulation(ArrayList<Language> language)
+    {
 
+        if (language == null)
+        {
+            System.out.println("* There is null data in Language Population!\n");
+            return;
+        }
+        System.out.print("===== languages from greatest number to smallest, including the percentage of the world population =====\n");
+        System.out.printf("%25s%25s%25s","Language","Population","Percentage\n");
+        System.out.print("========================================================================================================\n");
+        for(Language lan:language)
+        {
+            if (lan == null) {
+                System.out.println("* No null data in each Language population!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s%25s",lan.getLanguage(), lan.getCountry().getPopulation(), lan.getPercentage());
+            System.out.print("\n");
+        }
+        System.out.print("========================================================================================================\n");
+    }
 
 
 } /*This is the end of the public App class */
