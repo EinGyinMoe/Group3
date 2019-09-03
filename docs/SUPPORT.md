@@ -14,7 +14,6 @@ If you're looking for support for Group3 there are a lot of options, check out:
 * Chat &mdash; [Join the Group3]
 
 ### Have a question?
-
 If you have a question, you can ask it on [StackOverflow](https://stackoverflow.com/questions/tagged/typeorm).
 
 On Discuss and in the group3 team, there are a bunch of helpful community members that should be willing to point you in the right direction.
