@@ -49,10 +49,10 @@
 | 5 | The top N populated countries in a continent where N is provided by the user. | No | ![](screenshot/3.png) |
 | 6 | The top N populated countries in a region where N is provided by the user. | No | ![](screenshot/3.png) |
 | 7 | All the cities in the world organised by largest population to smallest. | Yes | ![](screenshot/3.png) |
-| 8 | All the cities in a continent organised by largest population to smallest. | Yes | ![](screenshot/3.png) |
+| 8 | All the cities in a continent organised by largest population to smallest. | Yes | ![](Screenshots/2_City_Continent.PNG) |
 | 9 | All the cities in a region organised by largest population to smallest. | Yes | ![](screenshot/3.png) |
 | 10 | All the cities in a country organised by largest population to smallest. | Yes | ![](screenshot/city_1.PNG) |
-| 11 | All the cities in a district organised by largest population to smallest. | Yes | ![](screenshot/city_1.PNG) |
+| 11 | All the cities in a district organised by largest population to smallest. | Yes | ![](Screenshots/1_City_District.PNG) |
 | 12 | The top N populated cities in the world where N is provided by the user. | No | ![](screenshot/2.png) |
 | 13 | The top N populated cities in a continent where N is provided by the user. | No | ![](screenshot/3.png) |
 | 14 | The top N populated cities in a region where N is provided by the user. | No | ![](screenshot/3.png) |
@@ -70,8 +70,8 @@
 | 26 | The population of the world. | Yes | ![](screenshot/3.png) |
 | 27 | The population of a continent. | Yes | ![](screenshot/3.png) |
 | 28 | The population of a region. | Yes | ![](screenshot/3.png) |
-| 29 | The population of a country. | Yes | ![](screenshot/3.png) |
+| 29 | The population of a country. | Yes | ![](Screenshots/3.png) |
 | 30 | The population of a district. | Yes | ![](screenshot/city_1.PNG) |
 | 31 | The population of a city. | Yes | ![](screenshot/city_1.PNG) |
 | 32 | The number of people who speak the Chinese/English/Hindi/Spanish/Arabic languages from greatest number to smallest, including the percentage of the world population. | Yes | ![](screenshot/2.png) |
-
+| 33 | The Country Report | Yes | ![](Screenshots/10_Country_Report.PNG) |
