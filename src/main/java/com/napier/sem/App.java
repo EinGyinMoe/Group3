@@ -94,17 +94,25 @@ public class App {
 //        ArrayList crtyTotlPopuWorld= a.getCountryTotalPopuWorld();
 //        a.displayCountryTotalPopuWorld(crtyTotlPopuWorld);
 
-//16. total country population of a region
+        //16. total country population of a region
 //        ArrayList crtyTotlPopuRegion= a.getCountryTotalPopuRegion();
 //        a.displayCountryTotalPopuRegion(crtyTotlPopuRegion);
 
         // 17. total country population of a continent
-        ArrayList crtyTotlPopuContinent= a.getCountryTotalPopuCont();
-        a.displayCountryTotalPopuCont(crtyTotlPopuContinent);
+//        ArrayList crtyTotlPopuContinent= a.getCountryTotalPopuCont();
+//        a.displayCountryTotalPopuCont(crtyTotlPopuContinent);
 
         // 18. total country population of a country
 //        ArrayList crtyTotlPopu= a.getCountryTotalPopu();
 //        a.displayCountryTotalPopu(crtyTotlPopu);
+
+        // 19. total city population
+//        ArrayList ctyTotlPopu= a.getCityTotalPopu();
+//        a.displayCityTotalPopu(ctyTotlPopu);
+
+        //20. total city population in a district
+        ArrayList ctyTotlPopuDistrict= a.getCityTotalPopuDistrict();
+        a.displayCityTotalPopuDistrict(ctyTotlPopuDistrict);
 
 //=======
 //        Cherry Get Function
@@ -1615,6 +1623,64 @@ public class App {
                 continue;
             }
             System.out.println("Total Country Population of Herat City: " + totlctypopu.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n*********************************************************\n\n");
+    }
+
+    //20. Total city population in a district.
+    public ArrayList<City> getCityTotalPopuDistrict()
+    {
+        ArrayList<City> ctyTotlPopuDistrict = null;
+        try {
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Statement stmt = con.createStatement();
+
+            // Create string for total population of a region and a continent SQL statement
+            String strSelect =
+                    "SELECT SUM(city.Population) as totaldistrict " +
+                            "FROM city " +
+                            "WHERE city.District='Kabol'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                ctyTotlPopuDistrict=new ArrayList<>();
+                // Return new total population of a district if valid.
+                while (rset.next()) {
+                    City totlctyDistrict=new City();
+                    totlctyDistrict.setPopulation(rset.getLong(1));
+
+                    ctyTotlPopuDistrict.add(totlctyDistrict);
+                    //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total country population of the world.");
+        }
+        return ctyTotlPopuDistrict;
+    }
+    public void displayCityTotalPopuDistrict(ArrayList<City>ctyTotlPopuDistrict)
+    {
+        if (ctyTotlPopuDistrict == null)
+        {
+            System.out.println("* There is null data in total city population in Kabol District!\n");
+            return;
+        }
+        System.out.print("\n*********************************************************\n\n");
+
+        for (City totlctypopudistrict:ctyTotlPopuDistrict)
+        {
+            if(totlctypopudistrict == null)
+            {
+                System.out.println("* Null data in each total city population of Kabol district!\n");
+                continue;
+            }
+            System.out.println("Total City Population in Kabol District: " + totlctypopudistrict.getPopulation());
             System.out.print("\n");
         }
         System.out.print("\n*********************************************************\n\n");
