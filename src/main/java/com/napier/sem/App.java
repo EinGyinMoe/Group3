@@ -16,14 +16,16 @@ public class App {
         if (args.length < 1)
         {
             a.connect("localhost:3306");
+            a.displayapp();
         }
         else
         {
             a.connect(args[0]);
+
         }
 
         // Input Display Method
-        a.maindisplay();
+//        a.displayapp();
 
 //        // 1. All the cities in a district organised by largest population to smallest
 //        ArrayList ctydistrict = a.getCityDistrict();
@@ -94,9 +96,9 @@ public class App {
 //        ArrayList crtyTotlPopuRegion= a.getCountryTotalPopuRegion();
 //        a.displayCountryTotalPopuRegion(crtyTotlPopuRegion);
 
-        // 16. total country population of a country
-        ArrayList crtyTotlPopu= a.getCountryTotalPopu();
-        a.displayCountryTotalPopu(crtyTotlPopu);
+        // 16. total population of a country
+//        ArrayList crtyTotlPopu= a.getCountryTotalPopu();
+//        a.displayCountryTotalPopu(crtyTotlPopu);
 
 //=======
 //        Cherry Get Function
@@ -171,7 +173,7 @@ public class App {
         }
     }
 
-    public void maindisplay()
+    public void displayapp()
     {
         Scanner Obj = new Scanner(System.in);  // Create a Scanner object
         System.out.println("\n");
@@ -184,10 +186,11 @@ public class App {
             System.out.println(
                             "1. About Country Report " + "\n" +
                             "2. About City Report " + "\n" +
-                            "3. About Capital City Report "+ "\n"
+                            "3. About Capital City Report "+ "\n" +
+                            "4. About Population Report "+ "\n"
             );
             System.out.print("Enter your option: ");
-            int reportOp = Obj.nextInt();  // Read user input
+            int reportOp = Obj.nextInt();  // To read user input
             System.out.println("\n");
 
             // Country Report
@@ -206,27 +209,20 @@ public class App {
 
                 if (CountryReport == 1)
                 {
-//                    ArrayList countryworld = a.getCountryWorld();
-//                    a.displayCountryWorld(countryworld);
-//                    again = Question();
                     ArrayList countryworld = getCountryWorld();
                     displayCountryWorld(countryworld);
                     again = Question();
                 }
                 else if (CountryReport == 2)
                 {
-//                    ArrayList countrycontinent = a.getCountryContinent();
-//                    a.displayCountryContinent(countrycontinent);
-//                    again = Question();
+
                     ArrayList countrycontinent = getCountryContinent();
                     displayCountryContinent(countrycontinent);
                     again = Question();
                 }
                 else if (CountryReport == 3)
                 {
-//                    ArrayList countryregion = a.getCountryRegion();
-//                    a.displayCountryRegion(countryregion);
-//                    again = Question();
+
                     ArrayList countryregion = getCountryRegion();
                     displayCountryRegion(countryregion);
                     again = Question();
@@ -255,48 +251,30 @@ public class App {
 
                 if (CityReport == 1)
                 {
-//                    ArrayList ctyworld = a.getCity_world();
-//                    a.displayCityWorld(ctyworld);
-//                    again = Question();
                     ArrayList ctyworld = getCity_world();
                     displayCityWorld(ctyworld);
                     again = Question();
                 }
                 else if (CityReport == 2)
                 {
-//                    ArrayList cty = a.getCityContinent();
-//                    a.displayCityContinent(cty);
-//                    // getCitiesContinent(askContinent());
-//                    again = Question();
-
                     ArrayList cty = getCityContinent();
                     displayCityContinent(cty);
-                    // getCitiesContinent(askContinent());
                     again = Question();
                 }
                 else if (CityReport == 3)
                 {
-//                    ArrayList ctyregion = a.getCityRegion();
-//                    a.displayCityRegion(ctyregion);
-//                    again = Question();
                     ArrayList ctyregion = getCityRegion();
                     displayCityRegion(ctyregion);
                     again = Question();
                 }
                 else if (CityReport == 4)
                 {
-//                    ArrayList ctycountry = a.getCityCountry();
-//                    a.displayCityCountry(ctycountry);
-//                    again = Question();
                     ArrayList ctycountry = getCityCountry();
                     displayCityCountry(ctycountry);
                     again = Question();
                 }
                 else if (CityReport == 5)
                 {
-//                    ArrayList ctydistrict = a.getCityDistrict();
-//                    a.displayCityDistrict(ctydistrict);
-//                    again = Question();
                     ArrayList ctydistrict = getCityDistrict();
                     displayCityDistrict(ctydistrict);
                     again = Question();
@@ -322,32 +300,119 @@ public class App {
 
                 if (CapCityReport == 1)
                 {
-//                    ArrayList cpcty_world = a.getCapitalCityWorld();
-//                    a.displayCapitalCityWorld(cpcty_world);
-//                    again = askQuestion();
                     ArrayList cpcty_world = getCapitalCityWorld();
                     displayCapitalCityWorld(cpcty_world);
                     again = Question();
                 }
                 else if (CapCityReport == 2)
                 {
-//                    ArrayList cpcty_continent = a.getCapitalCityContinent();
-//                    a.displayCapitalCityContinent(cpcty_continent);
-//                    again = askQuestion();
                     ArrayList cpcty_continent = getCapitalCityContinent();
                     displayCapitalCityContinent(cpcty_continent);
                     again = Question();
                 }
                 else if (CapCityReport == 3)
                 {
-//                    ArrayList cpcty_region = a.getCapitalCityRegion();
-//                    a.displayCapitalCityRegion(cpcty_region);
-//                    again = askQuestion();
                     ArrayList cpcty_region = getCapitalCityRegion();
                     displayCapitalCityRegion(cpcty_region);
                     again = Question();
                 }
                 else{
+                    again = true;
+                }
+            }
+
+            //Population Report
+            if (reportOp == 4)
+            {
+                System.out.println("*******************");
+                System.out.println("*Population Report*");
+                System.out.println("*******************");
+                System.out.println(
+                        "1. The top N populated countries in the world where N is provided by the user." + "\n" +
+                                "2. The top N populated countries in a continent where N is provided by the user." + "\n" +
+                                "3. The top N populated countries in a region where N is provided by the user. "+ "\n" +
+                                "4. The top N populated cities in the world where N is provided by the user. "+ "\n" +
+                                "5. The top N populated cities in a continent where N is provided by the user. "+ "\n" +
+                                "6. The top N populated cities in a region where N is provided by the user. "+ "\n" +
+                                "7. The top N populated cities in a country where N is provided by the user. "+ "\n" +
+                                "8. The top N populated cities in a district where N is provided by the user. "+ "\n" +
+                                "9. The top N populated capital cities in the world where N is provided by the user.. "+ "\n" +
+                                "10. The top N populated capital cities in a continent where N is provided by the user. "+ "\n" +
+                                "11. The top N populated capital cities in a region where N is provided by the user.  "+ "\n"
+
+
+                );
+                System.out.print("Enter an option : ");
+                int PopReport = Obj.nextInt();  // Read user input
+
+                if (PopReport == 1)
+                {
+                    ArrayList countryworld = getCountryWorld();
+                    displayCountryWorld(countryworld);
+                    again = Question();
+                }
+                else if (PopReport == 2)
+                {
+                    ArrayList countrycontinent = getCountryContinent();
+                    displayCountryContinent(countrycontinent);
+                    again = Question();
+                }
+                else if (PopReport == 3)
+                {
+                    ArrayList crtyTotlPopuRegion= getCountryTotalPopuRegion();
+                    displayCountryTotalPopuRegion(crtyTotlPopuRegion);
+                    again = Question();
+                }
+                else if (PopReport == 4)
+                {
+                    ArrayList countryregion = getCountryRegion();
+                    displayCountryRegion(countryregion);
+                    again = Question();
+                }
+                else if (PopReport == 5)
+                {
+                    ArrayList countryregion = getCountryRegion();
+                    displayCountryRegion(countryregion);
+                    again = Question();
+                }
+                else if (PopReport == 6)
+                {
+                    ArrayList countryregion = getCountryRegion();
+                    displayCountryRegion(countryregion);
+                    again = Question();
+                }
+                else if (PopReport == 7)
+                {
+                    ArrayList countryregion = getCountryRegion();
+                    displayCountryRegion(countryregion);
+                    again = Question();
+                }
+                else if (PopReport == 8)
+                {
+                    ArrayList countryregion = getCountryRegion();
+                    displayCountryRegion(countryregion);
+                    again = Question();
+                }
+                else if (PopReport == 9)
+                {
+                    ArrayList countryregion = getCountryRegion();
+                    displayCountryRegion(countryregion);
+                    again = Question();
+                }
+                else if (PopReport == 10)
+                {
+                    ArrayList countryregion = getCountryRegion();
+                    displayCountryRegion(countryregion);
+                    again = Question();
+                }
+                else if (PopReport == 11)
+                {
+                    ArrayList countryregion = getCountryRegion();
+                    displayCountryRegion(countryregion);
+                    again = Question();
+                }
+                else
+                {
                     again = true;
                 }
             }
@@ -1438,6 +1503,8 @@ public class App {
         }
         System.out.print("\n*********************************************************\n\n");
     }
+
+
 
 //    ******Cherry Coding (People live and not living in each region, country, continent)********
 
