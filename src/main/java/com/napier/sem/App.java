@@ -114,6 +114,9 @@ public class App {
 //      get population in the cities people who live and not living in each region
 //        a.getLivePopulationRegion();
 
+        ArrayList livpopuregion= a.getLivePopulationRegion();
+        a.displayLivePopulationRegion(livpopuregion);
+
 
         // Disconnect from database
         a.disconnect();
@@ -1665,40 +1668,77 @@ public class App {
 
 //    ******Cherry Coding (People live and not living in each region, country, continent)********
 
-//    public void getLivePopulationRegion()
-//
-//    {
-//        try {
-//            // Create an SQL statement
-//            Statement stmt = con.createStatement();
-//            // Create string for SQL statements
-//            String strSelect =
-//                    "SELECT country.Region, SUM(country.Population) as CountryTotalPopulation, SUM((select SUM(population) from city where countrycode = country.code)) as PeopleLiveInCity,"
-//                            +" (SUM((select SUM(population) from city where countrycode = country.code)) / SUM(country.Population))*100 as PercentagePeopleLiveInCity , (SUM(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) as PeopleNotInCity,"
-//                            +" ((SUM(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) / SUM(country.Population))*100 as PercentagePeopleNotInCity"
-//                            +" FROM country"
-//                            +" GROUP BY country.Region;";
-//            // Execute SQL statement
-//            ResultSet rset = stmt.executeQuery(strSelect);
-//            if (rset == null) {
-//                System.out.print("Not found.");
-//            } else {
-//                // Return new city if valid.
-//                // Check one is
-//                while (rset.next()) {
-//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-//                    //System.out.println("\n");
-//                    System.out.printf("Region Name : "+rset.getString(1)+"\n"+"People not living in cities in each region: "+rset.getLong(2)+"\n"+"\n");
-//                }
-//            }
-//        }
-//        catch (Exception e)
-//        {
-//            System.out.println(e.getMessage());
-//            System.out.println("Failed to get people who are not living in the city by region");
-//        }
-//        //return continent;
-//    }
+    public ArrayList<City> getLivePopulationRegion()
+
+    {
+        ArrayList<City>livepopuregion=null;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statements
+            String strSelect =
+                    "SELECT country.Region, SUM(country.Population) as CountryTotalPopulation, SUM((select SUM(population) from city where countrycode = country.code)) as PeopleLiveInCity,"
+                            +" (SUM((select SUM(population) from city where countrycode = country.code)) / SUM(country.Population))*100 as PercentagePeopleLiveInCity , (SUM(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) as PeopleNotInCity,"
+                            +" ((SUM(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) / SUM(country.Population))*100 as PercentagePeopleNotInCity"
+                            +" FROM country"
+                            +" GROUP BY country.Region;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                livepopuregion=new ArrayList<>();
+                // Return new city if valid.
+                // Check one is
+                while (rset.next()) {
+                    Country livregioncrty = new Country();
+                    City livregioncty = new City();
+                    livregioncrty.setRegion(rset.getString(1));
+                    livregioncrty.setPopulation(rset.getLong(2));
+                    livregioncrty.setPopulation(rset.getLong(3));
+                    livregioncty.setPopulation(rset.getLong(4));
+                    livregioncrty.setPopulation(rset.getLong(5));
+                    livregioncrty.setPopulation(rset.getLong(6));
+
+                    livregioncty.setCountry(livregioncrty);
+                    livepopuregion.add(livregioncty);
+                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+                    //System.out.println("\n");
+                    //System.out.printf("Region Name : "+rset.getString(1)+"\n"+"People not living in cities in each region: "+rset.getLong(2)+"\n"+"\n");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get people who are not living in the country by region");
+        }
+        return livepopuregion;
+        //return continent;
+    }
+    public void displayLivePopulationRegion(ArrayList<City>livepopuregion)
+    {
+        if (livepopuregion == null)
+        {
+            System.out.println("* There is no null data in total population of people living in a country!\n");
+            return;
+        }
+        System.out.print("\n*****************************************People Living in a Country*****************************************\n\n");
+        System.out.printf("%25s%25s%25s%25s%25s%25s","Region","Population1","Population2","Population3","Population4","Percentage\n");
+        System.out.print("\n******************************************************************************************************************\n\n");
+
+        for (City livcrtyregion:livepopuregion)
+        {
+            if(livcrtyregion == null)
+            {
+                System.out.println("* No null data in each total population of people living in a country!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s%25s%25s%25s%25s",livcrtyregion.getName(), livcrtyregion.getCountry().getPopulation(),livcrtyregion.getCountry().getPopulation(), livcrtyregion.getPopulation(),livcrtyregion.getCountry().getPopulation(),livcrtyregion.getCountry().getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n******************************************************************************************************************\n\n");
+    }
 //
 //    public void getLivePopulationCountry()
 //
