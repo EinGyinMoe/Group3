@@ -1562,6 +1562,64 @@ public class App {
         System.out.print("\n*********************************************************\n\n");
     }
 
+    //19. Total population of a city
+    public ArrayList<City> getCityTotalPopu()
+    {
+        ArrayList<City> ctyTotlPopu = null;
+        try {
+            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Statement stmt = con.createStatement();
+
+            // Create string for total population of a region and a continent SQL statement
+            String strSelect =
+                    "SELECT city.Population " +
+                            "FROM city " +
+                            "WHERE city.Name='Herat'";
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                ctyTotlPopu=new ArrayList<>();
+                // Return new total population of a region and a continent if valid.
+                while (rset.next()) {
+                    City totlcty=new City();
+                    totlcty.setPopulation(rset.getLong(1));
+
+                    ctyTotlPopu.add(totlcty);
+                    //System.out.printf("Total Population of a Region: " + rset.getLong(1) + "\n" + "Total Population of a Continent: " + rset.getLong(2) + "\n");
+                }
+            }
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get the total population of Herat City.");
+        }
+        return ctyTotlPopu;
+    }
+    public void displayCityTotalPopu(ArrayList<City>ctyTotlPopu)
+    {
+        if (ctyTotlPopu == null)
+        {
+            System.out.println("* There is null data in total population of Herat City!\n");
+            return;
+        }
+        System.out.print("\n*********************************************************\n\n");
+
+        for (City totlctypopu:ctyTotlPopu)
+        {
+            if(totlctypopu == null)
+            {
+                System.out.println("* Null data in each total population of Herat city!\n");
+                continue;
+            }
+            System.out.println("Total Country Population of Herat City: " + totlctypopu.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n*********************************************************\n\n");
+    }
+
 //    ******Cherry Coding (People live and not living in each region, country, continent)********
 
 //    public void getTotalPopulationCityRegion()
