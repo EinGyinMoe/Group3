@@ -110,7 +110,7 @@ public class App {
         //20. total city population in a district
 //        ArrayList ctyTotlPopuDistrict= a.getCityTotalPopuDistrict();
 //        a.displayCityTotalPopuDistrict(ctyTotlPopuDistrict);
-        
+
 //        Cherry Get Function
 //      get population in the cities people who live and not living in each region
 //        a.getLivePopulationRegion();
@@ -199,7 +199,7 @@ public class App {
         do {
             System.out.println("Choose Your Options for the following Report:");
             System.out.println(
-                            "1. About Country Report " + "\n" +
+                    "1. About Country Report " + "\n" +
                             "2. About City Report " + "\n" +
                             "3. About Capital City Report "+ "\n" +
                             "4. About Population Report "+ "\n" +
@@ -218,7 +218,7 @@ public class App {
                 System.out.println("*Country Report*");
                 System.out.println("****************");
                 System.out.println(
-                                "1. All the countries in the world organised by largest population to smallest." + "\n" +
+                        "1. All the countries in the world organised by largest population to smallest." + "\n" +
                                 "2. All the countries in a continent organised by largest population to smallest." + "\n" +
                                 "3. All the countries in a region organised by largest population to smallest."+ "\n"
                 );
@@ -256,7 +256,7 @@ public class App {
                 System.out.println("*City Report*");
                 System.out.println("*************");
                 System.out.println(
-                                "1. All the cities in the world organised by largest population to smallest. " + "\n" +
+                        "1. All the cities in the world organised by largest population to smallest. " + "\n" +
                                 "2. All the cities in a continent organised by largest population to smallest. " + "\n" +
                                 "3. All the cities in a region organised by largest population to smallest. " + "\n" +
                                 "4. All the cities in a country organised by largest population to smallest. " + "\n" +
@@ -307,10 +307,10 @@ public class App {
                 System.out.println("*Capital City Report*");
                 System.out.println("*********************");
                 System.out.println
-                                (
+                        (
                                 "1. All the capital cities in the world organised by largest population to smallest. " + "\n" +
-                                "2. All the capital cities in a continent organised by largest population to smallest. " + "\n" +
-                                "3. All the capital cities in a region organised by largest to smallest. " + "\n" );
+                                        "2. All the capital cities in a continent organised by largest population to smallest. " + "\n" +
+                                        "3. All the capital cities in a region organised by largest to smallest. " + "\n" );
                 System.out.print("Enter your option: ");
                 int CapCityReport = Obj.nextInt();  // Read user input
 
@@ -346,14 +346,14 @@ public class App {
                 System.out.println("*******************");
                 System.out.println(
                         "1. The population of the world." + "\n" +
-                        "2. The population of a continent." + "\n" +
-                        "3. The population of a region." + "\n" +
-                        "4. The population of a country." + "\n" +
-                        "5. The population of a district." + "\n" +
-                        "6. The population of a city." + "\n" +
-                        "7. The population of people, people living in cities, and people not living in cities in each continent." + "\n" +
-                        "8. The population of people, people living in cities, and people not living in cities in each region." + "\n" +
-                        "9. The population of people, people living in cities, and people not living in cities in each country." + "\n"
+                                "2. The population of a continent." + "\n" +
+                                "3. The population of a region." + "\n" +
+                                "4. The population of a country." + "\n" +
+                                "5. The population of a district." + "\n" +
+                                "6. The population of a city." + "\n" +
+                                "7. The population of people, people living in cities, and people not living in cities in each continent." + "\n" +
+                                "8. The population of people, people living in cities, and people not living in cities in each region." + "\n" +
+                                "9. The population of people, people living in cities, and people not living in cities in each country." + "\n"
 
                 );
                 System.out.print("Enter an option : ");
@@ -444,9 +444,9 @@ public class App {
 
                 if (PopuReport_input == 1)
                 {
-//                    ArrayList countryworld = getCountryWorld();
-//                    displayCountryWorld(countryworld);
-//                    again = Question();
+                    ArrayList topcountryworld = getinputCountryWorld();
+                    displayinputCountryWorld(topcountryworld);
+                    again = Question();
                 }
                 else if (PopuReport_input == 2)
                 {
@@ -592,7 +592,7 @@ public class App {
         }
     }
 
-//8.
+    //8.
 //Option 1.   all the countries in the world by the population
 ////
     public ArrayList<Country> getCountryWorld()
@@ -654,7 +654,7 @@ public class App {
 
     }
 
-//6.
+    //6.
 //Country Report Option 2. All the country in a continent by Population
 //
     public ArrayList<Country> getCountryContinent()
@@ -717,7 +717,7 @@ public class App {
         }
     }
 
-//7.
+    //7.
 //Country Report Option 3. all the countries in a region by the population
 //
     public ArrayList<Country> getCountryRegion()
@@ -783,7 +783,7 @@ public class App {
     }
 
 
-//9.
+    //9.
 //City Report Option 1. cities in the world by population
 //
     public ArrayList<City> getCity_world()
@@ -844,7 +844,7 @@ public class App {
 
     }
 
-//2.
+    //2.
 // City Report Option 2. All the cities in a continent organised by largest population to smallest
     public ArrayList<City> getCityContinent()
     {
@@ -910,7 +910,7 @@ public class App {
         System.out.print("========================================================================================================\n");
     }
 
-//4.
+    //4.
 //City Report Option 3. All the city population in a region
 //
     public ArrayList<City> getCityRegion()
@@ -972,7 +972,7 @@ public class App {
         System.out.print("======================================================================================================\n");
     }
 
-//5.
+    //5.
 //City Report Option 4. All the cities in a country organised by largest population to smallest.
 //
     public ArrayList<City> getCityCountry()
@@ -1033,7 +1033,7 @@ public class App {
         }
     }
 
-// 1.
+    // 1.
 // City Report Option 5. All the cities in a district organised by largest population to smallest
 //
     public ArrayList<City> getCityDistrict()
@@ -1094,7 +1094,7 @@ public class App {
         System.out.print("========================================================================================================\n");
     }
 
-//12.
+    //12.
 // Capital City Report Option 1.
 // All the capital cities in the world organised by largest population to smallest.
     public ArrayList<City> getCapitalCityWorld()
@@ -1160,7 +1160,7 @@ public class App {
         System.out.print("===============================================================================================\n");
     }
 
-//13.
+    //13.
 // Capital City Report Option 2. All the capital cities in a continent organised by largest population to smallest
     public ArrayList<City> getCapitalCityContinent()
     {
@@ -1524,7 +1524,7 @@ public class App {
         System.out.print("=========================================================\n");
     }
 
-// Population Report Option 7. The population of people, people living in cities, and people not living in cities in each continent
+    // Population Report Option 7. The population of people, people living in cities, and people not living in cities in each continent
 //
     public ArrayList<Population> getLivePopulationContinent()
 
@@ -1596,7 +1596,7 @@ public class App {
         System.out.print("=========================================================================================================================================================\n");
     }
 
-// Population Report Option 8.The population of people, people living in cities, and people not living in cities in each region
+    // Population Report Option 8.The population of people, people living in cities, and people not living in cities in each region
 //
     public ArrayList<Population> getLivePopulationRegion()
 
@@ -1668,7 +1668,7 @@ public class App {
         System.out.print("=========================================================================================================================================================\n");
     }
 
-// Population Report Option 9. The population of people, people living in cities, and people not living in cities in each Country
+    // Population Report Option 9. The population of people, people living in cities, and people not living in cities in each Country
 //
     public ArrayList<Population> getLivePopulationCountry()
 
@@ -1741,7 +1741,7 @@ public class App {
         System.out.print("=========================================================================================================================================================\n");
     }
 
-//Language Report
+    //Language Report
 //
 //the following languages from greatest number to smallest, including the percentage of the world population
 //
@@ -1806,6 +1806,79 @@ public class App {
             System.out.print("\n");
         }
         System.out.print("========================================================================================================\n");
+    }
+
+    //Population according to user input
+// Option 1. Top N Countries in the world organised by largest to smallest
+    public ArrayList<Country> getinputCountryWorld()
+    {
+        ArrayList<Country> countries = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter a number to output Top Countries in the world : ");
+            String number = scanner.next(); // get string
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Name, country.Continent, country.Region, country.Population "
+                            + "FROM country "
+                            + "ORDER BY Population DESC "
+                            + "Limit " + number;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset == null)
+            {
+                System.out.println("Not Found");
+            }
+
+            else
+            {
+                //Return new city if valid.
+                //Check one is returned
+                while (rset.next())
+                {
+                    Country c =new Country();
+                    c.setName(rset.getString(1));
+                    c.setContinent(rset.getString(2));
+                    c.setRegion(rset.getString(3));
+                    c.setPopulation(rset.getLong(4));
+                    countries.add(c);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Top countries in the World");
+        }
+        return countries;
+    }
+
+    public void displayinputCountryWorld(ArrayList<Country> countries)
+    {
+
+        if (countries == null)
+        {
+            System.out.println("* There is null data in Top N countries Population!\n");
+            return;
+        }
+        System.out.print("================== Top Countries in the World organised by Largest Population to Smallest ==================\n");
+        System.out.printf("%20s%20s%30s%20s", "Name","Continent","Region","Population\n");
+        System.out.print("============================================================================================================\n");
+        for(Country ctry:countries)
+        {
+            if (ctry == null) {
+                System.out.println("* No null data in each top N countries in the world!\n");
+                continue;
+            }
+            System.out.printf("%20s%20s%30s%20s",ctry.getName(),ctry.getContinent(),ctry.getRegion(),ctry.getPopulation());
+            System.out.println("\n");
+        }
+        System.out.print("============================================================================================================\n");
     }
 
     //3. city report requires the following columns:
@@ -1905,7 +1978,7 @@ public class App {
 
 
         }
-       return c;
+        return c;
     }
 
 
@@ -1913,7 +1986,7 @@ public class App {
 
 
 
-//10. cities in the world by population
+    //10. cities in the world by population
 //
     public ArrayList<City> getCountry_report()
     {
@@ -1947,7 +2020,7 @@ public class App {
                     ct10.setCountry(crty10);
                     countryrept.add(ct10);
                 }
-                }
+            }
         }
         catch (Exception e) {
             System.out.println(e.getMessage());
@@ -2044,14 +2117,6 @@ public class App {
         System.out.print("\n***********************************************************************************************\n");
     }
 
-
-
-
-//    ******Cherry Coding (People live and not living in each region, country, continent)********
-
-
-
-//    End of Cherry Coding
 
 
 
