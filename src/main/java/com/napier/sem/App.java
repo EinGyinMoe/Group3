@@ -514,19 +514,16 @@ public class App {
                 }
             }
 
-            // Capital_City_Report
+            // Language Report
             else if (reportOp == 6)
             {
                 System.out.println("*****************");
                 System.out.println("*Language Report*");
-                System.out.println("*****************");
-                System.out.println
-                        (
-                                "1. All the capital cities in the world organised by largest population to smallest. " + "\n" +
-                                "2. All the capital cities in a continent organised by largest population to smallest. " + "\n" +
-                                "3. All the capital cities in a region organised by largest to smallest. " + "\n" );
-                System.out.print("Enter your option: ");
-                int CapCityReport = Obj.nextInt();  // Read user input
+                System.out.println("*****************\n");
+
+                ArrayList language = getFiveLanguagePopulation();
+                displayFiveLanguagePopulation(language);
+                again = Question();
 
             }
             else
@@ -1741,6 +1738,73 @@ public class App {
             System.out.print("\n");
         }
         System.out.print("=========================================================================================================================================================\n");
+    }
+
+//Language Report
+//
+//the following languages from greatest number to smallest, including the percentage of the world population
+//
+public ArrayList<Language> getFiveLanguagePopulation()
+{
+    ArrayList<Language> LanguagePopulation = null;
+    try {
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
+        // Create string for SQL statement
+        String strSelect =
+                "SELECT countrylanguage.Language, sum(country.Population * countrylanguage.Percentage) AS PopulationLanguage, sum(country.Population * countrylanguage.percentage)/ (select sum(Population) FROM country) as Percentpopulation "
+                        + "FROM country, countrylanguage "
+                        + "WHERE countrylanguage.CountryCode = country.Code "
+                        + "AND countrylanguage.Language IN ('English','Chinese','Hindi','Arabic','Spanish') "
+                        + "GROUP BY countrylanguage.Language ORDER BY PopulationLanguage DESC";
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery(strSelect);
+        if (rset == null) {
+            System.out.print("Population for each language Not found!");
+        } else {
+            LanguagePopulation = new ArrayList<>();
+            // Return population if valid.
+            while (rset.next()) {
+                Country country=new Country();
+                Language lan =new Language();
+                lan.setLanguage(rset.getString(1));
+                country.setPopulation(rset.getLong(2));
+                lan.setPercentage(rset.getFloat(3));
+
+                lan.setCountry(country);
+                LanguagePopulation.add(lan);
+
+            }
+        }
+    }
+    catch (Exception e) {
+        System.out.println(e.getMessage());
+        System.out.println("Failed to get Country Language!.");
+    }
+    return LanguagePopulation;
+}
+
+    public void displayFiveLanguagePopulation(ArrayList<Language> language)
+    {
+
+        if (language == null)
+        {
+            System.out.println("* There is null data in Language Population!\n");
+            return;
+        }
+        System.out.print("===== Languages from Greatest Number to Smallest, including the Percentage of the World Population =====\n");
+        System.out.printf("%25s%25s%25s","Language","Population","Percentage\n");
+        System.out.print("========================================================================================================\n");
+        for(Language lan:language)
+        {
+            if (lan == null) {
+                System.out.println("* No null data in each Language population!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s%25s",lan.getLanguage(), lan.getCountry().getPopulation(), lan.getPercentage());
+            System.out.print("\n");
+        }
+        System.out.print("========================================================================================================\n");
     }
 
 
