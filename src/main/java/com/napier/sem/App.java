@@ -612,7 +612,8 @@ public class App {
                 System.out.print("Not found.");
             } else {
                 countryWorld = new ArrayList<>();
-                
+                // Return new city if valid.
+                // Check one is returned
                 while (rset.next()) {
                     Country country = new Country();
                     country.setName(rset.getString("Name"));
@@ -1744,45 +1745,45 @@ public class App {
 //
 //the following languages from greatest number to smallest, including the percentage of the world population
 //
-public ArrayList<Language> getFiveLanguagePopulation()
-{
-    ArrayList<Language> LanguagePopulation = null;
-    try {
-        // Create an SQL statement
-        Statement stmt = con.createStatement();
-        // Create string for SQL statement
-        String strSelect =
-                "SELECT countrylanguage.Language, sum(country.Population * countrylanguage.Percentage) AS PopulationLanguage, sum(country.Population * countrylanguage.percentage)/ (select sum(Population) FROM country) as Percentpopulation "
-                        + "FROM country, countrylanguage "
-                        + "WHERE countrylanguage.CountryCode = country.Code "
-                        + "AND countrylanguage.Language IN ('English','Chinese','Hindi','Arabic','Spanish') "
-                        + "GROUP BY countrylanguage.Language ORDER BY PopulationLanguage DESC";
-        // Execute SQL statement
-        ResultSet rset = stmt.executeQuery(strSelect);
-        if (rset == null) {
-            System.out.print("Population for each language Not found!");
-        } else {
-            LanguagePopulation = new ArrayList<>();
-            // Return population if valid.
-            while (rset.next()) {
-                Country country=new Country();
-                Language lan =new Language();
-                lan.setLanguage(rset.getString(1));
-                country.setPopulation(rset.getLong(2));
-                lan.setPercentage(rset.getFloat(3));
+    public ArrayList<Language> getFiveLanguagePopulation()
+    {
+        ArrayList<Language> LanguagePopulation = null;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT countrylanguage.Language, sum(country.Population * countrylanguage.Percentage) AS PopulationLanguage, sum(country.Population * countrylanguage.percentage)/ (select sum(Population) FROM country) as Percentpopulation "
+                            + "FROM country, countrylanguage "
+                            + "WHERE countrylanguage.CountryCode = country.Code "
+                            + "AND countrylanguage.Language IN ('English','Chinese','Hindi','Arabic','Spanish') "
+                            + "GROUP BY countrylanguage.Language ORDER BY PopulationLanguage DESC";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Population for each language Not found!");
+            } else {
+                LanguagePopulation = new ArrayList<>();
+                // Return population if valid.
+                while (rset.next()) {
+                    Country country=new Country();
+                    Language lan =new Language();
+                    lan.setLanguage(rset.getString(1));
+                    country.setPopulation(rset.getLong(2));
+                    lan.setPercentage(rset.getFloat(3));
 
-                lan.setCountry(country);
-                LanguagePopulation.add(lan);
+                    lan.setCountry(country);
+                    LanguagePopulation.add(lan);
 
+                }
             }
         }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Country Language!.");
+        }
+        return LanguagePopulation;
     }
-    catch (Exception e) {
-        System.out.println(e.getMessage());
-        System.out.println("Failed to get Country Language!.");
-    }
-    return LanguagePopulation;
-}
 
     public void displayFiveLanguagePopulation(ArrayList<Language> language)
     {
@@ -1806,7 +1807,6 @@ public ArrayList<Language> getFiveLanguagePopulation()
         }
         System.out.print("========================================================================================================\n");
     }
-
 
     //3. city report requires the following columns:
 //Name.
