@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
 /*** This is the class to be accessed from other function*/
+
 public class App {
     public static void main(String[] args) {
         // Create new Application
@@ -195,7 +196,11 @@ public class App {
             System.out.println(
                             "1. About Country Report " + "\n" +
                             "2. About City Report " + "\n" +
-                            "3. About Capital City Report "+ "\n"
+                            "3. About Capital City Report "+ "\n" +
+                            "4. About Population Report "+ "\n" +
+                            "5. About Population According To User-Input "+ "\n" +
+                            "6. About Language Report "+ "\n"
+
             );
             System.out.print("Enter your option: ");
             int reportOp = Obj.nextInt();  // Read user input
@@ -326,6 +331,187 @@ public class App {
                     again = true;
                 }
             }
+
+
+            // Population Report
+            if (reportOp == 4)
+            {
+                System.out.println("*******************");
+                System.out.println("*Population Report*");
+                System.out.println("*******************");
+                System.out.println(
+                        "1. The population of the world." + "\n" +
+                                "2. The population of a continent." + "\n" +
+                                "3. The population of a region." + "\n" +
+                                "4. The population of a country." + "\n" +
+                                "5. The population of a district." + "\n" +
+                                "6. The population of a city." + "\n" +
+                                "7. The population of people, people living in cities, and people not living in cities in each continent." + "\n" +
+                                "8. The population of people, people living in cities, and people not living in cities in each region." + "\n" +
+                                "9. The population of people, people living in cities, and people not living in cities in each country." + "\n"
+
+                );
+                System.out.print("Enter an option : ");
+                int PopuReport = Obj.nextInt();  // Read user input
+
+                if (PopuReport == 1)
+                {
+                    ArrayList crtyTotlPopuWorld= getCountryTotalPopuWorld();
+                    displayCountryTotalPopuWorld(crtyTotlPopuWorld);
+                    again = Question();
+                }
+                else if (PopuReport == 2)
+                {
+                    ArrayList crtyTotlPopuContinent= getCountryTotalPopuCont();
+                    displayCountryTotalPopuCont(crtyTotlPopuContinent);
+                    again = Question();
+                }
+                else if (PopuReport == 3)
+                {
+                    ArrayList crtyTotlPopuRegion= getCountryTotalPopuRegion();
+                    displayCountryTotalPopuRegion(crtyTotlPopuRegion);
+                    again = Question();
+                }
+                else if (PopuReport == 4)
+                {
+//                    ArrayList countryregion = getCountryRegion();
+//                    displayCountryRegion(countryregion);
+//                    again = Question();
+                }
+                else if (PopuReport == 5)
+                {
+//                    ArrayList countryregion = getCountryRegion();
+//                    displayCountryRegion(countryregion);
+//                    again = Question();
+                }
+                else if (PopuReport == 6)
+                {
+                    ArrayList ctyTotlPopu= getCityTotalPopu();
+                    displayCityTotalPopu(ctyTotlPopu);
+                    again = Question();
+                }
+                else if (PopuReport == 7)
+                {
+//                    ArrayList countryregion = getCountryRegion();
+//                    displayCountryRegion(countryregion);
+//                    again = Question();
+                }
+                else
+                {
+                    again = true;
+                }
+            }
+
+            // Population According to USer_input Report
+            if (reportOp == 5)
+            {
+                System.out.println("************************************");
+                System.out.println("*Population According to User_input*");
+                System.out.println("************************************");
+                System.out.println(
+                        "1. The top N populated countries in the world where N is provided by the user." + "\n" +
+                                "2. The top N populated countries in a continent where N is provided by the user." + "\n" +
+                                "3. The top N populated countries in a region where N is provided by the user." + "\n" +
+                                "4. The top N populated cities in the world where N is provided by the user." + "\n" +
+                                "5. The top N populated cities in a continent where N is provided by the user." + "\n" +
+                                "6. The top N populated cities in a region where N is provided by the user." + "\n" +
+                                "7. The top N populated cities in a country where N is provided by the user." + "\n" +
+                                "8. The top N populated cities in a district where N is provided by the user." + "\n" +
+                                "9. The top N populated capital cities in the world where N is provided by the user." + "\n" +
+                                "10. The top N populated capital cities in a continent where N is provided by the user." + "\n" +
+                                "11. The top N populated capital cities in a region where N is provided by the user." + "\n"
+
+                );
+                System.out.print("Enter an option : ");
+                int PopuReport_input = Obj.nextInt();  // Read user input
+
+                if (PopuReport_input == 1)
+                {
+//                    ArrayList countryworld = getCountryWorld();
+//                    displayCountryWorld(countryworld);
+//                    again = Question();
+                }
+                else if (PopuReport_input == 2)
+                {
+//                    ArrayList countrycontinent = getCountryContinent();
+//                    displayCountryContinent(countrycontinent);
+//                    again = Question();
+                }
+                else if (PopuReport_input == 3)
+                {
+//                    ArrayList countryregion = getCountryRegion();
+//                    displayCountryRegion(countryregion);
+//                    again = Question();
+                }
+                else if (PopuReport_input == 4)
+                {
+//                    ArrayList countryregion = getCountryRegion();
+//                    displayCountryRegion(countryregion);
+//                    again = Question();
+                }
+                else if (PopuReport_input == 5)
+                {
+//                    ArrayList countryregion = getCountryRegion();
+//                    displayCountryRegion(countryregion);
+//                    again = Question();
+                }
+                else if (PopuReport_input == 6)
+                {
+//                    ArrayList countryregion = getCountryRegion();
+//                    displayCountryRegion(countryregion);
+//                    again = Question();
+                }
+                else if (PopuReport_input == 7)
+                {
+//                    ArrayList countryregion = getCountryRegion();
+//                    displayCountryRegion(countryregion);
+//                    again = Question();
+                }
+                else if (PopuReport_input == 8)
+                {
+//                    ArrayList countryregion = getCountryRegion();
+//                    displayCountryRegion(countryregion);
+//                    again = Question();
+                }
+                else if (PopuReport_input == 9)
+                {
+//                    ArrayList countryregion = getCountryRegion();
+//                    displayCountryRegion(countryregion);
+//                    again = Question();
+                }
+                else if (PopuReport_input == 10)
+                {
+//                    ArrayList countryregion = getCountryRegion();
+//                    displayCountryRegion(countryregion);
+//                    again = Question();
+                }
+                else if (PopuReport_input == 11)
+                {
+//                    ArrayList countryregion = getCountryRegion();
+//                    displayCountryRegion(countryregion);
+//                    again = Question();
+                }
+                else
+                {
+                    again = true;
+                }
+            }
+
+            // Capital_City_Report
+            else if (reportOp == 6)
+            {
+                System.out.println("*****************");
+                System.out.println("*Language Report*");
+                System.out.println("*****************");
+                System.out.println
+                        (
+                                "1. All the capital cities in the world organised by largest population to smallest. " + "\n" +
+                                        "2. All the capital cities in a continent organised by largest population to smallest. " + "\n" +
+                                        "3. All the capital cities in a region organised by largest to smallest. " + "\n" );
+                System.out.print("Enter your option: ");
+                int CapCityReport = Obj.nextInt();  // Read user input
+
+            }
             else
             {
                 System.out.println("Invalid Input!");  // Output user input
@@ -335,39 +521,39 @@ public class App {
 
     }
 
-    public String Continent()
-    {
-        Scanner Obj = new Scanner(System.in);  // Create a Scanner object
-        System.out.println(
-                "Choose one of the following continent " + "\n" +
-                        "('Asia','Oceania','Antarctica','Europe','North America','Africa','South America')");
-        System.out.print("Enter a continent: ");
-        String continent = Obj.nextLine();
-        System.out.println("\n");
-        return continent;
-    }
-
-    String Country()
-    {
-        Scanner Obj = new Scanner(System.in);  // Create a Scanner object
-        System.out.print(
-                "Enter a country : ");
-        String country = Obj.nextLine();
-        System.out.println("\n");
-        return country;
-    }
-
-
-    public String Region()
-    {
-        Scanner Obj = new Scanner(System.in);  // Create a Scanner object
-        System.out.print(
-                "Choose a region of the world " + "\n" +
-                        "('Caribbean','Southern and Central Asia','Central Africa','Southern Europe', 'Eastern Africa', 'Middle East','Polynesia', 'Western Europe', 'Antarctica','South America' etc.)");
-        String region = Obj.nextLine();
-        System.out.println("\n");
-        return region;
-    }
+//    public String Continent()
+//    {
+//        Scanner Obj = new Scanner(System.in);  // Create a Scanner object
+//        System.out.println(
+//                "Choose one of the following continent " + "\n" +
+//                        "('Asia','Oceania','Antarctica','Europe','North America','Africa','South America')");
+//        System.out.print("Enter a continent: ");
+//        String continent = Obj.nextLine();
+//        System.out.println("\n");
+//        return continent;
+//    }
+//
+//    String Country()
+//    {
+//        Scanner Obj = new Scanner(System.in);  // Create a Scanner object
+//        System.out.print(
+//                "Enter a country : ");
+//        String country = Obj.nextLine();
+//        System.out.println("\n");
+//        return country;
+//    }
+//
+//
+//    public String Region()
+//    {
+//        Scanner Obj = new Scanner(System.in);  // Create a Scanner object
+//        System.out.print(
+//                "Choose a region of the world " + "\n" +
+//                        "('Caribbean','Southern and Central Asia','Central Africa','Southern Europe', 'Eastern Africa', 'Middle East','Polynesia', 'Western Europe', 'Antarctica','South America' etc.)");
+//        String region = Obj.nextLine();
+//        System.out.println("\n");
+//        return region;
+//    }
 
     private boolean Question() {
         Scanner Obj = new Scanner(System.in);
