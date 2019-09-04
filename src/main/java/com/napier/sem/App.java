@@ -397,9 +397,21 @@ public class App {
                 }
                 else if (PopuReport == 7)
                 {
-//                    ArrayList countryregion = getCountryRegion();
-//                    displayCountryRegion(countryregion);
-//                    again = Question();
+                    ArrayList popuContinent = getLivePopulationContinent();
+                    displayLivePopulationContinent(popuContinent);
+                    again = Question();
+                }
+                else if (PopuReport == 8)
+                {
+                    ArrayList popuRegion = getLivePopulationRegion();
+                    displayLivePopulationRegion(popuRegion);
+                    again = Question();
+                }
+                else if (PopuReport == 9)
+                {
+                    ArrayList popuCountry = getLivePopulationCountry();
+                    displayLivePopulationCountry(popuCountry);
+                    again = Question();
                 }
                 else
                 {
@@ -474,9 +486,9 @@ public class App {
                 }
                 else if (PopuReport_input == 8)
                 {
-//                    ArrayList countryregion = getCountryRegion();
-//                    displayCountryRegion(countryregion);
-//                    again = Question();
+                    ArrayList popuRegion = getLivePopulationRegion();
+                    displayLivePopulationRegion(popuRegion);
+                    again = Question();
                 }
                 else if (PopuReport_input == 9)
                 {
@@ -1151,7 +1163,7 @@ public class App {
         System.out.print("===============================================================================================\n");
     }
 
-    //13.
+//13.
 // Capital City Report Option 2. All the capital cities in a continent organised by largest population to smallest
     public ArrayList<City> getCapitalCityContinent()
     {
@@ -1515,6 +1527,223 @@ public class App {
         System.out.print("=========================================================\n");
     }
 
+// Population Report Option 7. The population of people, people living in cities, and people not living in cities in each continent
+//
+    public ArrayList<Population> getLivePopulationContinent()
+
+    {
+        ArrayList<Population> livpopucontinent=null;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Continent, SUM(country.Population) as CountryTotalPopulation, SUM((select SUM(population) from city where countrycode = country.code)) as PeopleLiveInCity, "
+                            + "(SUM((select SUM(population) from city where countrycode = country.code)) / SUM(country.Population))*100 as PercentagePeopleLiveInCity, "
+                            + " (sum(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) as PeopleNotLiveInCity, "
+                            + " ((sum(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) / SUM(country.Population))*100 as PercentagePeopleNotInCity"
+                            + " FROM country GROUP BY country.Continent;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                livpopucontinent=new ArrayList<>();
+                // Return new city if valid.
+                // Check one is
+                while (rset.next()) {
+                    Country c=new Country();
+                    Population popu = new Population();
+                    c.setContinent(rset.getString(1));
+
+                    popu.setCountry(c);
+                    popu.setTotalPopulation(rset.getLong(2));
+                    popu.setPopulationinCity(rset.getLong(3));
+                    popu.setPercentinCity(rset.getFloat(4));
+                    popu.setPopulationNotinCity(rset.getLong(5));
+                    popu.setPercentNotinCity(rset.getFloat(6));
+
+                    livpopucontinent.add(popu);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get people who are not living in the city by region");
+        }
+        return livpopucontinent;
+    }
+    public void displayLivePopulationContinent(ArrayList<Population> livepopucontinent)
+    {
+        if (livepopucontinent == null)
+        {
+            System.out.println("* There is no null data in total population of people living in a country of a continent!\n");
+            return;
+        }
+        System.out.print("=============================================== People Living and Not Living in the Country of a Continent ================================================\n");
+        System.out.printf("%25s%25s%25s%25s%25s%25s","Continent","CountryPopulation","LivingPopulation","LivingPercentage","NotLivingPopulation","NotLivingPercentage\n");
+        System.out.print("=========================================================================================================================================================\n");
+
+        for (Population pop:livepopucontinent)
+        {
+            if(pop == null)
+            {
+                System.out.println("* No null data in each total population of people living in a country of a continent!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s%25s%25s%25s%25s",pop.getCountry().getContinent(),pop.getTotalPopulation(), pop.getPopulationinCity(),
+                    pop.getPercentinCity(), pop.getPopulationNotinCity(), pop.getPercentNotinCity());
+            System.out.print("\n");
+        }
+        System.out.print("=========================================================================================================================================================\n");
+    }
+
+// Population Report Option 8.The population of people, people living in cities, and people not living in cities in each region
+//
+    public ArrayList<Population> getLivePopulationRegion()
+
+    {
+        ArrayList<Population>livepopuregion=null;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statements
+            String strSelect =
+                    "SELECT country.Region, SUM(country.Population) as CountryTotalPopulation, SUM((select SUM(population) from city where countrycode = country.code)) as PeopleLiveInCity,"
+                            +" (SUM((select SUM(population) from city where countrycode = country.code)) / SUM(country.Population))*100 as PercentagePeopleLiveInCity , (SUM(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) as PeopleNotInCity,"
+                            +" ((SUM(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) / SUM(country.Population))*100 as PercentagePeopleNotInCity"
+                            +" FROM country"
+                            +" GROUP BY country.Region;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                livepopuregion=new ArrayList<>();
+
+                while (rset.next()) {
+                    Country c = new Country();
+                    Population popu = new Population();
+                    c.setRegion(rset.getString(1));
+
+                    popu.setCountry(c);
+                    popu.setTotalPopulation(rset.getLong(2));
+                    popu.setPopulationinCity(rset.getLong(3));
+                    popu.setPercentinCity(rset.getFloat(4));
+                    popu.setPopulationNotinCity(rset.getLong(5));
+                    popu.setPercentNotinCity(rset.getFloat(6));
+                    livepopuregion.add(popu);
+
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get people who are not living in the country by region");
+        }
+        return livepopuregion;
+        //return population calculation
+    }
+    public void displayLivePopulationRegion(ArrayList<Population> livepopuregion)
+    {
+        if (livepopuregion == null)
+        {
+            System.out.println("* There is no null data in total population of people living in a country!\n");
+            return;
+        }
+        System.out.print("=============================================== People Living and Not Living in the Country of a Region ================================================\n");
+        System.out.printf("%25s%25s%25s%25s%25s%25s","Region","CountryPopulation","LivingInCity","PercentageOfLivinginCity","NotLivingInCity","PercentageOfNotLivingInCity\n");
+        System.out.print("=========================================================================================================================================================\n");
+
+        for (Population pop:livepopuregion)
+        {
+            if(pop == null)
+            {
+                System.out.println("* No null data in each total population of people living in a country!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s%25s%25s%25s%25s",pop.getCountry().getRegion(), pop.getTotalPopulation(),pop.getPopulationinCity(),
+                    pop.getPercentinCity(), pop.getPopulationNotinCity(), pop.getPercentNotinCity());
+            System.out.print("\n");
+        }
+        System.out.print("=========================================================================================================================================================\n");
+    }
+
+// Population Report Option 9. The population of people, people living in cities, and people not living in cities in each Country
+//
+    public ArrayList<Population> getLivePopulationCountry()
+
+    {
+        ArrayList<Population>livepopucrty=null;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.name, country.Population, country.Population-sum(city.Population) as 'PeopleNotInCity', "
+                            + "((country.Population-sum(city.Population))/country.Population)*100 as 'PercentagePeopleNotInCity', country.Population - (country.Population-sum(city.Population)) as 'PeopleLiveInCity', "
+                            + "((country.Population - (country.Population-sum(city.Population)))/country.Population)*100 as 'PercentagePeopleLiveInCity' "
+                            + "FROM country country join city city on country.code = city.countrycode "
+                            + "WHERE city.CountryCode = country.Code GROUP BY country.Name,"
+                            + "country.Population ORDER BY country.Name;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                livepopucrty = new ArrayList<>();
+                // Return new city if valid.
+                // Check one is
+                while (rset.next()) {
+                    Country c=new Country();
+                    Population popu = new Population();
+
+                    c.setName(rset.getString(1));
+                    c.setPopulation(rset.getLong(2));
+
+                    popu.setCountry(c);
+                    popu.setPopulationinCity(rset.getLong(5));
+                    popu.setPercentinCity(rset.getFloat(6));
+                    popu.setPopulationNotinCity(rset.getLong(3));
+                    popu.setPercentNotinCity(rset.getFloat(4));
+                    livepopucrty.add(popu);
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get people who are not living in the city.");
+        }
+        return livepopucrty;
+        //return country;
+    }
+    public void displayLivePopulationCountry(ArrayList<Population>livepopucrty)
+    {
+        if (livepopucrty == null)
+        {
+            System.out.println("* There is no null data in total population of people living in a city!\n");
+            return;
+        }
+        System.out.print("=========================== The Population of People, People living in Cities, and People not living in Cities in each Country ==========================\n");
+        System.out.printf("%25s%25s%25s%25s%25s%25s","Country","CountryPopulation","PeopleLivingInCity","LivingPercentage","PeopleNotLivingInCity","NotLivingPercentage\n");
+        System.out.print("=========================================================================================================================================================\n");
+
+        for (Population pop:livepopucrty)
+        {
+            if(pop == null)
+            {
+                System.out.println("* null data in each total population of people living in a city!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s%25s%25s%25s%25s",pop.getCountry().getName(), pop.getCountry().getPopulation(),pop.getPopulationinCity(), pop.getPercentinCity(),pop.getPopulationNotinCity(),pop.getPercentNotinCity());
+            System.out.print("\n");
+        }
+        System.out.print("=========================================================================================================================================================\n");
+    }
+
 
     //3. city report requires the following columns:
 //Name.
@@ -1757,221 +1986,7 @@ public class App {
 
 //    ******Cherry Coding (People live and not living in each region, country, continent)********
 
-    public ArrayList<City> getLivePopulationRegion()
 
-    {
-        ArrayList<City>livepopuregion=null;
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statements
-            String strSelect =
-                    "SELECT country.Region, SUM(country.Population) as CountryTotalPopulation, SUM((select SUM(population) from city where countrycode = country.code)) as PeopleLiveInCity,"
-                            +" (SUM((select SUM(population) from city where countrycode = country.code)) / SUM(country.Population))*100 as PercentagePeopleLiveInCity , (SUM(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) as PeopleNotInCity,"
-                            +" ((SUM(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) / SUM(country.Population))*100 as PercentagePeopleNotInCity"
-                            +" FROM country"
-                            +" GROUP BY country.Region;";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            if (rset == null) {
-                System.out.print("Not found.");
-            } else {
-                livepopuregion=new ArrayList<>();
-                // Return new city if valid.
-                // Check one is
-                while (rset.next()) {
-                    Country livregioncrty = new Country();
-                    City livregioncty = new City();
-                    livregioncrty.setRegion(rset.getString(1));
-                    livregioncrty.setPopulation(rset.getLong(2));
-                    livregioncrty.setPopulation(rset.getLong(3));
-                    livregioncty.setPopulation(rset.getLong(4));
-                    livregioncrty.setPopulation(rset.getLong(5));
-                    livregioncrty.setPopulation(rset.getLong(6));
-
-                    livregioncty.setCountry(livregioncrty);
-                    livepopuregion.add(livregioncty);
-                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-                    //System.out.println("\n");
-                    //System.out.printf("Region Name : "+rset.getString(1)+"\n"+"People not living in cities in each region: "+rset.getLong(2)+"\n"+"\n");
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get people who are not living in the country by region");
-        }
-        return livepopuregion;
-        //return continent;
-    }
-    public void displayLivePopulationRegion(ArrayList<City>livepopuregion)
-    {
-        if (livepopuregion == null)
-        {
-            System.out.println("* There is no null data in total population of people living in a country!\n");
-            return;
-        }
-        System.out.print("\n*****************************************People Living and Not Living in the Country of a Region*****************************************\n\n");
-        System.out.printf("%25s%25s%25s%25s%25s%25s","Region","Country Population","Living in City","Percentage of Living in City","Not Living in City","Percentage of Not Living in City\n");
-        System.out.print("\n******************************************************************************************************************\n\n");
-
-        for (City livcrtyregion:livepopuregion)
-        {
-            if(livcrtyregion == null)
-            {
-                System.out.println("* No null data in each total population of people living in a country!\n");
-                continue;
-            }
-            System.out.printf("%25s%25s%25s%25s%25s%25s",livcrtyregion.getName(), livcrtyregion.getCountry().getPopulation(),livcrtyregion.getCountry().getPopulation(), livcrtyregion.getPopulation(),livcrtyregion.getCountry().getPopulation(),livcrtyregion.getCountry().getPopulation());
-            System.out.print("\n");
-        }
-        System.out.print("\n******************************************************************************************************************\n\n");
-    }
-
-    public ArrayList<City> getLivePopulationCountry()
-
-    {
-        ArrayList<City>livepopucrty=null;
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT country.name, country.Population, country.Population-sum(city.Population) as 'PeopleNotInCity', "
-                            + "((country.Population-sum(city.Population))/country.Population)*100 as 'PercentagePeopleNotInCity', country.Population - (country.Population-sum(city.Population)) as 'PeopleLiveInCity', "
-                            + "((country.Population - (country.Population-sum(city.Population)))/country.Population)*100 as 'PercentagePeopleLiveInCity' "
-                            + "FROM country country join city city on country.code = city.countrycode "
-                            + "WHERE city.CountryCode = country.Code GROUP BY country.Name,"
-                            + "country.Population ORDER BY country.Name;";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            if (rset == null) {
-                System.out.print("Not found.");
-            } else {
-                livepopucrty=new ArrayList<>();
-                // Return new city if valid.
-                // Check one is
-                while (rset.next()) {
-                    Country crtylive=new Country();
-                    City ctylive=new City();
-                    crtylive.setName(rset.getString(1));
-                    crtylive.setPopulation(rset.getLong(2));
-                    ctylive.setPopulation(rset.getLong(3));
-                    ctylive.setPopulation(rset.getLong(4));
-                    ctylive.setPopulation(rset.getLong(5));
-                    ctylive.setPopulation(rset.getLong(6));
-
-                    ctylive.setCountry(crtylive);
-                    livepopucrty.add(ctylive);
-                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-                    //System.out.println("\n");
-                    //System.out.printf("Country Name : "+rset.getString(1)+"\n"+"People not living in cities in each country: "+rset.getLong(2)+"\n"+"\n");
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get people who are not living in the city.");
-        }
-        return livepopucrty;
-        //return continent;
-    }
-    public void displayLivePopulationCountry(ArrayList<City>livepopucrty)
-    {
-        if (livepopucrty == null)
-        {
-            System.out.println("* There is no null data in total population of people living in a city!\n");
-            return;
-        }
-        System.out.print("\n*****************************************People Living and Not Living in a City*****************************************\n\n");
-        System.out.printf("%25s%25s%25s%25s%25s%25s","Country","Country Population","Not Living in City","Not Living Percentage","Population4","Percentage\n");
-        System.out.print("\n******************************************************************************************************************\n\n");
-
-        for (City livcrty:livepopucrty)
-        {
-            if(livcrty == null)
-            {
-                System.out.println("* No null data in each total population of people living in a city!\n");
-                continue;
-            }
-            System.out.printf("%25s%25s%25s%25s%25s%25s",livcrty.getName(), livcrty.getCountry().getPopulation(),livcrty.getPopulation(), livcrty.getPopulation(),livcrty.getPopulation(),livcrty.getPopulation());
-            System.out.print("\n");
-        }
-        System.out.print("\n******************************************************************************************************************\n\n");
-    }
-
-    public ArrayList<City> getLivePopulationContinent()
-
-    {
-        ArrayList<City>livpopucontinent=null;
-        try {
-            // Create an SQL statement
-            Statement stmt = con.createStatement();
-            // Create string for SQL statement
-            String strSelect =
-                    "SELECT country.Continent, SUM(country.Population) as CountryTotalPopulation, SUM((select SUM(population) from city where countrycode = country.code)) as PeopleLiveInCity, "
-                            + "(SUM((select SUM(population) from city where countrycode = country.code)) / SUM(country.Population))*100 as PercentagePeopleLiveInCity, "
-                            + " (sum(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) as PeopleNotLiveInCity, "
-                            + " ((sum(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) / SUM(country.Population))*100 as PercentagePeopleNotInCity"
-                            + " FROM country GROUP BY country.Continent;";
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            if (rset == null) {
-                System.out.print("Not found.");
-            } else {
-                livpopucontinent=new ArrayList<>();
-                // Return new city if valid.
-                // Check one is
-                while (rset.next()) {
-                    Country crtylivcont=new Country();
-                    City ctylivcont=new City();
-                    crtylivcont.setContinent(rset.getString(1));
-                    crtylivcont.setPopulation(rset.getLong(2));
-                    ctylivcont.setPopulation(rset.getLong(3));
-                    ctylivcont.setPopulation(rset.getLong(4));
-                    ctylivcont.setPopulation(rset.getLong(5));
-                    ctylivcont.setPopulation(rset.getLong(6));
-
-                    ctylivcont.setCountry(crtylivcont);
-                    livpopucontinent.add(ctylivcont);
-                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-                    //System.out.println("\n");
-                    //System.out.printf("Continent Name : "+rset.getString(1)+"\n"+"People not living in cities in each continent: "+rset.getLong(2)+"\n"+"\n");
-                }
-            }
-        }
-        catch (Exception e)
-        {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get people who are not living in the city by region");
-        }
-        return livpopucontinent;
-    }
-    public void displayLivePopulationContinent(ArrayList<City>livepopucontinent)
-    {
-        if (livepopucontinent == null)
-        {
-            System.out.println("* There is no null data in total population of people living in a country of a continent!\n");
-            return;
-        }
-        System.out.print("\n*****************************************People Living and Not Living in a Country of a Continent*****************************************\n\n");
-        System.out.printf("%25s%25s%25s%25s%25s%25s","Continent","Country Population","Living Population","Living Population Percentage","Not Living Population","Not Living Population Percentage\n");
-        System.out.print("\n******************************************************************************************************************\n\n");
-
-        for (City livcrtycont:livepopucontinent)
-        {
-            if(livcrtycont == null)
-            {
-                System.out.println("* No null data in each total population of people living in a country of a continent!\n");
-                continue;
-            }
-            System.out.printf("%25s%25s%25s%25s%25s%25s",livcrtycont.getCountry().getName(), livcrtycont.getCountry().getPopulation(),livcrtycont.getPopulation(), livcrtycont.getPopulation(),livcrtycont.getPopulation(),livcrtycont.getPopulation());
-            System.out.print("\n");
-        }
-        System.out.print("\n******************************************************************************************************************\n\n");
-    }
 
 //    End of Cherry Coding
 
