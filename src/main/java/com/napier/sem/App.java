@@ -615,8 +615,7 @@ public class App {
                 System.out.print("Not found.");
             } else {
                 countryWorld = new ArrayList<>();
-                // Return new city if valid.
-                // Check one is returned
+                
                 while (rset.next()) {
                     Country country = new Country();
                     country.setName(rset.getString("Name"));
