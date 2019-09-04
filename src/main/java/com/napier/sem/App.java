@@ -118,6 +118,11 @@ public class App {
         ArrayList livpopuregion= a.getLivePopulationRegion();
         a.displayLivePopulationRegion(livpopuregion);
 
+        ArrayList livpopucrty= a.getLivePopulationCountry();
+        a.displayLivePopulationCountry(livpopucrty);
+
+        ArrayList livpopucont= a.getLivePopulationContinent();
+        a.displayLivePopulationContinent(livpopucont);
 
         // Disconnect from database
         a.disconnect();
@@ -1909,8 +1914,8 @@ public class App {
             System.out.println("* There is no null data in total population of people living in a country!\n");
             return;
         }
-        System.out.print("\n*****************************************People Living in a Country*****************************************\n\n");
-        System.out.printf("%25s%25s%25s%25s%25s%25s","Region","Population1","Population2","Population3","Population4","Percentage\n");
+        System.out.print("\n*****************************************People Living and Not Living in the Country of a Region*****************************************\n\n");
+        System.out.printf("%25s%25s%25s%25s%25s%25s","Region","Country Population","Living in City","Percentage of Living in City","Not Living in City","Percentage of Not Living in City\n");
         System.out.print("\n******************************************************************************************************************\n\n");
 
         for (City livcrtyregion:livepopuregion)
@@ -1925,77 +1930,150 @@ public class App {
         }
         System.out.print("\n******************************************************************************************************************\n\n");
     }
-//
-//    public void getLivePopulationCountry()
-//
-//    {
-//        try {
-//            // Create an SQL statement
-//            Statement stmt = con.createStatement();
-//            // Create string for SQL statement
-//            String strSelect =
-//                    "SELECT country.name, country.Population, country.Population-sum(city.Population) as 'PeopleNotInCity', "
-//                            + "((country.Population-sum(city.Population))/country.Population)*100 as 'PercentagePeopleNotInCity', country.Population - (country.Population-sum(city.Population)) as 'PeopleLiveInCity', "
-//                            + "((country.Population - (country.Population-sum(city.Population)))/country.Population)*100 as 'PercentagePeopleLiveInCity' "
-//                            + "FROM country country join city city on country.code = city.countrycode "
-//                            + "WHERE city.CountryCode = country.Code GROUP BY country.Name,"
-//                            + "country.Population ORDER BY country.Name;";
-//            // Execute SQL statement
-//            ResultSet rset = stmt.executeQuery(strSelect);
-//            if (rset == null) {
-//                System.out.print("Not found.");
-//            } else {
-//                // Return new city if valid.
-//                // Check one is
-//                while (rset.next()) {
-//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-//                    //System.out.println("\n");
-//                    System.out.printf("Country Name : "+rset.getString(1)+"\n"+"People not living in cities in each country: "+rset.getLong(2)+"\n"+"\n");
-//                }
-//            }
-//        }
-//        catch (Exception e)
-//        {
-//            System.out.println(e.getMessage());
-//            System.out.println("Failed to get people who are not living in the city by region");
-//        }
-//        //return continent;
-//    }
-//
-//    public void getLivePopulationContinent()
-//
-//    {
-//        try {
-//            // Create an SQL statement
-//            Statement stmt = con.createStatement();
-//            // Create string for SQL statement
-//            String strSelect =
-//                    "SELECT country.Continent, SUM(country.Population) as CountryTotalPopulation, SUM((select SUM(population) from city where countrycode = country.code)) as PeopleLiveInCity, "
-//                            + "(SUM((select SUM(population) from city where countrycode = country.code)) / SUM(country.Population))*100 as PercentagePeopleLiveInCity, "
-//                            + " (sum(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) as PeopleNotLiveInCity, "
-//                            + " ((sum(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) / SUM(country.Population))*100 as PercentagePeopleNotInCity"
-//                            + " FROM country GROUP BY country.Continent;";
-//            // Execute SQL statement
-//            ResultSet rset = stmt.executeQuery(strSelect);
-//            if (rset == null) {
-//                System.out.print("Not found.");
-//            } else {
-//                // Return new city if valid.
-//                // Check one is
-//                while (rset.next()) {
-//                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
-//                    //System.out.println("\n");
-//                    System.out.printf("Continent Name : "+rset.getString(1)+"\n"+"People not living in cities in each continent: "+rset.getLong(2)+"\n"+"\n");
-//                }
-//            }
-//        }
-//        catch (Exception e)
-//        {
-//            System.out.println(e.getMessage());
-//            System.out.println("Failed to get people who are not living in the city by region");
-//        }
-//        //return continent;
-//    }
+
+    public ArrayList<City> getLivePopulationCountry()
+
+    {
+        ArrayList<City>livepopucrty=null;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.name, country.Population, country.Population-sum(city.Population) as 'PeopleNotInCity', "
+                            + "((country.Population-sum(city.Population))/country.Population)*100 as 'PercentagePeopleNotInCity', country.Population - (country.Population-sum(city.Population)) as 'PeopleLiveInCity', "
+                            + "((country.Population - (country.Population-sum(city.Population)))/country.Population)*100 as 'PercentagePeopleLiveInCity' "
+                            + "FROM country country join city city on country.code = city.countrycode "
+                            + "WHERE city.CountryCode = country.Code GROUP BY country.Name,"
+                            + "country.Population ORDER BY country.Name;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                livepopucrty=new ArrayList<>();
+                // Return new city if valid.
+                // Check one is
+                while (rset.next()) {
+                    Country crtylive=new Country();
+                    City ctylive=new City();
+                    crtylive.setName(rset.getString(1));
+                    crtylive.setPopulation(rset.getLong(2));
+                    ctylive.setPopulation(rset.getLong(3));
+                    ctylive.setPopulation(rset.getLong(4));
+                    ctylive.setPopulation(rset.getLong(5));
+                    ctylive.setPopulation(rset.getLong(6));
+
+                    ctylive.setCountry(crtylive);
+                    livepopucrty.add(ctylive);
+                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+                    //System.out.println("\n");
+                    //System.out.printf("Country Name : "+rset.getString(1)+"\n"+"People not living in cities in each country: "+rset.getLong(2)+"\n"+"\n");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get people who are not living in the city.");
+        }
+        return livepopucrty;
+        //return continent;
+    }
+    public void displayLivePopulationCountry(ArrayList<City>livepopucrty)
+    {
+        if (livepopucrty == null)
+        {
+            System.out.println("* There is no null data in total population of people living in a city!\n");
+            return;
+        }
+        System.out.print("\n*****************************************People Living and Not Living in a City*****************************************\n\n");
+        System.out.printf("%25s%25s%25s%25s%25s%25s","Country","Country Population","Not Living in City","Not Living Percentage","Population4","Percentage\n");
+        System.out.print("\n******************************************************************************************************************\n\n");
+
+        for (City livcrty:livepopucrty)
+        {
+            if(livcrty == null)
+            {
+                System.out.println("* No null data in each total population of people living in a city!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s%25s%25s%25s%25s",livcrty.getName(), livcrty.getCountry().getPopulation(),livcrty.getPopulation(), livcrty.getPopulation(),livcrty.getPopulation(),livcrty.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n******************************************************************************************************************\n\n");
+    }
+
+    public ArrayList<City> getLivePopulationContinent()
+
+    {
+        ArrayList<City>livpopucontinent=null;
+        try {
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Continent, SUM(country.Population) as CountryTotalPopulation, SUM((select SUM(population) from city where countrycode = country.code)) as PeopleLiveInCity, "
+                            + "(SUM((select SUM(population) from city where countrycode = country.code)) / SUM(country.Population))*100 as PercentagePeopleLiveInCity, "
+                            + " (sum(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) as PeopleNotLiveInCity, "
+                            + " ((sum(country.Population)-SUM((select SUM(population) from city where countrycode = country.code))) / SUM(country.Population))*100 as PercentagePeopleNotInCity"
+                            + " FROM country GROUP BY country.Continent;";
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+            if (rset == null) {
+                System.out.print("Not found.");
+            } else {
+                livpopucontinent=new ArrayList<>();
+                // Return new city if valid.
+                // Check one is
+                while (rset.next()) {
+                    Country crtylivcont=new Country();
+                    City ctylivcont=new City();
+                    crtylivcont.setContinent(rset.getString(1));
+                    crtylivcont.setPopulation(rset.getLong(2));
+                    ctylivcont.setPopulation(rset.getLong(3));
+                    ctylivcont.setPopulation(rset.getLong(4));
+                    ctylivcont.setPopulation(rset.getLong(5));
+                    ctylivcont.setPopulation(rset.getLong(6));
+
+                    ctylivcont.setCountry(crtylivcont);
+                    livpopucontinent.add(ctylivcont);
+                    //System.out.printf("%20s%20s%20s%20d",rset.getString(1),rset.getInt(2),rset.getString(3));
+                    //System.out.println("\n");
+                    //System.out.printf("Continent Name : "+rset.getString(1)+"\n"+"People not living in cities in each continent: "+rset.getLong(2)+"\n"+"\n");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get people who are not living in the city by region");
+        }
+        return livpopucontinent;
+    }
+    public void displayLivePopulationContinent(ArrayList<City>livepopucontinent)
+    {
+        if (livepopucontinent == null)
+        {
+            System.out.println("* There is no null data in total population of people living in a country of a continent!\n");
+            return;
+        }
+        System.out.print("\n*****************************************People Living and Not Living in a Country of a Continent*****************************************\n\n");
+        System.out.printf("%25s%25s%25s%25s%25s%25s","Continent","Country Population","Living Population","Living Population Percentage","Not Living Population","Not Living Population Percentage\n");
+        System.out.print("\n******************************************************************************************************************\n\n");
+
+        for (City livcrtycont:livepopucontinent)
+        {
+            if(livcrtycont == null)
+            {
+                System.out.println("* No null data in each total population of people living in a country of a continent!\n");
+                continue;
+            }
+            System.out.printf("%25s%25s%25s%25s%25s%25s",livcrtycont.getCountry().getName(), livcrtycont.getCountry().getPopulation(),livcrtycont.getPopulation(), livcrtycont.getPopulation(),livcrtycont.getPopulation(),livcrtycont.getPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("\n******************************************************************************************************************\n\n");
+    }
 
 //    End of Cherry Coding
 
