@@ -8,6 +8,7 @@ public class Language {
         return CountryCode;
     }
 
+
     public void setCountryCode(String countryCode) {
         CountryCode = countryCode;
     }
@@ -44,5 +45,11 @@ public class Language {
 
     private Float Percentage;
 
+    public void setCountry(Country country) {
+    }
+
+    public Country getCountry() {
+        return null;
+    }
 }
 
