@@ -345,6 +345,9 @@ public class MyTest
         language.getLanguage();
         language.getPercentage();
         language.toString();
+        language.getIsOfficial();
+        language.getCountryCode();
+        language.setCountry(null);
     }
 
     //Country Testing
@@ -352,10 +355,19 @@ public class MyTest
     protected void country_testing(){
         Country country = new Country();
         country.setName("MyTest");
+        country.setCode(null);
         country.setContinent("MyTest");
         country.setCapital (10);
         country.setRegion("Test");
         country.setPopulation((long) 1000);
+        country.setSurfaceArea(100);
+        country.setIndepYear(999);
+        country.setLifeExpectancy(11);
+        country.setGNP(100);
+        country.setGNPOld(111);
+        country.setGovernmentForm("null");
+        country.setHeadOfState("null");
+        country.setCode2("AW");
         country.getCode();
         country.getName();
         country.getContinent();

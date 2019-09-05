@@ -450,63 +450,63 @@ public class App {
                 }
                 else if (PopuReport_input == 2)
                 {
-//                    ArrayList countrycontinent = getCountryContinent();
-//                    displayCountryContinent(countrycontinent);
-//                    again = Question();
+                    ArrayList topcountrycontinent = getinputCountryContinent();
+                    displayinputCountryContinent(topcountrycontinent);
+                    again = Question();
                 }
                 else if (PopuReport_input == 3)
                 {
-//                    ArrayList countryregion = getCountryRegion();
-//                    displayCountryRegion(countryregion);
-//                    again = Question();
+                    ArrayList topcountryregion = getinputCountryRegion();
+                    displayinputCountryRegion(topcountryregion);
+                    again = Question();
                 }
                 else if (PopuReport_input == 4)
                 {
-//                    ArrayList countryregion = getCountryRegion();
-//                    displayCountryRegion(countryregion);
-//                    again = Question();
+                    ArrayList topcityworld = getinputCityWorld();
+                    displayinputCityWorld(topcityworld);
+                    again = Question();
                 }
                 else if (PopuReport_input == 5)
                 {
-//                    ArrayList countryregion = getCountryRegion();
-//                    displayCountryRegion(countryregion);
-//                    again = Question();
+                    ArrayList topcitycontinent = getinputCityContinent();
+                    displayinputCityContinent(topcitycontinent);
+                    again = Question();
                 }
                 else if (PopuReport_input == 6)
                 {
-//                    ArrayList countryregion = getCountryRegion();
-//                    displayCountryRegion(countryregion);
-//                    again = Question();
+                    ArrayList topcityregion = getinputCityRegion();
+                    displayinputCityRegion(topcityregion);
+                    again = Question();
                 }
                 else if (PopuReport_input == 7)
                 {
-//                    ArrayList countryregion = getCountryRegion();
-//                    displayCountryRegion(countryregion);
-//                    again = Question();
+                    ArrayList topcitycountry = getinputCityCountry();
+                    displayinputCityCountry(topcitycountry);
+                    again = Question();
                 }
                 else if (PopuReport_input == 8)
                 {
-                    ArrayList popuRegion = getLivePopulationRegion();
-                    displayLivePopulationRegion(popuRegion);
+                    ArrayList topcitydistrict = getinputCityDistrict();
+                    displayinputCityDistrict(topcitydistrict);
                     again = Question();
                 }
                 else if (PopuReport_input == 9)
                 {
-//                    ArrayList countryregion = getCountryRegion();
-//                    displayCountryRegion(countryregion);
-//                    again = Question();
+                    ArrayList topcapitalworld = getinputCapitalCityWorld();
+                    displayinputCapitalCityWorld(topcapitalworld);
+                    again = Question();
                 }
                 else if (PopuReport_input == 10)
                 {
-//                    ArrayList countryregion = getCountryRegion();
-//                    displayCountryRegion(countryregion);
-//                    again = Question();
+                    ArrayList topcapitalcontinent = getinputCapitalCityContinent();
+                    displayinputCapitalCityContinent(topcapitalcontinent);
+                    again = Question();
                 }
                 else if (PopuReport_input == 11)
                 {
-//                    ArrayList countryregion = getCountryRegion();
-//                    displayCountryRegion(countryregion);
-//                    again = Question();
+                    ArrayList topcapitalregion = getinputCapitalCityRegion();
+                    displayinputCapitalCityRegion(topcapitalregion);
+                    again = Question();
                 }
                 else
                 {
@@ -1940,8 +1940,8 @@ public class App {
             return;
         }
         System.out.print("================== Top Countries in the Continent organised by Largest Population to Smallest ==================\n");
-        System.out.printf("%20s%20s%30s%20s", "Country Name","Continent","Region","Country Population\n");
-        System.out.print("============================================================================================================\n");
+        System.out.printf("%20s%20s%30s%20s", "CountryName","Continent","Region","CountryPopulation\n");
+        System.out.print("================================================================================================================\n");
         for(Country ctry:countries)
         {
             if (ctry == null) {
@@ -1951,10 +1951,10 @@ public class App {
             System.out.printf("%20s%20s%30s%20s",ctry.getName(),ctry.getContinent(),ctry.getRegion(),ctry.getPopulation());
             System.out.println("\n");
         }
-        System.out.print("============================================================================================================\n");
+        System.out.print("================================================================================================================\n");
     }
 
-    // Option 3. Top N Countries in the region organised by largest to smallest
+    //Input Report Option 3. Top N Countries in the region organised by largest to smallest
     public ArrayList<Country> getinputCountryRegion()
     {
         ArrayList<Country> countries = new ArrayList<>();
@@ -2014,7 +2014,7 @@ public class App {
         }
         System.out.print("================== Top Countries in the Region organised by Largest Population to Smallest ==================\n");
         System.out.printf("%20s%20s%30s%20s", "Country Name","Continent","Region","Country Population\n");
-        System.out.print("============================================================================================================\n");
+        System.out.print("=============================================================================================================\n");
         for(Country ctry:countries)
         {
             if (ctry == null) {
@@ -2027,7 +2027,7 @@ public class App {
         System.out.print("============================================================================================================\n");
     }
 
-    // Option 4. Top N Capital Cities in the world organised by largest to smallest
+// Option 9. Top N Capital Cities in the world organised by largest to smallest
     public ArrayList<City> getinputCapitalCityWorld()
     {
         ArrayList<City> cities = new ArrayList<>();
@@ -2091,20 +2091,20 @@ public class App {
         }
         System.out.print("================== Top Capital Cities in the World organised by Largest Population to Smallest ==================\n");
         System.out.printf("%20s%20s%20s%20s%20s","City Name","CountryName","Continent","District","City Population\n");
-        System.out.print("============================================================================================================\n");
+        System.out.print("=================================================================================================================\n");
         for(City cty:cities)
         {
             if (cty == null) {
                 System.out.println("* No null data in each top N capital  cities in the continent!\n");
                 continue;
             }
-            System.out.printf("%20s%20s%20s%20s", cty.getName(),cty.getCountry().getName(),cty.getDistrict(),cty.getPopulation());
+            System.out.printf("%20s%20s%20s%20s%20s", cty.getName(),cty.getCountry().getName(),cty.getCountry().getContinent(), cty.getDistrict(),cty.getPopulation());
             System.out.println("\n");
         }
-        System.out.print("============================================================================================================\n");
+        System.out.print("================================================================================================================\n");
     }
 
-    // Option 5. Top N Capital Cities in the continent organised by largest to smallest
+    // Option 10. Top N Capital Cities in a continent organised by largest to smallest
     public ArrayList<City> getinputCapitalCityContinent()
     {
         ArrayList<City> cities = new ArrayList<>();
@@ -2169,7 +2169,7 @@ public class App {
         }
         System.out.print("================== Top Capital Cities in the Continent organised by Largest Population to Smallest ==================\n");
         System.out.printf("%20s%20s%20s%20s%20s%20s","Capital","City Name","Country Name","Continent","District","City Population\n");
-        System.out.print("============================================================================================================\n");
+        System.out.print("=====================================================================================================================\n");
         for(City cty:cities)
         {
             if (cty == null) {
@@ -2179,10 +2179,10 @@ public class App {
             System.out.printf("%20s%20s%20s%20s%20s%20s",cty.getCountry().getCapital(),cty.getName(),cty.getCountry().getName(),cty.getCountry().getContinent(),cty.getDistrict(),cty.getPopulation());
             System.out.println("\n");
         }
-        System.out.print("============================================================================================================\n");
+        System.out.print("=====================================================================================================================\n");
     }
 
-    // Option 6. Top N Capital Cities in the region organised by largest to smallest
+    // Option 11. Top N Capital Cities in a region organised by largest to smallest
     public ArrayList<City> getinputCapitalCityRegion()
     {
         ArrayList<City> cities = new ArrayList<>();
@@ -2245,9 +2245,9 @@ public class App {
             System.out.println("* There is null data in Top N capital cities Population!\n");
             return;
         }
-        System.out.print("================== Top Capital Cities in the Region organised by Largest Population to Smallest ==================\n");
-        System.out.printf("%20s%20s%20s%20s%20s%20s", "Capital","City Name","CountryName","Region","District","City Population\n");
-        System.out.print("============================================================================================================\n");
+        System.out.print("===================== Top Capital Cities in the Region organised by Largest Population to Smallest =====================\n");
+        System.out.printf("%20s%20s%20s%20s%20s%20s", "Capital","CityName","CountryName","Region","District","CityPopulation\n");
+        System.out.print("========================================================================================================================\n");
         for(City cty:cities)
         {
             if (cty == null) {
@@ -2257,10 +2257,10 @@ public class App {
             System.out.printf("%20s%20s%20s%20s%20s%20s",cty.getCountry().getCapital(),cty.getName(),cty.getCountry().getName(),cty.getCountry().getRegion(),cty.getDistrict(),cty.getPopulation());
             System.out.println("\n");
         }
-        System.out.print("============================================================================================================\n");
+        System.out.print("=======================================================================================================================\n");
     }
 
-    // Option 7. Top N Cities in the world organised by largest to smallest
+// Option 4. Top N Cities in the world organised by largest to smallest
     public ArrayList<City> getinputCityWorld()
     {
         ArrayList<City> cities = new ArrayList<>();
@@ -2332,7 +2332,7 @@ public class App {
         System.out.print("============================================================================================================\n");
     }
 
-    // Option 8. Top N Cities in the continent organised by largest to smallest
+    // Option 5. Top N Cities in the continent organised by largest to smallest
     public ArrayList<City> getinputCityContinent()
     {
         ArrayList<City> cities = new ArrayList<>();
@@ -2409,7 +2409,7 @@ public class App {
         System.out.print("============================================================================================================\n");
     }
 
-    // Option 9. Top N Cities in the region organised by largest to smallest
+    // Option 6. Top N Cities in the region organised by largest to smallest
     public ArrayList<City> getinputCityRegion()
     {
         ArrayList<City> cities = new ArrayList<>();
@@ -2485,7 +2485,7 @@ public class App {
         System.out.print("============================================================================================================\n");
     }
 
-    // Option 10. Top N Cities in the country organised by largest to smallest
+    // Option 7. Top N Cities in the country organised by largest to smallest
     public ArrayList<City> getinputCityCountry()
     {
         ArrayList<City> cities = new ArrayList<>();
@@ -2561,7 +2561,7 @@ public class App {
         System.out.print("============================================================================================================\n");
     }
 
-    // Option 11. Top N Cities in the district organised by largest to smallest
+// Option 8. Top N Cities in the district organised by largest to smallest
     public ArrayList<City> getinputCityDistrict()
     {
         ArrayList<City> cities = new ArrayList<>();
@@ -2575,7 +2575,7 @@ public class App {
             String strSelect =
                     "SELECT city.Name, city.CountryCode, city.District, city.Population "
                             + "FROM city "
-                            + "WHERE city.District = 'California' "
+                            + "WHERE city.District = 'Queensland' "
                             + "ORDER BY city.Population DESC "
                             + "Limit " + number;
 
