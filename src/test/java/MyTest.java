@@ -364,6 +364,7 @@ public class MyTest
         country.setSurfaceArea(100);
         country.setIndepYear(999);
         country.setLifeExpectancy(11);
+        country.setLocalName("Mytest");
         country.setGNP(100);
         country.setGNPOld(111);
         country.setGovernmentForm("null");

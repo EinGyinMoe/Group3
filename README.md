@@ -74,3 +74,11 @@
 | 30 | The population of a district. | Yes | ![](Screenshots/city_1.PNG) |
 | 31 | The population of a city. | Yes | ![](Screenshots/city_1.PNG) |
 | 32 | The number of people who speak the Chinese/English/Hindi/Spanish/Arabic languages from greatest number to smallest, including the percentage of the world population. | Yes | ![](Screenshots/language_popu.png) |
+
+# Team Contribution Report 
+|      | Code Review 1 | Code Review 2 | Code Review 3 | Code Review 4 | Final Deliverable | Average |
+|------|---------------|---------------|---------------|---------------|-------------------|-------|
+| Ein Gyin Moe | 0.25 | 0.28 | 0.25 | 0.26 | 0.26 | 0.26 |
+| Khin Shoon Lett Moe | 0.25| 0.24 | 0.25 | 0.26 | 0.3 | 0.27 |
+| Nang Cherry Moe Myint | 0.25 | 0.24| 0.25 | 0.23 | 0.21 | 0.23 |
+| Khin Myat Nwe | 0.25 | 0.24 | 0.25 | 0.25 | 0.23 | 0.24 |
