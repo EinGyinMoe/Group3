@@ -416,7 +416,7 @@ public class MyTest
 
     //TO improve our code coverage
     @Test
-    void testingCityReport(){
+    protected void testingCityReport(){
         displayCapitalCity_Reporttest();
         displayCapitalCityContinenttest();
         displayCapitalCityWorldtest();
@@ -429,119 +429,119 @@ public class MyTest
     }
 
     @Test
-    void testCountryWorld()
+    protected void testCountryWorld()
     {
         ArrayList<Country> countryworld = app.getCountryWorld();
         app.displayCountryWorld(countryworld);
     }
 
     @Test
-    void testCountryReg()
+    protected void testCountryReg()
     {
         ArrayList<Country> countryInReg = app.getCountryRegion();
         app.displayCountryRegion(countryInReg);
     }
 
     @Test
-    void testCountryContinent()
+    protected void testCountryContinent()
     {
         ArrayList<Country> countrycontinent = app.getCountryContinent();
         app.displayCountryContinent(countrycontinent);
     }
 
     @Test
-    void testCityWorld()
+    protected void testCityWorld()
     {
         ArrayList<City> ctyworld = app.getCity_world();
         app.displayCityWorld(ctyworld);
     }
 
     @Test
-    void testCityContinent()
+    protected void testCityContinent()
     {
         ArrayList<City> cty = app.getCityContinent();
         app.displayCityContinent(cty);
     }
 
     @Test
-    void testCityRegion()
+    protected void testCityRegion()
     {
         ArrayList<City> ctyregion = app.getCityRegion();
         app.displayCityRegion(ctyregion);
     }
 
     @Test
-    void testCityCountry()
+    protected void testCityCountry()
     {
         ArrayList<City> ctycountry = app.getCityCountry();
         app.displayCityCountry(ctycountry);
     }
 
     @Test
-    void testCityDistrict()
+    protected void testCityDistrict()
     {
         ArrayList<City> ctydistrict = app.getCityDistrict();
         app.displayCityDistrict(ctydistrict);
     }
 
     @Test
-    void testCapitalCityWorld()
+    protected void testCapitalCityWorld()
     {
         ArrayList<City> cpcty_world = app.getCapitalCityWorld();
         app.displayCapitalCityWorld(cpcty_world);
     }
 
     @Test
-    void testCapitalCityContinent()
+    protected void testCapitalCityContinent()
     {
         ArrayList<City> cpcty_continent = app.getCapitalCityContinent();
         app.displayCapitalCityContinent(cpcty_continent);
     }
 
     @Test
-    void testCapitalCityRegion()
+    protected void testCapitalCityRegion()
     {
         ArrayList<City> cpcty_region = app.getCapitalCityRegion();
         app.displayCapitalCityRegion(cpcty_region);
     }
 
     @Test
-    void testCountryTotalPopuWorld()
+    protected void testCountryTotalPopuWorld()
     {
         ArrayList<Country> crtyTotlPopuWorld= app.getCountryTotalPopuWorld();
         app.displayCountryTotalPopuWorld(crtyTotlPopuWorld);
     }
 
     @Test
-    void testCountryTotalPopuCont()
+    protected void testCountryTotalPopuCont()
     {
         ArrayList<Country> crtyTotlPopuContinent= app.getCountryTotalPopuCont();
         app.displayCountryTotalPopuCont(crtyTotlPopuContinent);
     }
 
     @Test
-    void displayCountryTotalPopuRegion()
+    protected void displayCountryTotalPopuRegion()
     {
         ArrayList crtyTotlPopuRegion= app.getCountryTotalPopuRegion();
         app.displayCountryTotalPopuRegion(crtyTotlPopuRegion);
     }
 
     @Test
-    void displayCityTotalPopu()
+    protected void displayCityTotalPopu()
     {
         ArrayList ctyTotlPopu= app.getCityTotalPopu();
         app.displayCityTotalPopu(ctyTotlPopu);
     }
 
     @Test
-    void displayLivePopulationContinent()
+    protected void displayLivePopulationContinent()
     {
         ArrayList popuContinent = app.getLivePopulationContinent();
         app.displayLivePopulationContinent(popuContinent);
     }
 
     @Test
-    void displayLivePopulationCountry()
+    protected void displayLivePopulationCountry()
     {
         ArrayList popuCountry = app.getLivePopulationCountry();
         app.displayLivePopulationCountry(popuCountry);
@@ -549,14 +549,14 @@ public class MyTest
     
 
     @Test
-    void displayLivePopulationRegion()
+    protected void displayLivePopulationRegion()
     {
         ArrayList popuRegion = app.getLivePopulationRegion();
         app.displayLivePopulationRegion(popuRegion);
     }
 
     @Test
-    void displayFiveLanguagePopulationn()
+    protected void displayFiveLanguagePopulationn()
     {
         ArrayList language = app.getFiveLanguagePopulation();
         app.displayFiveLanguagePopulation(language);

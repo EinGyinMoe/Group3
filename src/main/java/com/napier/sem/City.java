@@ -61,6 +61,7 @@ public class City
     public void setCountryCode(String test) {
     }
 
-    public void getCountryCode() {
+    public String getCountryCode() {
+        return CountryCode;
     }
 }
