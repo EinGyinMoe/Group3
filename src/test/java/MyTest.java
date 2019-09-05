@@ -342,6 +342,8 @@ public class MyTest
         Language language =new Language();
         language.setLanguage("Unit_Testing");
         language.setPercentage((float) 0.20);
+        language.setIsOfficial("MyTest");
+        language.setCountryCode("Mytest");
         language.getLanguage();
         language.getPercentage();
         language.toString();
