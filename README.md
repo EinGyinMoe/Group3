@@ -78,7 +78,7 @@
 # Team Contribution Report 
 |      | Code Review 1 | Code Review 2 | Code Review 3 | Code Review 4 | Final Deliverable | Average |
 |------|---------------|---------------|---------------|---------------|-------------------|-------|
-| Ein Gyin Moe | 0.25 | 0.28 | 0.25 | 0.26 | 0.26 | 0.26 |
-| Khin Shoon Lett Moe | 0.25| 0.24 | 0.25 | 0.26 | 0.3 | 0.27 |
-| Nang Cherry Moe Myint | 0.25 | 0.24| 0.25 | 0.23 | 0.21 | 0.23 |
-| Khin Myat Nwe | 0.25 | 0.24 | 0.25 | 0.25 | 0.23 | 0.24 |
+| Ein Gyin Moe | 0.25 | 0.28 | 0.25 | 0.26 | 0.27 | 0.27 |
+| Khin Shoon Lett Moe | 0.25| 0.24 | 0.25 | 0.26 | 0.3 | 0.28 |
+| Khin Myat Nwe | 0.25 | 0.24| 0.25 | 0.23 | 0.2 | 0.21 |
+| Nang Cherry Moe Myint | 0.25 | 0.24 | 0.25 | 0.25 | 0.23 | 0.24 |
