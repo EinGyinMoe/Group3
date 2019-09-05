@@ -202,13 +202,13 @@ public class MyTest
     }
 
 
-    //Language Report
-    @Test
-    void testFiveLanguagePopulation()
-    {
-        ArrayList<Language> language = app.getFiveLanguagePopulation();
-        app.displayFiveLanguagePopulation(language);
-    }
+//    //Language Report
+//    @Test
+//    void testFiveLanguagePopulation()
+//    {
+//        ArrayList<Language> language = app.getFiveLanguagePopulation();
+//        app.displayFiveLanguagePopulation(language);
+//    }
 
 
     //Unit_testing for Cityreport
