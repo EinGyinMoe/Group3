@@ -71,8 +71,8 @@
 | 27 | The population of a continent. | Yes | ![](Screenshots/Option_2_Continent.png) |
 | 28 | The population of a region. | Yes | ![](Screenshots/Option_3_Region.png) |
 | 29 | The population of a country. | Yes | ![](Screenshots/Option_4_Country.png) |
-| 30 | The population of a district. | Yes | ![](Screenshots/Option_5_District.PNG) |
-| 31 | The population of a city. | Yes | ![](Screenshots/Option_6_City.PNG) |
+| 30 | The population of a district. | Yes | ![](Screenshots/Option_5_District.png) |
+| 31 | The population of a city. | Yes | ![](Screenshots/Option_6_City.png) |
 | 32 | The number of people who speak the Chinese/English/Hindi/Spanish/Arabic languages from greatest number to smallest, including the percentage of the world population. | Yes | ![](Screenshots/language_popu.png) |
 
 # Team Contribution Report 
