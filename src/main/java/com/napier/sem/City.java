@@ -7,13 +7,15 @@ public class City
 {
     private int ID;
 
-    public String Name;
+    private String Name;
 
     private Country country;
 
     private String District;
 
-    public Long Population;
+    private Long Population;
+
+    private String CountryCode;
 
     public int getID() {
         return ID;
@@ -56,5 +58,9 @@ public class City
     }
 
 
+    public void setCountryCode(String test) {
+    }
 
+    public void getCountryCode() {
+    }
 }
