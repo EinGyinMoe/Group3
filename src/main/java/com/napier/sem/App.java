@@ -1881,6 +1881,761 @@ public class App {
         System.out.print("============================================================================================================\n");
     }
 
+    // Option 2. Top N Countries in the continent organised by largest to smallest
+    public ArrayList<Country> getinputCountryContinent()
+    {
+        ArrayList<Country> countries = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter a number to output Top Countries in the continent: ");
+            String number = scanner.next(); // get string
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Name, country.Continent, country.Region, country.Population "
+                            + "FROM country "
+                            + "Where Continent = 'Europe'"
+                            + "ORDER BY Population DESC "
+                            + "Limit " + number;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset == null)
+            {
+                System.out.println("Not Found");
+            }
+
+            else
+            {
+                //Return new city if valid.
+                //Check one is returned
+                while (rset.next())
+                {
+                    Country c =new Country();
+                    c.setName(rset.getString(1));
+                    c.setContinent(rset.getString(2));
+                    c.setRegion(rset.getString(3));
+                    c.setPopulation(rset.getLong(4));
+                    countries.add(c);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Top countries in the Continent");
+        }
+        return countries;
+    }
+
+    public void displayinputCountryContinent(ArrayList<Country> countries)
+    {
+
+        if (countries == null)
+        {
+            System.out.println("* There is null data in Top N countries Population!\n");
+            return;
+        }
+        System.out.print("================== Top Countries in the Continent organised by Largest Population to Smallest ==================\n");
+        System.out.printf("%20s%20s%30s%20s", "Country Name","Continent","Region","Country Population\n");
+        System.out.print("============================================================================================================\n");
+        for(Country ctry:countries)
+        {
+            if (ctry == null) {
+                System.out.println("* No null data in each top N countries in the world!\n");
+                continue;
+            }
+            System.out.printf("%20s%20s%30s%20s",ctry.getName(),ctry.getContinent(),ctry.getRegion(),ctry.getPopulation());
+            System.out.println("\n");
+        }
+        System.out.print("============================================================================================================\n");
+    }
+
+    // Option 3. Top N Countries in the region organised by largest to smallest
+    public ArrayList<Country> getinputCountryRegion()
+    {
+        ArrayList<Country> countries = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter a number to output Top Countries in the region: ");
+            String number = scanner.next(); // get string
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Name, country.Continent, country.Region, country.Population "
+                            + "FROM country "
+                            + "Where Region = 'Caribbean'"
+                            + "ORDER BY Population DESC "
+                            + "Limit " + number ;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset == null)
+            {
+                System.out.println("Not Found");
+            }
+
+            else
+            {
+                //Return new city if valid.
+                //Check one is returned
+                while (rset.next())
+                {
+                    Country c =new Country();
+                    c.setName(rset.getString(1));
+                    c.setContinent(rset.getString(2));
+                    c.setRegion(rset.getString(3));
+                    c.setPopulation(rset.getLong(4));
+                    countries.add(c);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Top countries in the Region");
+        }
+        return countries;
+    }
+
+    public void displayinputCountryRegion(ArrayList<Country> countries)
+    {
+
+        if (countries == null)
+        {
+            System.out.println("* There is null data in Top N countries Population!\n");
+            return;
+        }
+        System.out.print("================== Top Countries in the Region organised by Largest Population to Smallest ==================\n");
+        System.out.printf("%20s%20s%30s%20s", "Country Name","Continent","Region","Country Population\n");
+        System.out.print("============================================================================================================\n");
+        for(Country ctry:countries)
+        {
+            if (ctry == null) {
+                System.out.println("* No null data in each top N countries in the world!\n");
+                continue;
+            }
+            System.out.printf("%20s%20s%30s%20s",ctry.getName(),ctry.getContinent(),ctry.getRegion(),ctry.getPopulation());
+            System.out.println("\n");
+        }
+        System.out.print("============================================================================================================\n");
+    }
+
+    // Option 4. Top N Capital Cities in the world organised by largest to smallest
+    public ArrayList<City> getinputCapitalCityWorld()
+    {
+        ArrayList<City> cities = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter a number to output Top Capital Citiesin the world : ");
+            String number = scanner.next(); // get string
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, country.Name, country.Continent, city.District , city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.ID = country.Capital "
+                            + "ORDER BY city.Population DESC "
+                            + "Limit " + number;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset == null)
+            {
+                System.out.println("Not Found");
+            }
+
+            else
+            {
+                //Return new city if valid.
+                //Check one is returned
+                while (rset.next())
+                {
+                    Country c =new Country();
+                    c.setName(rset.getString(2));
+                    c.setContinent(rset.getString(3));
+
+                    City cty = new City();
+                    cty.setCountry(c);
+                    cty.setName(rset.getString(1));
+                    cty.setDistrict(rset.getString(4));
+                    cty.setPopulation(rset.getLong(5));
+                    cities.add(cty);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Top capital cities in the World");
+        }
+        return cities;
+    }
+
+    public void displayinputCapitalCityWorld(ArrayList<City> cities)
+    {
+
+        if (cities == null)
+        {
+            System.out.println("* There is null data in Top N capital cities Population!\n");
+            return;
+        }
+        System.out.print("================== Top Capital Cities in the World organised by Largest Population to Smallest ==================\n");
+        System.out.printf("%20s%20s%20s%20s%20s","City Name","CountryName","Continent","District","City Population\n");
+        System.out.print("============================================================================================================\n");
+        for(City cty:cities)
+        {
+            if (cty == null) {
+                System.out.println("* No null data in each top N capital  cities in the continent!\n");
+                continue;
+            }
+            System.out.printf("%20s%20s%20s%20s", cty.getName(),cty.getCountry().getName(),cty.getDistrict(),cty.getPopulation());
+            System.out.println("\n");
+        }
+        System.out.print("============================================================================================================\n");
+    }
+
+    // Option 5. Top N Capital Cities in the continent organised by largest to smallest
+    public ArrayList<City> getinputCapitalCityContinent()
+    {
+        ArrayList<City> cities = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter a number to output Top Capital Citiesin the continent : ");
+            String number = scanner.next(); // get string
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Capital, city.Name, country.Name, country.Continent, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.ID = country.Capital AND country.Continent = 'Europe'"
+                            + "ORDER BY city.Population DESC "
+                            + "Limit " + number;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset == null)
+            {
+                System.out.println("Not Found");
+            }
+
+            else
+            {
+                //Return new city if valid.
+                //Check one is returned
+                while (rset.next())
+                {
+                    Country c =new Country();
+                    c.setCapital(rset.getInt(1));
+                    c.setName(rset.getString(3));
+                    c.setContinent(rset.getString(4));
+
+                    City cty = new City();
+                    cty.setCountry(c);
+                    cty.setName(rset.getString(2));
+                    cty.setDistrict(rset.getString(5));
+                    cty.setPopulation(rset.getLong(6));
+                    cities.add(cty);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Top capital cities in the Continent");
+        }
+        return cities;
+    }
+
+    public void displayinputCapitalCityContinent(ArrayList<City> cities)
+    {
+
+        if (cities == null)
+        {
+            System.out.println("* There is null data in Top N capital cities Population!\n");
+            return;
+        }
+        System.out.print("================== Top Capital Cities in the Continent organised by Largest Population to Smallest ==================\n");
+        System.out.printf("%20s%20s%20s%20s%20s%20s","Capital","City Name","Country Name","Continent","District","City Population\n");
+        System.out.print("============================================================================================================\n");
+        for(City cty:cities)
+        {
+            if (cty == null) {
+                System.out.println("* No null data in each top N capital  cities in the continent!\n");
+                continue;
+            }
+            System.out.printf("%20s%20s%20s%20s%20s%20s",cty.getCountry().getCapital(),cty.getName(),cty.getCountry().getName(),cty.getCountry().getContinent(),cty.getDistrict(),cty.getPopulation());
+            System.out.println("\n");
+        }
+        System.out.print("============================================================================================================\n");
+    }
+
+    // Option 6. Top N Capital Cities in the region organised by largest to smallest
+    public ArrayList<City> getinputCapitalCityRegion()
+    {
+        ArrayList<City> cities = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter a number to output Top Capital Citiesin the region : ");
+            String number = scanner.next(); // get string
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Capital, city.Name, country.Name, country.Region, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.ID = country.Capital AND country.Region='Caribbean'"
+                            + "ORDER BY city.Population DESC "
+                            + "Limit " + number;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset == null)
+            {
+                System.out.println("Not Found");
+            }
+
+            else
+            {
+                //Return new city if valid.
+                //Check one is returned
+                while (rset.next())
+                {
+                    Country c =new Country();
+                    c.setCapital(rset.getInt(1));
+                    c.setName(rset.getString(3));
+                    c.setRegion(rset.getString(4));
+
+                    City cty = new City();
+                    cty.setCountry(c);
+                    cty.setName(rset.getString(2));
+                    cty.setDistrict(rset.getString(5));
+                    cty.setPopulation(rset.getLong(6));
+                    cities.add(cty);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Top capital cities in the Region");
+        }
+        return cities;
+    }
+
+    public void displayinputCapitalCityRegion(ArrayList<City> cities)
+    {
+
+        if (cities == null)
+        {
+            System.out.println("* There is null data in Top N capital cities Population!\n");
+            return;
+        }
+        System.out.print("================== Top Capital Cities in the Region organised by Largest Population to Smallest ==================\n");
+        System.out.printf("%20s%20s%20s%20s%20s%20s", "Capital","City Name","CountryName","Region","District","City Population\n");
+        System.out.print("============================================================================================================\n");
+        for(City cty:cities)
+        {
+            if (cty == null) {
+                System.out.println("* No null data in each top N capital  cities in the continent!\n");
+                continue;
+            }
+            System.out.printf("%20s%20s%20s%20s%20s%20s",cty.getCountry().getCapital(),cty.getName(),cty.getCountry().getName(),cty.getCountry().getRegion(),cty.getDistrict(),cty.getPopulation());
+            System.out.println("\n");
+        }
+        System.out.print("============================================================================================================\n");
+    }
+
+    // Option 7. Top N Cities in the world organised by largest to smallest
+    public ArrayList<City> getinputCityWorld()
+    {
+        ArrayList<City> cities = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter a number to output Top Cities in the world : ");
+            String number = scanner.next(); // get string
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, city.CountryCode, city.District, city.Population "
+                            + "FROM city "
+                            + "ORDER BY city.Population DESC "
+                            + "Limit " + number;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset == null)
+            {
+                System.out.println("Not Found");
+            }
+
+            else
+            {
+                //Return new city if valid.
+                //Check one is returned
+                while (rset.next())
+                {
+                    City cty =new City();
+                    cty.setName(rset.getString(1));
+                    cty.setCountryCode(rset.getString(2));
+                    cty.setDistrict(rset.getString(3));
+                    cty.setPopulation(rset.getLong(4));
+                    cities.add(cty);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Top cities in the World");
+        }
+        return cities;
+    }
+
+    public void displayinputCityWorld(ArrayList<City> cities)
+    {
+
+        if (cities == null)
+        {
+            System.out.println("* There is null data in Top N cities Population!\n");
+            return;
+        }
+        System.out.print("================== Top Cities in the World organised by Largest Population to Smallest ==================\n");
+        System.out.printf("%20s%20s%30s%20s", "City Name","CountryCode","District","City Population\n");
+        System.out.print("============================================================================================================\n");
+        for(City cty:cities)
+        {
+            if (cty == null) {
+                System.out.println("* No null data in each top N capital  cities in the continent!\n");
+                continue;
+            }
+            System.out.printf("%20s%20s%30s%20s",cty.getName(),cty.getCountryCode(),cty.getDistrict(),cty.getPopulation());
+            System.out.println("\n");
+        }
+        System.out.print("============================================================================================================\n");
+    }
+
+    // Option 8. Top N Cities in the continent organised by largest to smallest
+    public ArrayList<City> getinputCityContinent()
+    {
+        ArrayList<City> cities = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter a number to output Top Cities in the continent : ");
+            String number = scanner.next(); // get string
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.continent, country.Name,city.CountryCode,city.Name, city.Population "
+                            + "FROM city,country "
+                            + "WHERE city.CountryCode = country.Code AND country.continent='Europe'"
+                            + "ORDER BY city.Population DESC "
+                            + "Limit " + number;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset == null)
+            {
+                System.out.println("Not Found");
+            }
+
+            else
+            {
+                //Return new city if valid.
+                //Check one is returned
+                while (rset.next())
+                {
+                    Country c =new Country();
+                    c.setContinent(rset.getString(1));
+                    c.setName(rset.getString(2));
+
+                    City cty = new City();
+                    cty.setCountry(c);
+                    cty.setCountryCode(rset.getString(3));
+                    cty.setName(rset.getString(4));
+                    cty.setPopulation(rset.getLong(5));
+                    cities.add(cty);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Top cities in the Continent");
+        }
+        return cities;
+    }
+
+    public void displayinputCityContinent(ArrayList<City> cities)
+    {
+
+        if (cities == null)
+        {
+            System.out.println("* There is null data in Top N cities Population!\n");
+            return;
+        }
+        System.out.print("================== Top Cities in the Continent organised by Largest Population to Smallest ==================\n");
+        System.out.printf("%20s%20s%30s%20s%20s", "Continent","CountryName","CountryCode","CityName","City Population\n");
+        System.out.print("============================================================================================================\n");
+        for(City cty:cities)
+        {
+            if (cty == null) {
+                System.out.println("* No null data in each top N capital  cities in the continent!\n");
+                continue;
+            }
+            System.out.printf("%20s%20s%30s%20s%20s",cty.getCountry().getContinent(),cty.getCountry().getName(),cty.getCountryCode(),cty.getName(),cty.getPopulation());
+            System.out.println("\n");
+        }
+        System.out.print("============================================================================================================\n");
+    }
+
+    // Option 9. Top N Cities in the region organised by largest to smallest
+    public ArrayList<City> getinputCityRegion()
+    {
+        ArrayList<City> cities = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter a number to output Top Cities in the region : ");
+            String number = scanner.next(); // get string
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, city.District , city.Population, country.Region "
+                            + "FROM country, city "
+                            + "WHERE city.ID=country.Capital AND country.Region='Central America'"
+                            + "ORDER BY city.Population DESC "
+                            + "Limit " + number;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset == null)
+            {
+                System.out.println("Not Found");
+            }
+
+            else
+            {
+                //Return new city if valid.
+                //Check one is returned
+                while (rset.next())
+                {
+                    Country c =new Country();
+                    c.setRegion(rset.getString(4));
+
+                    City cty = new City();
+                    cty.setCountry(c);
+                    cty.setName(rset.getString(1));
+                    cty.setDistrict(rset.getString(2));
+                    cty.setPopulation(rset.getLong(3));
+                    cities.add(cty);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Top cities in the Region");
+        }
+        return cities;
+    }
+
+    public void displayinputCityRegion(ArrayList<City> cities)
+    {
+
+        if (cities == null)
+        {
+            System.out.println("* There is null data in Top N cities Population!\n");
+            return;
+        }
+        System.out.print("================== Top Cities in the Region organised by Largest Population to Smallest ==================\n");
+        System.out.printf("%20s%20s%30s%20s", "City Name","District", "City Population" ,"Region\n");
+        System.out.print("============================================================================================================\n");
+        for(City cty:cities)
+        {
+            if (cty == null) {
+                System.out.println("* No null data in each top N capital  cities in the continent!\n");
+                continue;
+            }
+            System.out.printf("%20s%20s%30s%20s",cty.getName(),cty.getDistrict(), cty.getPopulation() ,cty.getCountry().getRegion());
+            System.out.println("\n");
+        }
+        System.out.print("============================================================================================================\n");
+    }
+
+    // Option 10. Top N Cities in the country organised by largest to smallest
+    public ArrayList<City> getinputCityCountry()
+    {
+        ArrayList<City> cities = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter a number to output Top Cities in the country : ");
+            String number = scanner.next(); // get string
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT country.Name, city.Name, city.District, city.Population "
+                            + "FROM city, country "
+                            + "WHERE city.CountryCode = country.Code AND country.Name = 'Myanmar'"
+                            + "ORDER BY city.Population DESC "
+                            + "Limit " + number;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset == null)
+            {
+                System.out.println("Not Found");
+            }
+
+            else
+            {
+                //Return new city if valid.
+                //Check one is returned
+                while (rset.next())
+                {
+                    Country c =new Country();
+                    c.setName(rset.getString(1));
+
+                    City cty = new City();
+                    cty.setCountry(c);
+                    cty.setName(rset.getString(2));
+                    cty.setDistrict(rset.getString(3));
+                    cty.setPopulation(rset.getLong(4));
+                    cities.add(cty);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Top cities in the Country");
+        }
+        return cities;
+    }
+
+    public void displayinputCityCountry(ArrayList<City> cities)
+    {
+
+        if (cities == null)
+        {
+            System.out.println("* There is null data in Top N cities Population!\n");
+            return;
+        }
+        System.out.print("================== Top Cities in the Country organised by Largest Population to Smallest ==================\n");
+        System.out.printf("%20s%20s%30s%20s", "Country Name","City Name", "District" ,"City Population\n");
+        System.out.print("============================================================================================================\n");
+        for(City cty:cities)
+        {
+            if (cty == null) {
+                System.out.println("* No null data in each top N capital  cities in the continent!\n");
+                continue;
+            }
+            System.out.printf("%20s%20s%30s%20s",cty.getCountry().getName(),cty.getName(),cty.getDistrict(),cty.getPopulation());
+            System.out.println("\n");
+        }
+        System.out.print("============================================================================================================\n");
+    }
+
+    // Option 11. Top N Cities in the district organised by largest to smallest
+    public ArrayList<City> getinputCityDistrict()
+    {
+        ArrayList<City> cities = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+            System.out.println("Enter a number to output Top Cities in the district : ");
+            String number = scanner.next(); // get string
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect =
+                    "SELECT city.Name, city.CountryCode, city.District, city.Population "
+                            + "FROM city "
+                            + "WHERE city.District = 'California' "
+                            + "ORDER BY city.Population DESC "
+                            + "Limit " + number;
+
+            // Execute SQL statement
+            ResultSet rset = stmt.executeQuery(strSelect);
+
+            if (rset == null)
+            {
+                System.out.println("Not Found");
+            }
+
+            else
+            {
+                //Return new city if valid.
+                //Check one is returned
+                while (rset.next())
+                {
+                    City cty = new City();
+                    cty.setName(rset.getString(1));
+                    cty.setCountryCode(rset.getString(2));
+                    cty.setDistrict(rset.getString(3));
+                    cty.setPopulation(rset.getLong(4));
+                    cities.add(cty);
+                }
+            }
+
+        }
+        catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            System.out.println("Failed to get Top cities in the District");
+        }
+        return cities;
+    }
+
+    public void displayinputCityDistrict(ArrayList<City> cities)
+    {
+
+        if (cities == null)
+        {
+            System.out.println("* There is null data in Top N cities Population!\n");
+            return;
+        }
+        System.out.print("================== Top Cities in the District organised by Largest Population to Smallest ==================\n");
+        System.out.printf("%20s%20s%30s%20s", "City Name","CountryCode", "District" ,"City Population\n");
+        System.out.print("============================================================================================================\n");
+        for(City cty:cities)
+        {
+            if (cty == null) {
+                System.out.println("* No null data in each top N capital  cities in the continent!\n");
+                continue;
+            }
+            System.out.printf("%20s%20s%30s%20s",cty.getName(),cty.getCountryCode(),cty.getDistrict(),cty.getPopulation());
+            System.out.println("\n");
+        }
+        System.out.print("============================================================================================================\n");
+    }
+
+
+
     //3. city report requires the following columns:
 //Name.
 //Country.
