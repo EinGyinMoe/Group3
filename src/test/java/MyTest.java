@@ -376,6 +376,23 @@ public class MyTest
         population.setPopulationPercent(500);
     }
 
+    //TO improve our code coverage
+    @Test
+    void testingCityReport(){
+        displayCapitalCity_Reporttest();
+        displayCapitalCityContinenttest();
+        displayCapitalCityWorldtest();
+        displayCityContinentNulltest();
+        displayCityContinenttest();
+        displayCityCountryNulltest();
+        displayCityDistrictNulltest();
+        displayCapitalCity_Reporttest();
+        displayCityRegiontest();
+    }
+
+
+
+
 
 
 

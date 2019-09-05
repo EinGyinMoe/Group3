@@ -185,5 +185,62 @@ public class AppIntegrationTest
     }
 
 
+    //To improve code coverage
+    //Test the correct Country by Continent
+
+    @Test
+    void test_getCountryContinent() throws SQLException
+    {
+        ArrayList<Country> ctries = app.getCountryContinent();
+
+        for (Country c: ctries) {
+            if (c.getName().equals("Myanmar"))
+            {
+                assertEquals(c.getCode(),null);
+                assertEquals(c.getContinent(), "Asia");
+            }
+        }
+    }
+
+    @Test
+    void test_getCountryTotalPopuWorld() throws SQLException
+    {
+        ArrayList<Country> crtyTotlPopuWorld= app.getCountryTotalPopuWorld();
+
+        for (Country c: crtyTotlPopuWorld) {
+            if (c.getName().equals("Afghanistan"))
+            {
+                assertEquals(c.getContinent(), "Asia");
+                assertEquals(c.getRegion(),"Southern and Central Asia");
+                assertEquals(c.getSurfaceArea(),652090.00);
+                assertEquals(c.getPopulation(),45.9,5976.00);
+                assertEquals(c.getCode(),null);
+
+
+            }
+        }
+    }
+
+    //17.
+    // Population Report Option 2. Total population of a continent.
+    @Test
+    void test_getCountryTotalPopuCont() throws SQLException
+    {
+        ArrayList<Country> crtyTotlPopuCont= app.getCountryTotalPopuCont();
+
+        for (Country c: crtyTotlPopuCont) {
+            if (c.getName().equals("Afghanistan"))
+            {
+                assertEquals(c.getContinent(), "Asia");
+                assertEquals(c.getRegion(),"Southern and Central Asia");
+                assertEquals(c.getSurfaceArea(),652090.00);
+                assertEquals(c.getPopulation(),45.9,5976.00);
+                assertEquals(c.getCode(),null);
+
+
+            }
+        }
+    }
+
 
 }
