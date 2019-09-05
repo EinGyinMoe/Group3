@@ -546,13 +546,7 @@ public class MyTest
         ArrayList popuCountry = app.getLivePopulationCountry();
         app.displayLivePopulationCountry(popuCountry);
     }
-
-    @Test
-    void displayinputCountryWorld()
-    {
-        ArrayList topcountryworld = app.getinputCountryWorld();
-        app.displayinputCountryWorld(topcountryworld);
-    }
+    
 
     @Test
     void displayLivePopulationRegion()
