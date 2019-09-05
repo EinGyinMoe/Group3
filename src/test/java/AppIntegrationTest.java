@@ -204,26 +204,26 @@ public class AppIntegrationTest
         }
     }
 
-    //15.
-    // Population Report Option 1. Total population of the world.
-    @Test
-    void test_getCountryTotalPopuWorld() throws SQLException
-    {
-        ArrayList<Country> crtyTotlPopuWorld= app.getCountryTotalPopuWorld();
+//     //15.
+//     // Population Report Option 1. Total population of the world.
+//     @Test
+//     void test_getCountryTotalPopuWorld() throws SQLException
+//     {
+//         ArrayList<Country> crtyTotlPopuWorld= app.getCountryTotalPopuWorld();
 
-        for (Country c: crtyTotlPopuWorld) {
-            if (c.getName().equals("Afghanistan"))
-            {
-                assertEquals(c.getContinent(), "Asia");
-                assertEquals(c.getRegion(),"Southern and Central Asia");
-                assertEquals(c.getSurfaceArea(),652090.00);
-                assertEquals(c.getPopulation(),45.9,5976.00);
-                assertEquals(c.getCode(),null);
+//         for (Country c: crtyTotlPopuWorld) {
+//             if (c.getName().equals("Afghanistan"))
+//             {
+//                 assertEquals(c.getContinent(), "Asia");
+//                 assertEquals(c.getRegion(),"Southern and Central Asia");
+//                 assertEquals(c.getSurfaceArea(),652090.00);
+//                 assertEquals(c.getPopulation(),45.9,5976.00);
+//                 assertEquals(c.getCode(),null);
 
 
-            }
-        }
-    }
+//             }
+//         }
+//     }
 
     //Still Need to Check
 
@@ -322,7 +322,7 @@ public class AppIntegrationTest
                 assertEquals(c.getCountry().getName(),"South Korea" );
                 assertEquals(c.getCountry().getContinent(), "Asia");
                 assertEquals(c.getCountry().getRegion(), "Eastern Asia");
-                assertEquals(c.getPopulation(), 0);
+                assertEquals(c.getPopulation(), null);
             }
         }
     }
