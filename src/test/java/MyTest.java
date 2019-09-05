@@ -345,6 +345,9 @@ public class MyTest
         language.getLanguage();
         language.getPercentage();
         language.toString();
+        language.getIsOfficial();
+        language.getCountryCode();
+        language.setCountry(null);
     }
 
     //Country Testing
