@@ -57,8 +57,8 @@ public class City
         return Population;
     }
 
-
-    public void setCountryCode(String test) {
+    public void setCountryCode(String countryCode) {
+        CountryCode = countryCode;
     }
 
     public String getCountryCode() {
