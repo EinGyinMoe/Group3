@@ -67,7 +67,7 @@
 | 23 | The population of people, people living in cities, and people not living in cities in each continent. | Yes | ![](Screenshots/Option_7_Popu_Continent.PNG) |
 | 24 | The population of people, people living in cities, and people not living in cities in each region. | Yes | ![](Screenshots/Option_8_Popu_Region.PNG) |
 | 25 | The population of people, people living in cities, and people not living in cities in each country. | Yes | ![](Screenshots/Option_9_Popu_Country.PNG) |
-| 26 | The population of the world. | Yes | ![](Screenshots/3.png) |
+| 26 | The population of the world. | Yes | ![](Screenshots/Popu_world.PNG) |
 | 27 | The population of a continent. | Yes | ![](Screenshots/Option_2_Continent.png) |
 | 28 | The population of a region. | Yes | ![](Screenshots/Option_3_Region.png) |
 | 29 | The population of a country. | Yes | ![](Screenshots/Option_4_Country.png) |
