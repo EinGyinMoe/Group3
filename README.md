@@ -45,14 +45,14 @@
 | 1 | All the countries in the world organised by largest population to smallest. | Yes | ![](Screenshots/Option_1_Country_world.png) |
 | 2 | All the countries in a continent organised by largest population to smallest. | Yes | ![](Screenshots/Option_2_Country_Continent.png) |
 | 3 | All the countries in a region organised by largest population to smallest. | Yes | ![](Screenshots/Option_3_Country_Region.png) |
-| 4 | The top N populated countries in the world where N is provided by the user. | No | ![](Screenshots/3.png) |
+| 4 | The top N populated countries in the world where N is provided by the user. | No | ![](Screenshots/Input_Countries_world.png) |
 | 5 | The top N populated countries in a continent where N is provided by the user. | No | ![](Screenshots/3.png) |
 | 6 | The top N populated countries in a region where N is provided by the user. | No | ![](Screenshots/3.png) |
-| 7 | All the cities in the world organised by largest population to smallest. | Yes | ![](Screenshots/3.png) |
-| 8 | All the cities in a continent organised by largest population to smallest. | Yes | ![](Screenshots/2_City_Continent.PNG) |
-| 9 | All the cities in a region organised by largest population to smallest. | Yes | ![](Screenshots/3.png) |
-| 10 | All the cities in a country organised by largest population to smallest. | Yes | ![](Screenshots/city_1.PNG) |
-| 11 | All the cities in a district organised by largest population to smallest. | Yes | ![](Screenshots/1_City_District.PNG) |
+| 7 | All the cities in the world organised by largest population to smallest. | Yes | ![](Screenshots/Option_1_City_world.png) |
+| 8 | All the cities in a continent organised by largest population to smallest. | Yes | ![](Screenshots/Option_2_City_Continent.PNG) |
+| 9 | All the cities in a region organised by largest population to smallest. | Yes | ![](Screenshots/Option_3_City_Region.png) |
+| 10 | All the cities in a country organised by largest population to smallest. | Yes | ![](Screenshots/Option_4_City_Country.PNG) |
+| 11 | All the cities in a district organised by largest population to smallest. | Yes | ![](Screenshots/Option_5_City_District.PNG) |
 | 12 | The top N populated cities in the world where N is provided by the user. | No | ![](Screenshots/2.png) |
 | 13 | The top N populated cities in a continent where N is provided by the user. | No | ![](Screenshots/3.png) |
 | 14 | The top N populated cities in a region where N is provided by the user. | No | ![](Screenshots/3.png) |
