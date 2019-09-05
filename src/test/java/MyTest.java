@@ -348,6 +348,7 @@ public class MyTest
         language.getIsOfficial();
         language.getCountryCode();
         language.setCountry(null);
+        language.getCountry();
     }
 
     //Country Testing
@@ -424,6 +425,15 @@ public class MyTest
         population.setPercentNotinCity(30);
         population.setTotalPopulation(400);
         population.setPopulationPercent(500);
+        population.getName();
+        population.getCountry();
+        population.getCity();
+        population.getLanguage();
+        population.getTotalPopulation();
+        population.getPercentNotinCity();
+        population.getPopulationNotinCity();
+        population.getPopulationPercent();
+
     }
 
     //TO improve our code coverage
