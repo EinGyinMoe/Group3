@@ -555,12 +555,12 @@ public class MyTest
         app.displayLivePopulationRegion(popuRegion);
     }
 
-    @Test
-    protected void displayFiveLanguagePopulationn()
-    {
-        ArrayList language = app.getFiveLanguagePopulation();
-        app.displayFiveLanguagePopulation(language);
-    }
+//    @Test
+//    protected void displayFiveLanguagePopulationn()
+//    {
+//        ArrayList language = app.getFiveLanguagePopulation();
+//        app.displayFiveLanguagePopulation(language);
+//    }
 
 
 
