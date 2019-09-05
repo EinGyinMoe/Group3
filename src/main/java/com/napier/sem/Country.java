@@ -1,10 +1,8 @@
 package com.napier.sem;
-
 /**
  * Represents an country
  */
 public class Country {
-
     private String Code;
     private Object City;
 
@@ -117,7 +115,7 @@ public class Country {
 
     private String HeadOfState;
     public String getHeadOfState() {
-        return HeadOfState;
+       return HeadOfState;
     }
 
     public void setHeadOfState(String headOfState) {
@@ -125,7 +123,6 @@ public class Country {
     }
 
     private int Capital;
-
     public int getCapital() {
         return Capital;
     }
@@ -142,8 +139,4 @@ public class Country {
     public void setCode2(String code2) {
         Code2 = code2;
     }
-
-
-
-
 }
