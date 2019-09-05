@@ -1,5 +1,6 @@
 package com.napier.sem;
 
+import javax.swing.plaf.synth.Region;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -13,116 +14,13 @@ public class App {
         // Connect to database
         if (args.length < 1)
         {
-            a.connect("localhost:3306");
+            a.connect("localhost:33060");
             a.displayapp();  // Input Display Method
         }
         else
         {
             a.connect(args[0]);
         }
-
-
-//        // 1. All the cities in a district organised by largest population to smallest
-//        ArrayList ctydistrict = a.getCityDistrict();
-//        a.displayCityDistrict(ctydistrict);
-
-//        //2. All the country in a continent by Population
-//        ArrayList cty = a.getCityContinent();
-//        a.displayCityContinent(cty);
-//
-        //3. city report requires the following columns:
-        //Name.
-        //Country.
-        //District.
-        //Population.
-//        ArrayList ctrept = a.getCity_report();
-//        a.displayCityReport(ctrept);
-//
-//        //4. All the city population in a region
-//        ArrayList ctyregion = a.getCityRegion();
-//        a.displayCityRegion(ctyregion);
-//
-//        //5. All the cities in a country
-//        // organised by largest population to smallest.
-//        ArrayList ctycountry = a.getCityCountry();
-//        a.displayCityCountry(ctycountry);
-//
-//        //6.
-//        // All the country in a continent by Population
-//        ArrayList countrycontinent = a.getCountryContinent();
-//        a.displayCountryContinent(countrycontinent);
-//
-//        //7.
-//        //all the countries in a region by the population
-//        ArrayList countryregion = a.getCountryRegion();
-//        a.displayCountryRegion(countryregion);
-//
-//        //8.
-//        //all the countries in the world by the population
-//        ArrayList countryworld = a.getCountryWorld();
-//        a.displayCountryWorld(countryworld);
-//
-//        //9.
-//        //cities in the world by population
-//        ArrayList ctyworld = a.getCity_world();
-//        a.displayCityWorld(ctyworld);
-
-//        //10. cities in the world by population
-//        ArrayList countryreport = a.getCountry_report();
-//        a.displayCountry_report(countryreport);
-
-//        //11. capital city report
-//        ArrayList cpcty_report = a.getCapitalCityReport();
-//        a.displayCapitalCityReport(cpcty_report);
-//
-//        //12. capital city world
-//        ArrayList cpcty_world = a.getCapitalCityWorld();
-//        a.displayCapitalCityWorld(cpcty_world);
-//
-//        //13. capital city continent
-//        ArrayList cpcty_continent = a.getCapitalCityContinent();
-//        a.displayCapitalCityContinent(cpcty_continent);
-
-        //14. capital city region
-//        ArrayList cpcty_region = a.getCapitalCityRegion();
-//        a.displayCapitalCityRegion(cpcty_region);
-
-        // 15. total country population in the world
-//        ArrayList crtyTotlPopuWorld= a.getCountryTotalPopuWorld();
-//        a.displayCountryTotalPopuWorld(crtyTotlPopuWorld);
-
-        //16. total country population of a region
-//        ArrayList crtyTotlPopuRegion= a.getCountryTotalPopuRegion();
-//        a.displayCountryTotalPopuRegion(crtyTotlPopuRegion);
-
-        // 17. total country population of a continent
-//        ArrayList crtyTotlPopuContinent= a.getCountryTotalPopuCont();
-//        a.displayCountryTotalPopuCont(crtyTotlPopuContinent);
-
-        // 18. total country population of a country
-//        ArrayList crtyTotlPopu= a.getCountryTotalPopu();
-//        a.displayCountryTotalPopu(crtyTotlPopu);
-
-        // 19. total city population
-//        ArrayList ctyTotlPopu= a.getCityTotalPopu();
-//        a.displayCityTotalPopu(ctyTotlPopu);
-
-        //20. total city population in a district
-//        ArrayList ctyTotlPopuDistrict= a.getCityTotalPopuDistrict();
-//        a.displayCityTotalPopuDistrict(ctyTotlPopuDistrict);
-
-//        Cherry Get Function
-//      get population in the cities people who live and not living in each region
-//        a.getLivePopulationRegion();
-
-//        ArrayList livpopuregion= a.getLivePopulationRegion();
-//        a.displayLivePopulationRegion(livpopuregion);
-//
-//        ArrayList livpopucrty= a.getLivePopulationCountry();
-//        a.displayLivePopulationCountry(livpopucrty);
-//
-//        ArrayList livpopucont= a.getLivePopulationContinent();
-//        a.displayLivePopulationContinent(livpopucont);
 
         // Disconnect from database
         a.disconnect();
@@ -346,14 +244,14 @@ public class App {
                 System.out.println("*******************");
                 System.out.println(
                         "1. The population of the world." + "\n" +
-                                "2. The population of a continent." + "\n" +
-                                "3. The population of a region." + "\n" +
-                                "4. The population of a country." + "\n" +
-                                "5. The population of a district." + "\n" +
-                                "6. The population of a city." + "\n" +
-                                "7. The population of people, people living in cities, and people not living in cities in each continent." + "\n" +
-                                "8. The population of people, people living in cities, and people not living in cities in each region." + "\n" +
-                                "9. The population of people, people living in cities, and people not living in cities in each country." + "\n"
+                        "2. The population of a continent." + "\n" +
+                        "3. The population of a region." + "\n" +
+                        "4. The population of a country." + "\n" +
+                        "5. The population of a district." + "\n" +
+                        "6. The population of a city." + "\n" +
+                        "7. The population of people, people living in cities, and people not living in cities in each continent." + "\n" +
+                        "8. The population of people, people living in cities, and people not living in cities in each region." + "\n" +
+                        "9. The population of people, people living in cities, and people not living in cities in each country." + "\n"
 
                 );
                 System.out.print("Enter an option : ");
@@ -367,32 +265,33 @@ public class App {
                 }
                 else if (PopuReport == 2)
                 {
-                    ArrayList crtyTotlPopuContinent= getCountryTotalPopuCont();
-                    displayCountryTotalPopuCont(crtyTotlPopuContinent);
+                    ArrayList continentinput = getInputContinentPopulation();
+                    displayInputContinentPopulation(continentinput);
                     again = Question();
+
                 }
                 else if (PopuReport == 3)
                 {
-                    ArrayList crtyTotlPopuRegion= getCountryTotalPopuRegion();
-                    displayCountryTotalPopuRegion(crtyTotlPopuRegion);
+                    ArrayList regioninput = getInputRegionPopulation();
+                    displayInputRegionPopulation(regioninput);
                     again = Question();
                 }
                 else if (PopuReport == 4)
                 {
-//                    ArrayList countryregion = getCountryRegion();
-//                    displayCountryRegion(countryregion);
-//                    again = Question();
+                    ArrayList countryinput = getInputCountryPopulation();
+                    displayInputCountryPopulation(countryinput);
+                    again = Question();
                 }
                 else if (PopuReport == 5)
                 {
-//                    ArrayList countryregion = getCountryRegion();
-//                    displayCountryRegion(countryregion);
-//                    again = Question();
+                    ArrayList districtinput = getInputDistrictPopulation();
+                    displayInputDistrictPopulation(districtinput);
+                    again = Question();
                 }
                 else if (PopuReport == 6)
                 {
-                    ArrayList ctyTotlPopu= getCityTotalPopu();
-                    displayCityTotalPopu(ctyTotlPopu);
+                    ArrayList cityinput = getInputCityPopulation();
+                    displayInputCityPopulation(cityinput);
                     again = Question();
                 }
                 else if (PopuReport == 7)
@@ -1350,181 +1249,325 @@ public class App {
         System.out.print("================================================================\n\n");
     }
 
-    //17.
+
 // Population Report Option 2. Total population of a continent.
-    public ArrayList<Country> getCountryTotalPopuCont()
-    {
-        ArrayList<Country> crtyTotlPopuCont = null;
+    public ArrayList<Population> getInputContinentPopulation() {
+        ArrayList<Population> continentpopulation = new ArrayList<>();
         try {
-            // Create SQL statements for the total population of the world, a region, a continent, and a country.
+            Scanner scanner = new Scanner(System.in);
+            System.out.println(
+                "Choose one of the following continent " + "\n" +
+                        "('Asia','Oceania','Antarctica','Europe','North America','Africa','South America')");
+            System.out.println("Please enter a Continent: ");
+            String continent = scanner.next(); // get string
+            // Create an SQL statement
             Statement stmt = con.createStatement();
-
-            // Create string for total population of a region and a continent SQL statement
+            // Create string for SQL statement
             String strSelect =
-                    "SELECT SUM(country.Population) as crtytotlcont " +
-                            "FROM country " +
-                            "WHERE country.Continent='Asia'";
+                    "SELECT country.continent,sum(population) FROM country WHERE continent = '"+continent+"' group by continent;";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            if (rset == null) {
-                System.out.print("Not found.");
-            } else {
-                crtyTotlPopuCont=new ArrayList<>();
-                // Return new total population of a region and a continent if valid.
-                while (rset.next()) {
-                    Country totlcrtyCont=new Country();
-                    totlcrtyCont.setPopulation(rset.getLong(1));
 
-                    crtyTotlPopuCont.add(totlcrtyCont);
+            if (rset == null) {
+                System.out.println("Not Found");
+            } else {
+                //Return new city if valid.
+                //Check one is returned
+                while (rset.next()) {
+                    Country c = new Country();
+                    Population pop = new Population();
+
+                    c.setContinent(rset.getString(1));
+                    pop.setCountry(c);
+                    pop.setTotalPopulation(rset.getLong(2));
+                    continentpopulation.add(pop);
                 }
             }
-        }
-        catch (Exception e) {
+
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get the total country population of Asia Continent.");
+            System.out.println("Failed to get a Continent Population");
         }
-        return crtyTotlPopuCont;
+        return continentpopulation;
     }
-    public void displayCountryTotalPopuCont(ArrayList<Country>crtyTotlPopuCont)
+    public void displayInputContinentPopulation(ArrayList<Population> continentpopulation )
     {
-        if (crtyTotlPopuCont == null)
-        {
-            System.out.println("* There is null data in total country population of Asia Continent!\n");
-            return;
-        }
-        System.out.print("===========================================================\n");
-
-        for (Country totlcrtypopucont:crtyTotlPopuCont)
-        {
-            if(totlcrtypopucont == null)
-            {
-                System.out.println("* Null data in each total country population of Asia Continent!\n");
-                continue;
-            }
-            System.out.println("Total Country Population of Asia Continent: " + totlcrtypopucont.getPopulation());
-            System.out.print("\n");
-        }
-        System.out.print("===========================================================\n");
-    }
-
-    // 16.
-// Population Report Option 3. Total country population of a region.
-    public ArrayList<Country> getCountryTotalPopuRegion()
-    {
-        ArrayList<Country> crtyTotlPopuRegion = null;
-        try {
-            // Create SQL statements for the total population of the world, a region, a continent, and a country.
-            Statement stmt = con.createStatement();
-
-            // Create string for total population of a region and a continent SQL statement
-            String strSelect =
-                    "SELECT SUM(country.Population) as crtytotlworld " +
-                            "FROM country " +
-                            "WHERE country.Region='Central Africa'";
-
-            // Execute SQL statement
-            ResultSet rset = stmt.executeQuery(strSelect);
-            if (rset == null) {
-                System.out.print("Not found.");
-            } else {
-                crtyTotlPopuRegion=new ArrayList<>();
-                // Return new total population of a region and a continent if valid.
-                while (rset.next()) {
-                    Country totlcrtyRegion=new Country();
-                    totlcrtyRegion.setPopulation(rset.getLong(1));
-
-                    crtyTotlPopuRegion.add(totlcrtyRegion);
-                }
-            }
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("Failed to get the total country population of the world.");
-        }
-        return crtyTotlPopuRegion;
-    }
-    public void displayCountryTotalPopuRegion(ArrayList<Country>crtyTotlPopuRegion)
-    {
-        if (crtyTotlPopuRegion == null)
+        if (continentpopulation == null)
         {
             System.out.println("* There is null data in total country population of Central Africa Region!\n");
             return;
         }
         System.out.print("========================================================\n");
 
-        for (Country totlcrtypopuregion:crtyTotlPopuRegion)
+        for (Population total:continentpopulation)
         {
-            if(totlcrtypopuregion == null)
+            if(total == null)
             {
                 System.out.println("* Null data in each total country population of Central Africa Region!\n");
                 continue;
             }
-            System.out.println("Total Country Population of Central Africa Region: " + totlcrtypopuregion.getPopulation());
+            System.out.println("Total Population of the entered Continent : " + total.getTotalPopulation());
             System.out.print("\n");
         }
         System.out.print("========================================================\n");
     }
 
-    //19.
-// Population Report Option 6. Total population of a city
-    public ArrayList<City> getCityTotalPopu()
-    {
-        ArrayList<City> ctyTotlPopu = null;
-        try {
-            // Create SQL statements for the total population of the world, a region, a continent, and a country.
-            Statement stmt = con.createStatement();
 
-            // Create string for total population of a region and a continent SQL statement
-            String strSelect =
-                    "SELECT city.Population " +
-                            "FROM city " +
-                            "WHERE city.Name='Herat'";
+// Population Report Option 3. Total population of a region.
+    public ArrayList<Population> getInputRegionPopulation() {
+        ArrayList<Population> regionpopulation = new ArrayList<>();
+    try {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print(
+                "Choose a region of the world " + "\n" +
+                        "('Caribbean','Southern and Central Asia','Central Africa','Southern Europe', 'Eastern Africa'," +
+                        "'Middle East','Polynesia', 'Western Europe', 'Antarctica','South America' etc.)");
+        System.out.println("Please enter a Region: ");
+        String Region = scanner.next(); // get string
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
+        // Create string for SQL statement
+        String strSelect = "SELECT country.Region, SUM(country.Population) as crtytotlworld " +
+                "FROM country " +
+                "WHERE country.Region='"+Region+"' group by Region;";
+
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery(strSelect);
+
+        if (rset == null) {
+            System.out.println("Not Found");
+        } else {
+            //Return new city if valid.
+            //Check one is returned
+            while (rset.next()) {
+                Country c = new Country();
+                Population pop = new Population();
+
+                c.setRegion(rset.getString(1));
+                pop.setCountry(c);
+                pop.setTotalPopulation(rset.getLong(2));
+                regionpopulation.add(pop);
+            }
+        }
+
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+        System.out.println("Failed to get a Continent Population");
+    }
+    return regionpopulation;
+}
+    public void displayInputRegionPopulation(ArrayList<Population> regionpopulation )
+    {
+        if (regionpopulation == null)
+        {
+            System.out.println("* There is null data in total population of Region!\n");
+            return;
+        }
+        System.out.print("========================================================\n");
+
+        for (Population total:regionpopulation)
+        {
+            if(total == null)
+            {
+                System.out.println("* Null data in each total country population of Central Africa Region!\n");
+                continue;
+            }
+            System.out.println("Total Population of the entered Region : " + total.getTotalPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("========================================================\n");
+    }
+
+//Population Report Option 4. the total population of a country.
+    public ArrayList<Population> getInputCountryPopulation() {
+        ArrayList<Population> countrypopulation = new ArrayList<>();
+        try {
+            Scanner scanner = new Scanner(System.in);
+
+            System.out.println("Please enter a Country : ");
+            String country = scanner.next(); // get string
+            // Create an SQL statement
+            Statement stmt = con.createStatement();
+            // Create string for SQL statement
+            String strSelect = "SELECT country.Name, SUM(country.Population) " +
+                    "FROM country " +
+                    "WHERE country.Name ='"+country+"' group by country.Name;";
 
             // Execute SQL statement
             ResultSet rset = stmt.executeQuery(strSelect);
-            if (rset == null) {
-                System.out.print("Not found.");
-            } else {
-                ctyTotlPopu=new ArrayList<>();
-                // Return new total population of a region and a continent if valid.
-                while (rset.next()) {
-                    City totlcty=new City();
-                    totlcty.setPopulation(rset.getLong(1));
 
-                    ctyTotlPopu.add(totlcty);
+            if (rset == null) {
+                System.out.println("Not Found");
+            } else {
+                //Return new city if valid.
+                //Check one is returned
+                while (rset.next()) {
+                    Country c = new Country();
+                    Population pop = new Population();
+
+                    c.setName(rset.getString(1));
+                    pop.setCountry(c);
+                    pop.setTotalPopulation(rset.getLong(2));
+                    countrypopulation.add(pop);
                 }
             }
-        }
-        catch (Exception e) {
+
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-            System.out.println("Failed to get the total population of Herat City.");
+            System.out.println("Failed to get a Continent Population");
         }
-        return ctyTotlPopu;
+        return countrypopulation;
     }
-    public void displayCityTotalPopu(ArrayList<City>ctyTotlPopu)
+    public void displayInputCountryPopulation(ArrayList<Population> countrypopulation )
     {
-        if (ctyTotlPopu == null)
+        if (countrypopulation == null)
         {
-            System.out.println("* There is null data in total population of Herat City!\n");
+            System.out.println("* There is null data in total population of Region!\n");
             return;
         }
-        System.out.print("=========================================================\n");
+        System.out.print("========================================================\n");
 
-        for (City totlctypopu:ctyTotlPopu)
+        for (Population total:countrypopulation)
         {
-            if(totlctypopu == null)
+            if(total == null)
             {
-                System.out.println("* Null data in each total population of Herat city!\n");
+                System.out.println("* Null data in total country population !\n");
                 continue;
             }
-            System.out.println("Total Country Population of Herat City: " + totlctypopu.getPopulation());
+            System.out.println("Total Population of the entered Country : " + total.getTotalPopulation());
             System.out.print("\n");
         }
-        System.out.print("=========================================================\n");
+        System.out.print("========================================================\n");
     }
 
-    // Population Report Option 7. The population of people, people living in cities, and people not living in cities in each continent
+//Population Report Option 5. The population of a district.
+public ArrayList<Population> getInputDistrictPopulation() {
+    ArrayList<Population> districtpopulation = new ArrayList<>();
+    try {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Please enter a District : ");
+        String district = scanner.next(); // get string
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
+        // Create string for SQL statement
+        String strSelect = "SELECT city.District, SUM(city.Population) " +
+                "FROM city " +
+                "WHERE city.District ='"+district+"' group by city.District;";
+
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery(strSelect);
+
+        if (rset == null) {
+            System.out.println("Not Found");
+        } else {
+            //Return new city if valid.
+            //Check one is returned
+            while (rset.next()) {
+                City cty = new City();
+                Population pop = new Population();
+
+                cty.setDistrict(rset.getString(1));
+                pop.setCity(cty);
+                pop.setTotalPopulation(rset.getLong(2));
+                districtpopulation.add(pop);
+            }
+        }
+
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+        System.out.println("Failed to get a Continent Population");
+    }
+    return districtpopulation;
+}
+    public void displayInputDistrictPopulation(ArrayList<Population> districtpopulation )
+    {
+        if (districtpopulation == null)
+        {
+            System.out.println("* There is null data in total population of District!\n");
+            return;
+        }
+        System.out.print("========================================================\n");
+
+        for (Population total:districtpopulation)
+        {
+            if(total == null)
+            {
+                System.out.println("* Null data in total district population !\n");
+                continue;
+            }
+            System.out.println("Total Population of the entered District : " + total.getTotalPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("========================================================\n");
+    }
+
+//19.
+// Population Report Option 6. Total population of a city
+public ArrayList<Population> getInputCityPopulation() {
+    ArrayList<Population> citypopulation = new ArrayList<>();
+    try {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("Please enter a City : ");
+        String name = scanner.next(); // get string
+        // Create an SQL statement
+        Statement stmt = con.createStatement();
+        // Create string for SQL statement
+        String strSelect = "SELECT city.Name, SUM(city.Population) " +
+                "FROM city " +
+                "WHERE city.Name ='"+name+"' group by city.Name;";
+
+        // Execute SQL statement
+        ResultSet rset = stmt.executeQuery(strSelect);
+
+        if (rset == null) {
+            System.out.println("Not Found");
+        } else {
+            //Return new city if valid.
+            //Check one is returned
+            while (rset.next()) {
+                City cty = new City();
+                Population pop = new Population();
+
+                cty.setName(rset.getString(1));
+                pop.setCity(cty);
+                pop.setTotalPopulation(rset.getLong(2));
+                citypopulation.add(pop);
+            }
+        }
+
+    } catch (Exception e) {
+        System.out.println(e.getMessage());
+        System.out.println("Failed to get a Continent Population");
+    }
+    return citypopulation;
+}
+    public void displayInputCityPopulation(ArrayList<Population> citypopulation )
+    {
+        if (citypopulation == null)
+        {
+            System.out.println("* There is null data in total population of City!\n");
+            return;
+        }
+        System.out.print("========================================================\n");
+
+        for (Population total:citypopulation)
+        {
+            if(total == null)
+            {
+                System.out.println("* Null data in total district population !\n");
+                continue;
+            }
+            System.out.println("Total Population of the entered City : " + total.getTotalPopulation());
+            System.out.print("\n");
+        }
+        System.out.print("========================================================\n");
+    }
+
+
+// Population Report Option 7. The population of people, people living in cities, and people not living in cities in each continent
 //
     public ArrayList<Population> getLivePopulationContinent()
 

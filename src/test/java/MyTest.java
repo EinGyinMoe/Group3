@@ -257,47 +257,47 @@ public class MyTest
 //For code review 4
 
     //Unit_testing for total country population of a region
-    @Test
-    protected void  displayCountryTotalPopuRegiontest()
-    {
-        app.displayCountryTotalPopuRegion(null);
-    }
+//    @Test
+//    protected void  displayCountryTotalPopuRegiontest()
+//    {
+//        app.displayCountryTotalPopuRegion(null);
+//    }
 
-    @Test
-    protected void  displayCountryTotalPopuRegionNulltest()
-    {   ArrayList<Country> countries =new ArrayList<>();
-        countries.add(null);
-        app.displayCountryTotalPopuRegion(countries);
-    }
+//    @Test
+//    protected void  displayCountryTotalPopuRegionNulltest()
+//    {   ArrayList<Country> countries =new ArrayList<>();
+//        countries.add(null);
+//        app.displayCountryTotalPopuRegion(countries);
+//    }
 
-    //Unit_testing for total country population of a region
-    @Test
-    protected void  displayCountryTotalPopuConttest()
-    {
-        app.displayCountryTotalPopuCont(null);
-    }
-
-    @Test
-    protected void  displayCountryTotalPopuNulltest()
-    {   ArrayList<Country> countries =new ArrayList<>();
-        countries.add(null);
-        app.displayCountryTotalPopuCont(countries);
-    }
+//    //Unit_testing for total country population of a region
+//    @Test
+//    protected void  displayCountryTotalPopuConttest()
+//    {
+//        app.displayCountryTotalPopuCont(null);
+//    }
+//
+//    @Test
+//    protected void  displayCountryTotalPopuNulltest()
+//    {   ArrayList<Country> countries =new ArrayList<>();
+//        countries.add(null);
+//        app.displayCountryTotalPopuCont(countries);
+//    }
 
 
     //Unit_testing for total city population
-    @Test
-    protected void  displayCityTotalPoputest()
-    {
-        app.displayCityTotalPopu(null);
-    }
+//    @Test
+//    protected void  displayCityTotalPoputest()
+//    {
+//        app.displayCityTotalPopu(null);
+//    }
 
-    @Test
-    protected void  displayCityTotalPopuNulltest()
-    {   ArrayList<City> cities =new ArrayList<>();
-        cities.add(null);
-        app.displayCityTotalPopu(cities);
-    }
+//    @Test
+//    protected void  displayCityTotalPopuNulltest()
+//    {   ArrayList<City> cities =new ArrayList<>();
+//        cities.add(null);
+//        app.displayCityTotalPopu(cities);
+//    }
 
 
     //    Additional Testing
@@ -311,10 +311,10 @@ public class MyTest
         app.getCountryRegion();
     }
 
-    @Test
-    protected void getCountryTotalPopuCont(){
-        app.getCountryTotalPopuCont();
-    }
+//    @Test
+//    protected void getCountryTotalPopuCont(){
+//        app.getCountryTotalPopuCont();
+//    }
 
     @Test
     protected void getCountryWorldNull(){
@@ -331,10 +331,10 @@ public class MyTest
         app.getCapitalCityContinent();
     }
 
-    @Test
-    protected void getCityTotalPopuNull(){
-        app.getCityTotalPopu();
-    }
+//    @Test
+//    protected void getCityTotalPopuNull(){
+//        app.getCityTotalPopu();
+//    }
 
     //Language Testing
     @Test
@@ -524,26 +524,26 @@ public class MyTest
         app.displayCountryTotalPopuWorld(crtyTotlPopuWorld);
     }
 
-    @Test
-    protected void testCountryTotalPopuCont()
-    {
-        ArrayList<Country> crtyTotlPopuContinent= app.getCountryTotalPopuCont();
-        app.displayCountryTotalPopuCont(crtyTotlPopuContinent);
-    }
+//    @Test
+//    protected void testCountryTotalPopuCont()
+//    {
+//        ArrayList<Country> crtyTotlPopuContinent= app.getCountryTotalPopuCont();
+//        app.displayCountryTotalPopuCont(crtyTotlPopuContinent);
+//    }
 
-    @Test
-    protected void displayCountryTotalPopuRegion()
-    {
-        ArrayList crtyTotlPopuRegion= app.getCountryTotalPopuRegion();
-        app.displayCountryTotalPopuRegion(crtyTotlPopuRegion);
-    }
+//    @Test
+//    protected void displayCountryTotalPopuRegion()
+//    {
+//        ArrayList crtyTotlPopuRegion= app.getCountryTotalPopuRegion();
+//        app.displayCountryTotalPopuRegion(crtyTotlPopuRegion);
+//    }
 
-    @Test
-    protected void displayCityTotalPopu()
-    {
-        ArrayList ctyTotlPopu= app.getCityTotalPopu();
-        app.displayCityTotalPopu(ctyTotlPopu);
-    }
+//    @Test
+//    protected void displayCityTotalPopu()
+//    {
+//        ArrayList ctyTotlPopu= app.getCityTotalPopu();
+//        app.displayCityTotalPopu(ctyTotlPopu);
+//    }
 
     @Test
     protected void displayLivePopulationContinent()
