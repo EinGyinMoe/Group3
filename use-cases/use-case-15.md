@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-We know the role.  Database contains the data of current population information that does not live in top populated country in a continent.
+We know the role.  Database contains the data of current population information that in top populated country in a continent.
 
 ### Success End Condition
 

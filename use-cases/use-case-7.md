@@ -1,10 +1,9 @@
-# USE CASE: 7 Produce a capital city report requires name, country and population.
+# USE CASE: 6 Produce a report on getting all the countries in a region organised by largest population to smallest.
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
-
-As an Organization user, I want to product a capital city report requires name, country and population so that I can support capital city information reporting of the organization.
+ an Organization user, I want to product a report on all the countries in a region from database sorted in descending order so that I can support population reporting of the organization.
 
 ### Scope
 
@@ -16,11 +15,11 @@ Primary task.
 
 ### Preconditions
 
-We know the role.  Database contains the data of current information of all of the capital city.
+We know the role.  Database contains current population of the countries in a regiont data.
 
 ### Success End Condition
 
-A report is available for an organization user to provide capital city information report.
+A report is available for an organization user to provide population report.
 
 ### Failed End Condition
 
@@ -36,9 +35,9 @@ A request for Population information is sent to an Organization user.
 
 ## MAIN SUCCESS SCENARIO
 
-1. Organization requests information of the capital cities.
-2. An organization user captures all the capital city names, country and population to get information for.
-3. An organization user extracts current information of all capital city.
+1. Organization requests population information of all the countries a region.
+2. An organization user captures all the country names to get population information for.
+3. An organization user extracts current population information of all countries a region.
 4. An organization user provides report to an organization.
 
 ## EXTENSIONS

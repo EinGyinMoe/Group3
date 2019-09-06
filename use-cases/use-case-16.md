@@ -1,4 +1,4 @@
-# USE CASE: 15 Produce a report of top populated country in a world where N is provided by the user.
+# USE CASE: 16 Produce a report of top populated country in a world where N is provided by the user.
 
 ## CHARACTERISTIC INFORMATION
 
@@ -16,7 +16,7 @@ Primary task.
 
 ### Preconditions
 
-We know the role.  Database contains the data of current population information that does not live in top populated country in a world.
+We know the role.  Database contains the data of current population information that in top populated country in a world.
 
 ### Success End Condition
 

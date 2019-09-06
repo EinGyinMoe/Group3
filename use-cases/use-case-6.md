@@ -1,10 +1,9 @@
-# USE CASE: 6 Produce a city report requires name, country, district and population.
+# USE CASE: 6 Produce a report on getting all the countries in a continent organised by largest population to smallest.
 
 ## CHARACTERISTIC INFORMATION
 
 ### Goal in Context
-
-As an Organization user, I want to product a city report requires name, country, district and population so that I can support city information reporting of the organization.
+ an Organization user, I want to product a report on all the countries in the continent from database sorted in descending order so that I can support population reporting of the organization.
 
 ### Scope
 
@@ -16,11 +15,11 @@ Primary task.
 
 ### Preconditions
 
-We know the role.  Database contains the data of current information of all of the city.
+We know the role.  Database contains current population of the countries in the continent data.
 
 ### Success End Condition
 
-A report is available for an organization user to provide city information report.
+A report is available for an organization user to provide population report.
 
 ### Failed End Condition
 
@@ -36,9 +35,9 @@ A request for Population information is sent to an Organization user.
 
 ## MAIN SUCCESS SCENARIO
 
-1. Organization requests information of the cities.
-2. An organization user captures all the city names, country, district and population to get information for.
-3. An organization user extracts current information of all city.
+1. Organization requests population information of all the countries in the continent.
+2. An organization user captures all the country names to get population information for.
+3. An organization user extracts current population information of all countries in the continent.
 4. An organization user provides report to an organization.
 
 ## EXTENSIONS

@@ -1,0 +1,54 @@
+# USE CASE: 27 Produce a report of top populated capital city in a region where N is provided by the user.
+
+## CHARACTERISTIC INFORMATION
+
+### Goal in Context
+
+As an Organization user, I want to product top populated capital city in a world report so that I can support the report of population information of top capital city in a region to the organization.
+
+### Scope
+
+Organization
+
+### Level
+
+Primary task.
+
+### Preconditions
+
+We know the role.  Database contains the data of current population information that in top populated capital city in a region.
+
+### Success End Condition
+
+A report is available for an organization user to provide population information report.
+
+### Failed End Condition
+
+No report is produced.
+
+### Primary Actor
+
+Organization User.
+
+### Trigger
+
+A request for Population information is sent to an Organization user.
+
+## MAIN SUCCESS SCENARIO
+
+1. Organization requests population information of top populated capital cities in a region.
+2. An organization user captures all population information of top populated capital cities in a region.
+3. An organization user extracts current population information of top populated capital city in a region.
+4. An organization user provides report to an organization.
+
+## EXTENSIONS
+
+3. **Role does not exist**:
+
+## SUB-VARIATIONS
+
+None.
+
+## SCHEDULE
+
+**DUE DATE**: Release 1.0

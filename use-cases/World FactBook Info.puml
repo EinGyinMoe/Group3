@@ -11,9 +11,10 @@ actor user as "Organization User"
 rectangle "World factbook Information System " {
     usecase UC1 as "Country Report"
     usecase UC2 as "City Report"
-    usecase UC3 as "Population Report"
-    usecase UC4 as "Capital City Report"
-    usecase UC5 as "Addition Report"
+    usecase UC3 as "Capital City Report"
+    usecase UC4 as "Population Report"
+    usecase UC5 as "Population According to User-input Report"
+    usecase UC6 as "Language Report"
 
 
 
