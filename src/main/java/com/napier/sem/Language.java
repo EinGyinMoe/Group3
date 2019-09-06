@@ -45,11 +45,13 @@ public class Language {
 
     private Float Percentage;
 
+    private Country country;
+
     public void setCountry(Country country) {
+       this.country = country;
     }
 
     public Country getCountry() {
         return null;
     }
 }
-

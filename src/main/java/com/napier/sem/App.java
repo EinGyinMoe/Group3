@@ -434,39 +434,6 @@ public class App {
 
     }
 
-//    public String Continent()
-//    {
-//        Scanner Obj = new Scanner(System.in);  // Create a Scanner object
-//        System.out.println(
-//                "Choose one of the following continent " + "\n" +
-//                        "('Asia','Oceania','Antarctica','Europe','North America','Africa','South America')");
-//        System.out.print("Enter a continent: ");
-//        String continent = Obj.nextLine();
-//        System.out.println("\n");
-//        return continent;
-//    }
-//
-//    String Country()
-//    {
-//        Scanner Obj = new Scanner(System.in);  // Create a Scanner object
-//        System.out.print(
-//                "Enter a country : ");
-//        String country = Obj.nextLine();
-//        System.out.println("\n");
-//        return country;
-//    }
-//
-//
-//    public String Region()
-//    {
-//        Scanner Obj = new Scanner(System.in);  // Create a Scanner object
-//        System.out.print(
-//                "Choose a region of the world " + "\n" +
-//                        "('Caribbean','Southern and Central Asia','Central Africa','Southern Europe', 'Eastern Africa', 'Middle East','Polynesia', 'Western Europe', 'Antarctica','South America' etc.)");
-//        String region = Obj.nextLine();
-//        System.out.println("\n");
-//        return region;
-//    }
 
     private boolean Question() {
         Scanner Obj = new Scanner(System.in);
@@ -491,7 +458,6 @@ public class App {
         }
     }
 
-    //8.
 //Option 1.   all the countries in the world by the population
 ////
     public ArrayList<Country> getCountryWorld()
@@ -553,7 +519,6 @@ public class App {
 
     }
 
-    //6.
 //Country Report Option 2. All the country in a continent by Population
 //
     public ArrayList<Country> getCountryContinent()
@@ -574,8 +539,7 @@ public class App {
                 System.out.print("Not found.");
             } else {
                 countryContinent =new ArrayList<>();
-                // Return new city if valid.
-                // Check one is returned
+
                 while (rset.next()) {
                     Country country = new Country();
                     country.setName(rset.getString("Name"));
@@ -616,7 +580,6 @@ public class App {
         }
     }
 
-    //7.
 //Country Report Option 3. all the countries in a region by the population
 //
     public ArrayList<Country> getCountryRegion()
@@ -681,8 +644,6 @@ public class App {
         }
     }
 
-
-    //9.
 //City Report Option 1. cities in the world by population
 //
     public ArrayList<City> getCity_world()
@@ -702,8 +663,6 @@ public class App {
                 System.out.print("Not found.");
             } else {
                 ctyworld = new ArrayList<>();
-                // Return new city if valid.
-                // Check one is returned
                 while (rset.next()) {
                     City city = new City();
                     city.setName(rset.getString("Name"));
@@ -743,7 +702,7 @@ public class App {
 
     }
 
-    //2.
+    
 // City Report Option 2. All the cities in a continent organised by largest population to smallest
     public ArrayList<City> getCityContinent()
     {
@@ -809,7 +768,7 @@ public class App {
         System.out.print("========================================================================================================\n");
     }
 
-    //4.
+    
 //City Report Option 3. All the city population in a region
 //
     public ArrayList<City> getCityRegion()
@@ -871,7 +830,7 @@ public class App {
         System.out.print("======================================================================================================\n");
     }
 
-    //5.
+    
 //City Report Option 4. All the cities in a country organised by largest population to smallest.
 //
     public ArrayList<City> getCityCountry()
@@ -932,7 +891,7 @@ public class App {
         }
     }
 
-    // 1.
+    
 // City Report Option 5. All the cities in a district organised by largest population to smallest
 //
     public ArrayList<City> getCityDistrict()
@@ -993,7 +952,7 @@ public class App {
         System.out.print("========================================================================================================\n");
     }
 
-    //12.
+   
 // Capital City Report Option 1.
 // All the capital cities in the world organised by largest population to smallest.
     public ArrayList<City> getCapitalCityWorld()
@@ -1059,7 +1018,7 @@ public class App {
         System.out.print("===============================================================================================\n");
     }
 
-    //13.
+    
 // Capital City Report Option 2. All the capital cities in a continent organised by largest population to smallest
     public ArrayList<City> getCapitalCityContinent()
     {
@@ -1125,7 +1084,7 @@ public class App {
         System.out.print("===================================================================================================================\n");
     }
 
-    //14.
+   
 //Capital City Report Option 3. All the capital cities in a region organised by largest to smallest
     public ArrayList<City> getCapitalCityRegion()
     {
@@ -1191,7 +1150,7 @@ public class App {
         System.out.print("===================================================================================================================\n");
     }
 
-    //15.
+   
 // Population Report Option 1. Total population of the world.
     public ArrayList<Country> getCountryTotalPopuWorld()
     {
@@ -1272,8 +1231,6 @@ public class App {
             if (rset == null) {
                 System.out.println("Not Found");
             } else {
-                //Return new city if valid.
-                //Check one is returned
                 while (rset.next()) {
                     Country c = new Country();
                     Population pop = new Population();
@@ -1503,7 +1460,6 @@ public ArrayList<Population> getInputDistrictPopulation() {
         System.out.print("========================================================\n");
     }
 
-//19.
 // Population Report Option 6. Total population of a city
 public ArrayList<Population> getInputCityPopulation() {
     ArrayList<Population> citypopulation = new ArrayList<>();
@@ -2678,7 +2634,7 @@ public ArrayList<Population> getInputCityPopulation() {
     }
 
 
-
+//to delete
     //3. city report requires the following columns:
 //Name.
 //Country.
